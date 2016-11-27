@@ -57,8 +57,10 @@
 		\subsection{Strukturelles Mapping}
 		Eine zweite Möglichkeit für das Matching von Ontologien ist das Betrachten der Strukturen innerhalb der Ontologien. Dabei werden die Eigenschaften und die Beziehung der Entitäten untereinander untersucht.
 		\begin{itemize}
-			\item Taxonomisches Mapping: Dabei werden zwei Techniken verwendet, super-
-			oder  subclass rule und bounded-paths. Die super class rule unterstellt, dass eine Ähnlichkeit zwischen zwei Konzepten besteht, wenn diese ein Elternkonzept teilen. \cite{Euz07}  Beispielsweise kann man annehmen, dass wenn zwei Ontologien ein gleiches oder ähnliches Konzept haben, um Bücher zu beschreiben, dass die darunterliegenden Konzepte für die Beschreibung für „creator“ und „author“ ebenfalls ähnlich bzw. gleich sind. Bei bounded-paths werden Pfade verglichen, um ähnliche Konzepte zu identifizieren. Bei diesen Pfaden handelt es sich um Verbindungen zwischen Klassen. Die Art und Weise der Verbindungen wird durch eine hierarchische Struktur definiert. \cite{Euz07} Wenn das Attribut „book“ in zwei verschiedenen Ontologien einmal mit „hasAuthor“ und einmal mit „hasWritten“ zu den beiden äquivalenten Elementen „creator“ bzw. „author“ verbunden ist, dann bieten sich diese beiden für eine Betrachtung bezüglich eines Matches an.
+			\item Taxonomisches Mapping: Dabei werden zwei Techniken verwendet,
+			\textit{super-} oder  \textit{subclass rule} und \textit{bounded-paths}. Die
+			\textit{super class rule} unterstellt, dass eine Ähnlichkeit zwischen zwei
+			Konzepten besteht, wenn diese ein Elternkonzept teilen. \cite{Euz07}  Beispielsweise kann man annehmen, dass wenn zwei Ontologien ein gleiches oder ähnliches Konzept haben, um Bücher zu beschreiben, dass die darunterliegenden Konzepte für die Beschreibung für „creator“ und „author“ ebenfalls ähnlich bzw. gleich sind. Bei bounded-paths werden Pfade verglichen, um ähnliche Konzepte zu identifizieren. Bei diesen Pfaden handelt es sich um Verbindungen zwischen Klassen. Die Art und Weise der Verbindungen wird durch eine hierarchische Struktur definiert. \cite{Euz07} Wenn das Attribut „book“ in zwei verschiedenen Ontologien einmal mit „hasAuthor“ und einmal mit „hasWritten“ zu den beiden äquivalenten Elementen „creator“ bzw. „author“ verbunden ist, dann bieten sich diese beiden für eine Betrachtung bezüglich eines Matches an.
 			\item Baumbasiertes Mapping: Hierbei spielt Ähnlichkeit eine Rolle. Es wird
 			angenommen, dass sich Knoten ähneln, die benachbart sind, und dass dies auch für verschiedene Ontologien gilt. Also wenn ein Knoten mit einem anderen benachbart ist und mit einem Knoten aus einer anderen Ontologie verbunden ist, dann ähneln sich die benachbarten Knoten mit den beiden verbundenen. Wenn beispielsweise in einer Ontologie das Element „book“ über „author“ mit „human“ verbunden ist und in einer zweiten Ontologie „volume“ über „author“ mit „writer“, wobei festgelegt wurde, dass sowohl „book“ und „volume“, als auch die beiden „author“ Elemente äquivalent sind, besteht Grund zur Annahme, dass „human“ und „writer“ ebenfalls ähnlich sind. \cite{Euz07} 
 		\end{itemize}
@@ -114,7 +116,6 @@
 				% Anforderungen herausgearbeitet werden. Dabei sollte die bestehende Literatur geeignet integriert werden.
 		 	%\end{itemize}
 		%\item Umsetzung (Praktischer Anteil der Arbeit)
-		%\item Umsetzung (Praktischer Anteil der Arbeit)
 			%\begin{itemize}
 				%\item Zunächst sollte die Softwarearchitektur und die genutzten
 				% Anwendungen, APIs etc. erläutert werden. Ebenfalls gehört dazu das Datenbankschema.
@@ -132,6 +133,56 @@
 				%\item Klassendiagramm für Backend
 				%\item Dr Quellcode zentraler Implementierungen  können als Auszug in den Anhang. Im Text kann dann darauf verwiesen werden.
 			%\end{itemize}
+		\section{Umsetzung}
+		Die im Rahmen dieser Masterarbeit entwickelte Software besteht aus einem
+		modularen Kern und ist über verschiedene Technologien ansprechbar. Aktuell
+		sind die Matcher als App
+		für Django\footnote{\url{https://www.djangoproject.com/}} verfügbar, können
+		aber auch direkt in Python Skripten benutzt werden.\\
+		Der Kernteil besteht aus mehreren Modulen, für die weitere Module
+		implementiert werden können, um verschiedene Arten von Daten eingelesen
+		werden können, z.B.
+		Formate wie OWL/XML, Query Languages wie SPARQL oder REST-Schnittstellen.
+		Zusätzlich können unterschiedliche Arten und Implementierungen von Matchern
+		verwendet werden. Um dies zu realisieren, gibt es eine Klasse, um Ontologien,
+		deren Elemente und Eigenschaften abzubilden, namens \textit{ontology}.
+		Die Elemente dieser Instanzen bestehen wiederum aus Instanzen der Klasse \textit{ontology element}.
+		Desweiteren gibt es eine Klasse, die die Matchings darstellt.
+		Diese beiden Klassen dienen als Schnittstellen, um innerhalb der Software zu agieren.
+		\subsection{Architektur}
+		Sowohl die Kernmodule als auch die einzelnen, konkreten Ausführungen dieser
+		Module sind entlang eines Prozesses organisiert, wie in Abbildung \ref{fig2}
+		gezeigt.
+		\begin{figure}[ht]
+		\centering
+		\includegraphics[width=1.0\textwidth]{Module-overview.png}
+		\caption{Prozessablauf der Module}
+		\label{fig2}
+		\end{figure}
+		An erster Stelle stehen der oder die Parser, die die Ontologien einlesen und
+		die Daten in Instanzen der Klasse \textit{ontology} einpflegen. Hierbei können
+		auch Daten aus unterschiedlichen Quellen und beliebigen Formaten verwendet
+		werden, sofern ein \textit{Reader} implementiert wurde. Im Rahmen dieser
+		Masterarbeit wurden bereits einige implementiert, die einige gängige
+		Möglichkeiten abdecken. Durch die Modularität können aber problemlos weitere
+		hinzugefügt werden.\\
+		Dann werden die Ontologien an an verschiedene Matcher übergeben. Dabei werden
+		die Ergebnisse von einem Matcher zum nächsten weitergegeben, so ist es zum
+		einen möglich, diese Ergebnisse zu akumulieren und zum
+		anderen, weitergehende Analysen z.B. zur Struktur vorzunehmen.
+		Die Gesamtergebnisse werden dann an einen \textit{Output Writer} übergeben, um
+		sie dann weiterbearbeiten zu können.
+		
+		\subsubsection{Anwendungsfall 1: Django App}
+		
+		\begin{figure}[ht]
+		\centering
+		\includegraphics[width=1.0\textwidth]{Module-overview1.png}
+		\caption{Module Django App}
+		\label{fig3}
+		\end{figure}
+		
+		\subsubsection{Anwendungsfall 2: Python Skript}
 		%\item Evaluation (zumeist nur für Masterarbeiten relevant)
 		%\begin{itemize}
 		%	\item Jede Software muss auch getestet werden. Dieses Tests werden entweder
