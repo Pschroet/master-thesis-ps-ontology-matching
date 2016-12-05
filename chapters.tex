@@ -22,7 +22,7 @@
 		
 		\begin{figure}[ht]
 		\centering
-		\includegraphics[width=1.0\textwidth]{simple-high-level-view-of-a-mapping-process.png}
+		\includegraphics[width=1.0\textwidth]{pics/simple-high-level-view-of-a-mapping-process.png}
 		\caption{Eine einfache Übersicht des Mapping Prozesses \cite{Hoo14}}
 		\label{fig1}
 		\end{figure}
@@ -155,7 +155,7 @@
 		gezeigt.
 		\begin{figure}[ht]
 		\centering
-		\includegraphics[width=1.0\textwidth]{Module-overview.png}
+		\includegraphics[width=1.0\textwidth]{pics/Module-overview.png}
 		\caption{Prozessablauf der Module}
 		\label{fig2}
 		\end{figure}
@@ -174,13 +174,75 @@
 		sie dann weiterbearbeiten zu können.
 		
 		\subsubsection{Anwendungsfall 1: Django App}
+		Wenn die Module der Matching Software als Teil einer Django App genutzt
+		werden, werden über ein Skript\footnote{settings.py} von Django
+		mögliche Ontologien und Matcher gesammelt.
 		
 		\begin{figure}[ht]
 		\centering
-		\includegraphics[width=1.0\textwidth]{Module-overview1.png}
+		\includegraphics[width=1.0\textwidth]{pics/Module-overview1.png}
 		\caption{Module Django App}
+		\label{fig6}
+		\end{figure}
+		Dabei können verschiedene Quellen verwendet werden. Für Ontologien sind lokale
+		und auf externen Servern gespeicherte Dateien und in Datenbank
+		eingepflegte Daten möglich. Bei Matchern werden nur lokal vorhandene Python
+		Module berücksichtigt. Die gefundenen Ontologien und Matcher werden dann in
+		ein HTML Template eingebetet, dass mit der Template Engine von Django erstellt
+		wird. Dabei wird auch die Quelle gespeichert, also der Dateiname mit Pfad oder
+		die URL.\\
+		Über die dann erstellte Seite können Ontologien ausgewählt werden, die
+		analyisert werden sollen, und Matcher, mit denen dies durchgeführt wird.\\
+		Das Design ist möglichst simpel gewählt, wie in \ref{fig3} gezeigt. Zum einen,
+		um die Bedienung und gleichzeitig die Komplexität zu verringern. Zum anderen wurde der Fokus dieser
+		Masterarbeit auf die Matcher und Matching Algorithmen gelegt und nicht das
+		Design.
+		
+		\begin{figure}[ht]
+		\centering
+		\includegraphics[width=1.0\textwidth]{pics/TemplateMatchingStartPage.png}
+		\caption{Startseite Django App 1}
 		\label{fig3}
 		\end{figure}
+		Wenn sowohl Ontologien bzw. Terminologien als auch mindestens ein Matcher
+		gewählt wurden, wird der Matching Prozess wie in \ref{fig4} gezeigt,
+		gestartet.
+		
+		\begin{figure}[ht]
+		\centering
+		\includegraphics[width=1.0\textwidth]{pics/TemplateMatchingStartPage1.png}
+		\caption{Startseite Django App 2}
+		\label{fig4}
+		\end{figure}
+		Anschließend werden die ausgewählten Ontologien mit entsprechenden
+		\textit{Readern} geparst. Die Reader werden ermittelt, indem überprüft wird,
+		ob es sich bei der gespeicherten Quelle um eine URL oder eine
+		existierende Datei handelt. Dies wird über das \textit{View} von Django
+		erledigt und dann an das \textit{Reader} Modul weitergeleitet. Dieses bindet
+		die passenden Module ein, startet das Parsen und liefert die Ergebnisse
+		zurück. Die Ergebnisse bestehen aus Instanzen des Moduls \textit{onto} in
+		einer Liste.\\
+		Mit den übergebenen Matchern wird eine \textit{Matching Tool Chain} im
+		gleichnamigen Modul erstellt, welche die Matcher in der angegebenen
+		Reihenfolge ausführt. Die Ergebnisse jedes Matching Vorgangs werden von einem
+		Matcher an den nächsten in Form des Python Datentyps \textit{Dictionary}
+		weitergegeben. Dadurch ist es möglich, auf vorherige Ergebnisse zuzugreifen,
+		um z.B. die Struktur zu analysieren. Die eigenen Ergebnisse eines Matchers
+		werden einfach zum Dictionary hinzugefügt.\\
+		Wenn alle Matcher durchlaufen wurden, wird das letztendliche Ergebnis in einem
+		anderen Template der Django Template Engine verarbeitet und angezeigt, wie in
+		\ref{fig5} dargestellt.
+				
+		\begin{figure}[ht]
+		\centering
+		\includegraphics[width=1.0\textwidth]{pics/TemplateMatchingResultPage.png}
+		\caption{Django App Resultatseite}
+		\label{fig5}
+		\end{figure}
+		Auf dieser Seite kann dann gewählt werden, ob zwei Elemente eine Verbindung
+		haben und welche dies ist. Wenn allen Paaren von Elementen eine Art von
+		Verbindung oder eben keine zugeordnet wurde, ist es möglich, das Ergebnis in
+		eine Datei im XML Format zu exportieren.
 		
 		\subsubsection{Anwendungsfall 2: Python Skript}
 		%\item Evaluation (zumeist nur für Masterarbeiten relevant)
