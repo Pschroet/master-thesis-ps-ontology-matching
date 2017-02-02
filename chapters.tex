@@ -18,7 +18,7 @@
 		\subsection{Mapping Methoden}
 		Der grundlegende Prozess für die Bestimmung möglicher Matches von Eigenschaften
 		sieht wie in Abbildung \ref{fig1} gezeigt aus. Das zentrale Element dabei ist
-		der Matcher. \cite{Hoo14}
+		der oder die Matcher. \cite{Hoo14}
 		
 		\begin{figure}[ht]
 		\centering
@@ -146,9 +146,11 @@
 		Zusätzlich können unterschiedliche Arten und Implementierungen von Matchern
 		verwendet werden. Um dies zu realisieren, gibt es eine Klasse, um Ontologien,
 		deren Elemente und Eigenschaften abzubilden, namens \textit{ontology}.
-		Die Elemente dieser Instanzen bestehen wiederum aus Instanzen der Klasse \textit{ontology element}.
-		Desweiteren gibt es eine Klasse, die die Matchings darstellt.
-		Diese beiden Klassen dienen als Schnittstellen, um innerhalb der Software zu agieren.
+		Die Elemente dieser Instanzen bestehen wiederum aus Instanzen der Klasse
+		\textit{onto element}. Dort enthalten sind alle Informationen, die das Element
+		beschreiben. Diese beiden Klassen dienen als Schnittstellen, um innerhalb der
+		Software mit Ontologien und deren Elementen zu interagieren.
+		
 		\subsection{Architektur}
 		Sowohl die Kernmodule als auch die einzelnen, konkreten Ausführungen dieser
 		Module sind entlang eines Prozesses organisiert, wie in Abbildung \ref{fig2}
@@ -166,16 +168,18 @@
 		Masterarbeit wurden bereits einige implementiert, die einige gängige
 		Möglichkeiten abdecken. Durch die Modularität können aber problemlos weitere
 		hinzugefügt werden.\\
-		Dann werden die Ontologien an an verschiedene Matcher übergeben. Dabei werden
+		Dann werden die Ontologien an verschiedene Matcher übergeben. Dabei werden
 		die Ergebnisse von einem Matcher zum nächsten weitergegeben, so ist es zum
-		einen möglich, diese Ergebnisse zu akumulieren und zum
-		anderen, weitergehende Analysen z.B. zur Struktur vorzunehmen.
+		einen möglich, diese Ergebnisse zu akkumulieren und zum
+		anderen, weitergehende Analysen z.B. der Struktur oder Hierarchie vorzunehmen.
 		Die Gesamtergebnisse werden dann an einen \textit{Output Writer} übergeben, um
-		sie dann weiterbearbeiten zu können.
+		sie dann weiter bearbeiten zu können.\\
+		
 		
 		\subsubsection{Anwendungsfall 1: Django App}
 		Wenn die Module der Matching Software als Teil einer Django App genutzt
-		werden, werden über ein Skript\footnote{settings.py} von Django
+		werden, werden über ein
+		Skript\footnote{SimpleOntologyMatcher/OntologyMatcher/settings.py} von Django
 		mögliche Ontologien und Matcher gesammelt.
 		
 		\begin{figure}[ht]
@@ -184,12 +188,11 @@
 		\caption{Module Django App}
 		\label{fig6}
 		\end{figure}
-		Dabei können verschiedene Quellen verwendet werden. Für Ontologien sind lokale
-		und auf externen Servern gespeicherte Dateien und in Datenbank
+		Dabei können, wie erwähnt, verschiedene Quellen verwendet werden. Für
+		Ontologien sind lokale und auf externen Servern gespeicherte Dateien und in Datenbank
 		eingepflegte Daten möglich. Bei Matchern werden nur lokal vorhandene Python
 		Module berücksichtigt. Die gefundenen Ontologien und Matcher werden dann in
-		ein HTML Template eingebetet, dass mit der Template Engine von Django erstellt
-		wird. Dabei wird auch die Quelle gespeichert, also der Dateiname mit Pfad oder
+		ein HTML Template eingebetet, dass mit der textit{Django Template Engine} erstellt wird. Dabei wird auch die Quelle gespeichert, also der Dateiname mit Pfad oder
 		die URL.\\
 		Über die dann erstellte Seite können Ontologien ausgewählt werden, die
 		analyisert werden sollen, und Matcher, mit denen dies durchgeführt wird.\\
@@ -230,8 +233,8 @@
 		um z.B. die Struktur zu analysieren. Die eigenen Ergebnisse eines Matchers
 		werden einfach zum Dictionary hinzugefügt.\\
 		Wenn alle Matcher durchlaufen wurden, wird das letztendliche Ergebnis in einem
-		anderen Template der Django Template Engine verarbeitet und angezeigt, wie in
-		\ref{fig5} dargestellt.
+		anderen Template der Django Template Engine verarbeitet und angezeigt,
+		wie in \ref{fig5} exemplarisch dargestellt.
 				
 		\begin{figure}[ht]
 		\centering
@@ -245,6 +248,145 @@
 		eine Datei im XML Format zu exportieren.
 		
 		\subsubsection{Anwendungsfall 2: Python Skript}
+		Neben der Möglichkeit den Simple Ontology Matcher als Django App zu verwenden,
+		können die einzelnen Module auch wie üblich als normale Python Module
+		importiert und aufgerufen werden. Dabei ist es möglich, die Module der
+		Zwischenschicht\footnote{matcher.py und reader.py} zu verwenden oder
+		auszulassen, da diese nur das dynamische Einbinden übernehmen.
+		
+		\subsection{Implementierte Matcher}
+		Im Rahmen dieser Masterarbeit wurden verschiedene Matching Algorithmen
+		implementiert. Das Ziel der verschiedenen Matcher ist nicht nur Beziehungen,
+		die Gleichheit oder Ähnlichkeit ausdrücken, zu finden, sondern möglichst
+		verschiedene Arten von Verknüpfungen.
+		
+		\subsubsection{Same Entity Matcher}
+		Der einfachste Matcher überprüft die URI der Elemente, um festzustellen, ob es
+		in den übergebenen Ontologien gleiche Elemente gibt.
+		
+		\subsubsection{Simple Label Matcher}
+		
+		\subsubsection{Levenshtein Distance Matcher}
+		Dieser Matcher berechnet die Levenshtein Distanz bzw. den Editierabstand
+		zwischen den Labeln zweier Elemente. Also wie viele Änderungen der Buchstaben
+		man an einem Label durchführen muss, um das andere Label zu erhalten.\\
+		Zuerst wird geprüft, ob beide Label aus mehr als drei Buchstaben bestehen.
+		Dann wird der Abstand, ob der Abstand zwischen beiden berechnet. Damit ein
+		Elementenpaar als mögliches Matching anerkannt wird, muss der Abstand größer
+		als eins und kleiner als fünf sein. Zusätzlich darf der Abstand nicht größer
+		als ein Drittel der Länge beider Label sein.\\
+		In der ersten Version dieses Matchers war die einzige Bedingung, dass der
+		Editierabstand kleiner als fünf sein musste. Dadurch gab es viele false
+		positives, wo der Editierabstand zwischen zwei Labeln eins betrug, die
+		Elemente aber nichts miteinander zu tun hatten.	Ähnliche Probleme traten bei
+		kurzen Wörtern, da dann alle Buchstaben geändert werden konnten. Aus diesem
+		Grund wurde die Bedingung eingeführt, dass die Veränderungen maximal ein
+		Drittel der Buchstaben umfassen dürfen.
+		
+		\subsubsection{Dictionary Synonym Matcher}
+		Mit diesem Matcher werden über die PyDictionary API Synonyme der Labels
+		abgefragt und diese mit den anderen Labels verglichen. Sobald es eine
+		Übereinstimmung in den Synonymen eines Labels mit einem anderen gibt, wird
+		dieses Elementenpaar als mögliches Matching vorgemerkt.\\
+		Bei diesem Matcher hat sich der Kontext der Ontologie als Schwachstelle
+		herausgestellt, da viele Begriffe verschiedene Bedeutungen haben, insbesondere
+		in bestimmten Wissenschaften. Dann ergeben viele Synonyme keinen Sinn.
+		
+		\subsubsection{Dictionary Antonym Matcher}
+		Bei diesem Matcher werden analog zum \textit{Dictionary Synonym Matcher}
+		Antonyme, also Gegenteile betrachtet.
+		
+		\subsubsection{Synonym Matcher}
+		Um das Problem mit den Synonymen anzugehen, wurden bei der German Federation
+		for Biological Data (GFBio)\footnote{\url{http://www.gfbio.org}} Synonyme als
+		Eigenschaft eingeführt. Dieser Matcher bedient sich dieser Synonyme, um nach passenden
+		Matchings zu suchen.
+		
+		\subsection{Sicherheit}
+		
+		\subsection{Zusätzliche Module}
+		Neben den Modulen, die für das Matching nötig sind, gibt es einige zusätzliche
+		Module zur Durchführung verschiedener Aufgaben mit den Resultaten.\\
+		Implementiert wurde eine Klasse, die die Matchings abbildet und welche die
+		Elemente und Informationen über das Matching enthält. Instanzen davon werden
+		über einen Reader aus den XML formatierten Ergebnissen erstellt und als Liste
+		übergeben. Dadurch können verschiedene Matcher und Algorithmen miteinander
+		verglichen werden.\\
+		Ein anderes Modul wandelt die Ergebnisse vom XML-Format in CSV. Die Ergebnisse
+		können dann in anderen Anwendungen verwendet werden, die Dateien im CSV-Format
+		besser verwenden können.
+		
+		\section{Evaluation}
+		Anhand eines vorher festgelegten Satzes an Daten wurde der im Rahmen dieser
+		Masterarbeit entwickelte Simple Ontology Matcher mit der etablierten Matching
+		Software
+		AgreementMakerLight\footnote{\url{https://github.com/AgreementMakerLight/AML-Jar}}(\textit{AML})
+		verglichen. Dieser Vergleich dient dazu, die Matcher mittels \textit{Precision
+		and recall} zu verbessern.
+		
+		\subsection{Verwendete Ontologien}
+		Für den Vergleich wurden zwei Ontologien verwendet, Human und Mouse. Human
+		ist beschreibt die menschliche Anatomie, Mouse die von Mäusen. Diese beiden
+		wurden ausgewählt, da eine hohe Überschneidung zu erwarten ist, wobei die
+		innerhalb der Ontolgien verwendeten Terminologie ähnlich sein dürfte.
+		
+		\subsection{Daten}
+		Wenn man die Gesamtheit der Ergebnisse aus beiden Matching Tools betrachtet,
+		erhält man eine Gesamtmenge von 2421 potenziellen Matchings. Der Simple
+		Ontology Matcher hat 980 Ergebnisse, welche nicht in denen von AML enthalten
+		sind (diese werden im Anschluss noch genauer analysiert). AML hat 786
+		exklusive Ergebnisse. Der verbliebene Teil von 655 Matchings wurden von beiden
+		vorgeschlagen.
+		
+		\subsection{Korrektheit der Resultate des Simple Ontology Matchers}
+		Die exklusiven Ergebnisse des Simple Ontology Matchers wurden händisch auf
+		Korrektheit überprüft und in verschiedene Kategorien unterteilt. Die
+		Kategorien sind \textit{gleiches} Element, \textit{direkte}, \textit{keine}, \textit{unsichere}
+		Verbindung.\\
+		Gleiche Element sind nicht nur Teile der Ontologie, die das
+		selbe Konzept darstellen, sondern solche, die die gleiche URI haben, also bei denen
+		es sich tatsächlich um ein und dasselbe handelt. Eine direkte Verbindung liegt
+		vor, wenn zwischen zwei Elemente eine eindeutige Verknüpfung vorliegt, z.B.
+		Unterklasse (rdfs:subClassOf) oder Gegenteil (owl:differentFrom). Wenn
+		es unklar ist, ob sich ein korrektes Matching handelt, werden die entsprechenden Paare in die
+		Kategorie "`unsicher"' einsortiert. Diese Ergebnisse benötigen zusätzliche
+		Betrachtung von Personen mit entsprechendem Hintergrundwissen in der Domäne.\\
+		
+		%\begin{center}
+		\begin{table}
+		\centering
+		\caption{Kategorisierte Ergebnisse}
+		\begin{tabular}{|c|c|}\hline
+		Kategorie & Anzahl Paare\\ \hline
+		Gleich & 7\\ \hline
+		Direkt & 887\\ \hline
+		Keine & 13\\ \hline
+		Unsicher & 73\\ \hline
+		\end{tabular}
+		\end{table}
+		%\end{center}
+		
+		\subsection{Analyse und mögliche Verbesserung der Matcher}
+		Wenn man die vom Simple Ontology Matcher nicht erfassten Ergebnispaare
+		betrachtet, fällt als erstes auf, dass es überwiegend Paare mit
+		unterschiedlicher Groß- und Kleinschreibung und mit bzw. ohne Unterstrichen
+		sind.\\
+		Beispiele:
+		\begin{itemize}
+		\item \url{http://mouse.owl#MA_0001849} (right main bronchus) und \url{http://human.owl#NCI_C33486} (Right\textunderscore Main\textunderscore Bronchus)
+		\item \url{http://mouse.owl#MA_0000638} (wrist skin) und \url{http://human.owl#NCI_C52752} (Wrist\textunderscore Skin)
+		\item \url{http://mouse.owl#MA_0000467} (foot digit 3) und \url{http://human.owl#NCI_C52841} (Foot\textunderscore Digit\textunderscore 3)
+		\item \url{http://mouse.owl#MA_0001432} (lumbar vertebra 5) und \url{http://human.owl#NCI_C32903} (L5\textunderscore Vertebra)
+		\item \url{http://mouse.owl#MA_0001106} (vagus X nerve) und \url{http://human.owl#NCI_C12812} (Vagus\textunderscore Nerve)
+		\item \url{http://mouse.owl#MA_0001426} (cervical vertebra 6) und \url{http://human.owl#NCI_C32244} (C6\textunderscore Vertebra)
+		\item \url{http://mouse.owl#MA_0001579} (lip skin) und \url{http://human.owl#NCI_C12291} (Skin\textunderscore of\textunderscore the\textunderscore Lip)
+		\item \url{http://mouse.owl#MA_0000370} (kidney capsule) und \url{http://human.owl#NCI_C12885} (Renal\textunderscore Capsule)
+		\item \url{http://mouse.owl#MA_0001320} (external naris) und \url{http://human.owl#NCI_C33178} (Nostril)
+		\item \url{http://mouse.owl#MA_0000715} (venous system smooth muscle) und \url{http://human.owl#NCI_C49321} (Venous\textunderscore System\textunderscore Smooth\textunderscore Muscle\textunderscore Tissue)
+		\item \url{http://mouse.owl#MA_0001735} (epididymal duct) und \url{http://human.owl#NCI_C32484} (Duct\textunderscore of\textunderscore the\textunderscore Epididymis)
+		\end{itemize}
+		
+		
 		%\item Evaluation (zumeist nur für Masterarbeiten relevant)
 		%\begin{itemize}
 		%	\item Jede Software muss auch getestet werden. Dieses Tests werden entweder
@@ -255,5 +397,6 @@
 		%	\item Die Ergebnisse der Anwendung werden in diesem Kapitel vorgestellt und
 			% anschließend diskutiert. Wenn möglich sollte die Ergebnisse in Relation zu bestehenden Arbeiten in dem Bereich erörtert werden.
 		%\end{itemize}
+		
 	%\end{itemize}  
 %\end{itemize}
