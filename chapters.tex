@@ -262,9 +262,38 @@
 		
 		\subsubsection{Same Entity Matcher}
 		Der einfachste Matcher überprüft die URI der Elemente, um festzustellen, ob es
-		in den übergebenen Ontologien gleiche Elemente gibt.
+		in den übergebenen Ontologien gleiche Elemente gibt. Dies wird über eine
+		einfach Abfrage auf Gleichheit der gesicherten URIs getan.
+		\begin{lstlisting}
+		for i in onto_elements:
+			for j in onto1_elements:
+				if re.match(i.name, j.name, re.IGNORECASE):
+		\end{lstlisting}
 		
 		\subsubsection{Simple Label Matcher}
+		Bei diesem Matcher werden die Labels der Elemente auf Ähnlichkeiten
+		untersucht.
+		Zuerst werden die Labels auf Gleichheit überprüft.
+		\begin{lstlisting}
+		match_result = re.match("^" + item.get_text() + "$", item1.get_text(), re.IGNORECASE)
+		if not already_matched and match_result and not re.match(i.name, j.name, re.IGNORECASE):
+		\end{lstlisting}
+		Anschließend wird einfach nach Übereinstimmungen in den Labels gesucht.
+		\begin{lstlisting}
+		elif not already_matched and ((re.match(item.get_text(), item1.get_text(), re.IGNORECASE) and len(item.get_text()) > 3) or (re.match(item1.get_text(), item.get_text(), re.IGNORECASE) and len(item1.get_text()) > 3)) and not re.match(i.name, j.name, re.IGNORECASE):
+		\end{lstlisting}
+		Die reguläre Ausdrucküberprüfung wird in beide Richtungen durchgeführt, da in
+		der Python re.match Funktion der im ersten Argument übergebene Ausdruck im
+		zweiten gesucht wird. In beiden Fällen darf der gesuchte Ausdruck aber nicht
+		kürzer als vier Zeichen sein. In früheren Tests, wo es diese Einschränkung
+		noch nicht gab, waren in der Ergebnismenge viele false positives.
+		Die erste Bedingung in beiden Abfragen ist nach der Variable
+		\textit{already\textunderscorematched}, diese dient dazu festzuhalten, ob zwei Elemente
+		bereits als mögliches Matching vorgemerkt wurde. Dies ist für den Fall
+		gedacht, dass es mehr als ein Label für ein Element gibt. Sollte dies
+		vorkommen, werden nicht alle Kombinationen von Labels überprüft, falls es
+		bereits bei einem Paar ein Treffer gab. Dadurch können potenziell Vergleiche
+		und damit Zeit eingespart werden.
 		
 		\subsubsection{Levenshtein Distance Matcher}
 		Dieser Matcher berechnet die Levenshtein Distanz bzw. den Editierabstand
@@ -276,17 +305,22 @@
 		als eins und kleiner als fünf sein. Zusätzlich darf der Abstand nicht größer
 		als ein Drittel der Länge beider Label sein.\\
 		In der ersten Version dieses Matchers war die einzige Bedingung, dass der
-		Editierabstand kleiner als fünf sein musste. Dadurch gab es viele false
-		positives, wo der Editierabstand zwischen zwei Labeln eins betrug, die
-		Elemente aber nichts miteinander zu tun hatten.	Ähnliche Probleme traten bei
-		kurzen Wörtern, da dann alle Buchstaben geändert werden konnten. Aus diesem
-		Grund wurde die Bedingung eingeführt, dass die Veränderungen maximal ein
-		Drittel der Buchstaben umfassen dürfen.
-		
+		Editierabstand größer als eins und kleiner als fünf sein musste.
+		\begin{lstlisting}
+		if 1 < distance and distance < 5 and (distance < len(item.get_text())/3) and not already_matched:
+		\end{lstlisting}
+		Probleme traten bei kurzen Wörtern, da dann alle Buchstaben geändert werden
+		konnten. Aus diesem Grund wurden die Bedingungen eingeführt, dass mehr als ein Buchstabe
+		geändert werden muss und die Veränderungen maximal ein Drittel der Buchstaben
+		umfassen dürfen.
+		\begin{lstlisting}
+		if not already_matched and 1 < distance and distance < 5 and (distance < len(item.get_text())/3) and (distance < len(item1.get_text())/3) and not re.match(i.name, j.name, re.IGNORECASE):
+		\end{lstlisting}
+				
 		\subsubsection{Dictionary Synonym Matcher}
-		Mit diesem Matcher werden über die PyDictionary API Synonyme der Labels
-		abgefragt und diese mit den anderen Labels verglichen. Sobald es eine
-		Übereinstimmung in den Synonymen eines Labels mit einem anderen gibt, wird
+		Mit diesem Matcher werden über die PyDictionary
+		API\footnote{\url{https://pypi.python.org/pypi/PyDictionary}} Synonyme der
+		Labels abgefragt und diese mit den anderen Labels verglichen. Sobald es eine Übereinstimmung in den Synonymen eines Labels mit einem anderen gibt, wird
 		dieses Elementenpaar als mögliches Matching vorgemerkt.\\
 		Bei diesem Matcher hat sich der Kontext der Ontologie als Schwachstelle
 		herausgestellt, da viele Begriffe verschiedene Bedeutungen haben, insbesondere
@@ -294,7 +328,7 @@
 		
 		\subsubsection{Dictionary Antonym Matcher}
 		Bei diesem Matcher werden analog zum \textit{Dictionary Synonym Matcher}
-		Antonyme, also Gegenteile betrachtet.
+		Antonyme, also Gegenteile von Wörtern, betrachtet.
 		
 		\subsubsection{Synonym Matcher}
 		Um das Problem mit den Synonymen anzugehen, wurden bei der German Federation
