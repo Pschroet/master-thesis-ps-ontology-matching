@@ -210,7 +210,7 @@
 		\label{fig3}
 		\end{figure}
 		Wenn sowohl Ontologien bzw. Terminologien als auch mindestens ein Matcher
-		gewählt wurden, wird der Matching Prozess wie in \ref{fig4} gezeigt,
+		gewählt wurden, wird der Matching Prozess, wie in \ref{fig4} gezeigt,
 		gestartet.
 		
 		\begin{figure}[ht]
@@ -314,7 +314,7 @@
 		Probleme traten bei kurzen Wörtern, da dann alle Buchstaben geändert werden
 		konnten. Aus diesem Grund wurden die Bedingungen eingeführt, dass mehr als ein Buchstabe
 		geändert werden muss und die Veränderungen maximal ein Drittel der Buchstaben
-		umfassen dürfen.
+		umfassen dürfen (siehe auch \ref{subsec:Evaluation 1} Evaluation 1).
 		\begin{lstlisting}
 		if not already_matched and 1 < distance and distance < 5 and (distance < len(item.get_text())/3) and (distance < len(item1.get_text())/3) and not re.match(i.name, j.name, re.IGNORECASE):
 		\end{lstlisting}
@@ -326,7 +326,11 @@
 		dieses Elementenpaar als mögliches Matching vorgemerkt.\\
 		Bei diesem Matcher hat sich der Kontext der Ontologie als Schwachstelle
 		herausgestellt, da viele Begriffe verschiedene Bedeutungen haben, insbesondere
-		in bestimmten Wissenschaften. Dann ergeben viele Synonyme keinen Sinn.
+		in bestimmten Wissenschaften. Dann ergeben viele Synonyme keinen Sinn.\\
+		Ein weiteres Problem dieses Matchers ist die Laufzeit, da die Dauer Anfrage
+		zusammen mit der Menge der Anfragen den gesamten Prozess spürbar in die Länge
+		ziehen. Eine mögliche andere Quelle für einen derartigen Matcher ist daher
+		wünschenswert.
 		
 		\subsubsection{Dictionary Antonym Matcher}
 		Bei diesem Matcher werden analog zum \textit{Dictionary Synonym Matcher}
@@ -336,10 +340,110 @@
 		Um das Problem mit den Synonymen anzugehen, wurden bei der German Federation
 		for Biological Data (GFBio)\footnote{\url{http://www.gfbio.org}} Synonyme als
 		Eigenschaft eingeführt. Dieser Matcher bedient sich dieser Synonyme, um nach passenden
-		Matchings zu suchen.
+		Matchings zu suchen. Die verringert auch die 
 		
 		\subsection{Sicherheit}
+		Sicherheit ist bei der Softwareentwicklung ein wichtiger Aspekt, der
+		betrachtet werden muss. Dies gilt insbesondere bei einer Webanwendung, da
+		dort mit Eingaben von Außen gearbeitet wird. Außerdem sind der Nutzerkreis
+		nicht eingeschränkt und Nutzer nicht per se bekannt.
 		
+		\subsubsection{XML}
+		Daten, die in XML vorliegen, lassen sich grundsätzlich so gestalten, dass sie
+		schädliches Verhalten hervorrufen. Denkbar sind
+		\textit{Denial of Service} (DoS) Attacke, Zugriff auf lokale Dateien,
+		Erstellen von Netzwerkverbindungen oder Umgehung von
+		Schutzmaßnahmen.\footnote{\url{https://docs.python.org/2/library/xml.html#xml-vulnerabilities}}
+		Das Modul aus der Python Standardbibliothek, um XML Dateien bzw. XML
+		formatierte Strings zu lesen, ist gegen derartige Angriffe nicht explizit
+		geschützt. Es gibt zwei Bibliotheken, die in der Dokumentation von Python 2
+		erwähnt werden, die die Sicherheitsproblematik angehen (\textit{defused
+		packages}).\footnote{\url{https://docs.python.org/2/library/xml.html#defused-packages}}
+		Für den Simple Ontology Matcher wurde eine dieser beiden verwendet, defusedxml.\footnote{\url{https://pypi.python.org/pypi/defusedxml}} Dadurch
+		soll die Möglichkeit verringert werden, dass der Simple Ontology Matcher als
+		Einfallstor für Schadsoftware dient.
+		
+		\subsubsection{Exponential Entity Expansion}
+		Bei dieser Art Angriff werden XML Entities benutzt, um den Inhalt einer
+		einzulesenden XML Datei gezielt um ein Vielfaches zu vergrößern. XML Entities
+		dienen dazu, Zeichen durch andere gezielt zu ersetzen. Bei einer
+		für eine solche Attacke präpariertem XML werden rekursiv auszuführende
+		Definitionen angelegt, die dann zu einer vielfachen Menge der angelegten
+		Definition führen. Dadurch wird der Parser und eventuell auch das System, auf
+		dem der Parser läuft, lahmgelegt, indem unerwartet eine große Menge
+		Arbeitsspeicher belegt werden. Dieser Angriff ist auch als \textit{billion laughs} oder XML
+		Bombe bekannt.\cite{Sul09} Ein Beispiel für solch einen Angriff ist hier aufgeführt:
+		\begin{lstlisting}
+		<?xml version="1.0"?>
+		<!DOCTYPE lolz [
+		 <!ENTITY lol "lol">
+		 <!ELEMENT lolz (#PCDATA)>
+		 <!ENTITY lol1 "&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;">
+		 <!ENTITY lol2 "&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;">
+		 <!ENTITY lol3 "&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;">
+		 <!ENTITY lol4 "&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;">
+		 <!ENTITY lol5 "&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;">
+		 <!ENTITY lol6 "&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;">
+		 <!ENTITY lol7 "&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;">
+		 <!ENTITY lol8 "&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;">
+		 <!ENTITY lol9 "&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;">
+		]>
+		<lolz>&lol9;</lolz>
+		\end{lstlisting}
+		Dabei handelt es sich um valides und wohlgeformtes XML. Wenn ein XML Parser
+		dieses XML Dokument lädt, wird das Element <lolz> gefunden, welches den Text
+		“&lol9;” enthält. Dieses ist als Entität definiert, welches aus zehn mal der
+		Zeichenkette “&lol8;” besteht. Dieses setzt sich aus zehn mal
+		dem Ausdruck “&lol7;”  zusammen. Dies wird nun weitergeführt, bis alle
+		Entitäten aufgedröselt wurden. Danach bestehen die Daten aus einer Milliarde
+		mal dem Ausdruck "`lol"'. Daher auch die Bezeichnung billion laughs. Die Menge an
+		Daten ist dadurch von weniger als einem Kilobyte auf fast drei GB
+		angewachsen.\cite{Sul09}
+		
+		\subsubsection{Quadratic Blowup Entity Expansion}
+		Dieser Angriff funktioniert ähnlich der Exponential Entity Expansion, nutzt
+		aber keine Verschachtelung von Entitäten, sondern wiederholt eine sehr lange
+		Zeichenkette mehrfach. Dadurch ist die Menge an Daten, die hinzugewonnen wird,
+		potenziell nicht so groß, wie bei der Exponential Entity Expansion. Jedoch
+		wirken hier einige Schutzmechanismen, die extra gegen diese Verschachtelung in
+		Parser eingebaut wurden, nicht mehr. Dafür lassen sich beide Angriffe
+		kombinieren.\footnote{\url{https://pypi.python.org/pypi/defusedxml#quadratic-blowup-entity-expansion}}
+		
+		\subsubsection{External Entity Attacks}
+		XML erlaubt es auch, externe Ressourcen einzubinden, indem eine URL in einer
+		Entität definiert wird. Dabei wird jedes mal, wenn eine entsprechende Entität
+		ersetzt werden soll, die angegebene URL aufgerufen, um das Dokument zu laden.
+		Dieses Verhalten kann ausgenutzt werden, indem z.B. die Wartezeit auf
+		unendlich gesetzt oder die Datenübertragung langsam durchgeführt wird.
+		Alternativ kann man auch sehr große Menge an Daten oder sogar unendlich viel
+		übertragen werden.\cite{Sul09}
+		Es ist auch möglich, Dateien auf dem selben System, wie der XML Parser
+		anzugeben, sie dadurch einzulesen und an den Inhalt zu gelangen.
+		\footnote{\url{https://pypi.python.org/pypi/defusedxml#external-entity-expansion-local-file}}
+		\\
+		\\
+		Beim vom Simple Ontology Matcher verwendeten XML Parser defusedxml sind
+		Entitäten standardmäßig nicht erlaubt und lösen eine
+		Exception aus, sofern welche gefunden werden.\footnote{\url{https://pypi.python.org/pypi/defusedxml}}
+		Dadurch können die Vorteile von Entitäten nicht genutzt werden, es erschwert
+		aber auch das 
+		
+		\subsubsection{Django}
+		Wenn der Simple Ontology Matcher als Django App verwendet wird, nimmt er
+		Eingaben von Nutzern, also von extern, entgegen und verarbeitet sie. Bei den
+		URLs sind nur bestimmte Ausdrücke erlaubt, bei denen auf Gleichheit geprüft
+		wird. Andere Pfade sind in der URL nicht gestattet. In zwei Fällen ist das
+		Abfragen von Dokumenten zulässig.
+		Entweder wenn es eine Anfrage nach der Datei \textit{scripts.js} gibt oder das Ergebnis
+		eines Matchings angezeigt werden soll. In diesem Fall werden auch drei Arten
+		von Parametern in der URL übergeben, ausgelesen und verwendet. Dabei werden
+		die Eingaben in die Zwischenmodule gegeben. Erwartet werden Namen von
+		vorhandenen Python Modulen. Sollten diese nicht existieren, werden die
+		Matcher nicht in die Matching Tool Chain aufgenommen, da es eine
+		entsprechende Abfrage gibt.
+		\begin{lstlisting}
+		if os.path.isfile(os.path.dirname(__file__) + '/reader/' + matcher + ".py"):
+		\end{lstlisting}
 		
 		\subsection{Zusätzliche Module}
 		Neben den Modulen, die für das Matching nötig sind, gibt es einige zusätzliche
@@ -353,7 +457,108 @@
 		können dann in anderen Anwendungen verwendet werden, die Dateien im CSV-Format
 		besser verwenden können.
 		
-		\section{Evaluation}
+		\section{Evaluationen}
+		Im Rahmen dieser Masterarbeit wurden mehrere Evaluationen durchgeführt, um die
+		Genauigkeit der Matcher zu beurteilen. In diesem Prozess wurde etablierte
+		Matching Software für ausgewählte Ontologien verwendet, um eine möglichst
+		umfangreiche Ergebnismenge für den Vergleich zu haben.
+		
+		\subsection{Evaluation 1}
+		\label{subsec:Evaluation 1}
+		Als erste Evaluation wurde ein Vergleich zwischen einem von Dr. Ing. Alsayed
+		Algergawy entwickelten Algorithmus und einem Matching Prozess mit den Simple
+		Label und Levenshtein Distance Matchern. Anschließend wurden die Ergebnisse
+		händisch begutachtet, um die Qualität der Matchings zu beurteilen. Die
+		Algorithmen nehmen als Ausgangsbasis beide die Labels der Elemente der
+		Ontologien.
+		
+		\subsubsection{Verwendete Ontologien}
+		Für den Vergleich wurden die Environment Ontology (EnvO) und die Phenotypic
+		Quality Ontology (PATO) herangezogen. EnvO wurde entwickelt, um die
+		Annotation für jegliche Organismen und biologische Exemplare zu erleichtern.
+		Dafür wird ein strukturiertes Vokabular geboten. EnvO besteht aus Wörtern für
+		Biome, Umwelteigenschaften und
+		Materialien.\footnote{\url{http://www.environmentontology.org/home/about-envo}}
+		PATO enthält Begriffe über
+		Phänotypen, also das
+		Erscheinungsbild von
+		Organismen.\footnote{\url{http://obofoundry.org/ontology/pato.html}}
+		
+		\subsubsection{Resultat}
+		Insgesamt wurden 203 Matchings von beiden Algorithmen gefunden, bis auf neun
+		Ergebnisse beschrieben alle das gleiche, d.h. sie hatten die selbe URI.
+		Wenn man die exklusiven Ergebnisse betrachtet, also solche, die nur einer
+		der beiden Matching Algorithmen gefunden hat, dann hat der Simple Ontology
+		Matcher fand 89 potenzielle Matchings, während der Algorithmus von Dr. Ing.
+		Algergawy 62 vorschlug. Von diesen Matchings war beim Simple Ontology Matcher
+		lediglich eines dabei, bei welchem beide Elemente die gleiche URI hatten. Bei
+		den Ergebnissen anderen Algorithmus war dies bei 19 Matchings der Fall.\\
+		Alle Paare und die konkrete Einteilung in die Kategorien sind im Appendix
+		\ref{app:first_appendix}
+		aufgeführt.
+		
+		\subsubsection{Korrektheit der Resultate}
+		Die erste Evaluation sollte als erste grobe Einordnung dienen, inwiefern
+		der Simple Ontology Matcher seinem Ziel nahe kommt, zwei beliebige Ontologien
+		zu vergleichen und Verbindungen zwischen ihnen zu finden. Für die Einordnung
+		wurden folgende Kategorien verwendet:\\
+		\begin{itemize}
+		  \item Gleich: Zwei Elemente beschreiben das selbe Konzept
+		  \item Gegenteil: Zwei Elemente sind das Gegenteil voneinander
+		  \item Indirekt: Die beiden Elemente können über ein anderes Elemente
+		  miteinander verbunden werden, unabhängig davon, ob es Teil einer der beiden
+		  Ontologien ist
+		  \item Ähnlich: Zwei Elemente sind zwar verbunden, es lässt sich aber keine
+		  direkte Verbindung angeben, meist ist eines eine Beschreibung des anderen
+		  oder beide haben den selbst Wortstamm
+		  \item Keine: Es besteht keine Verbindung und das Matching ist ein false
+		  positive
+		  \item Unsicher: Es ist unklar ob zwei Elemente miteinander verbunden sind,
+		  da das notwendige Domänenwissen aufgrund von Fachfremdheit fehlt.
+		\end{itemize}
+		
+		Bei der Durchsicht der Ergebnisse fiel schnell auf, dass der Simple Ontology
+		Matcher sehr viele Matchings gefunden hat, die zwar verbunden sind, aber keine
+		Gleichheit ausdrücken (Kategorien Gegeteil und indirekt).
+		Wohingegen der von Dr. Ing. Algergawy verwendete Algorithmus viele Matchings
+		gefunden hat, die Gleichheit zwischen den Elementen ausdrücken (Kategorien
+		Gleich und Ähnlich).\\
+		
+		\begin{table}
+		\centering
+		\small
+		\setlength\tabcolsep{2pt}
+		\caption{Kategorisierte Ergebnisse}
+		\begin{tabular}{|c|c|c|c|c|c|c|}\hline
+		Matching Algorithmus von & Gleich & Gegenteil & Indirekt & Ähnlich & Keine &
+		Unsicher \\\hline
+		Dr. Ing. Algergawy & 6 (13,95\%) & 0 & 1 (2,32\%) & 16 (37,2\%) & 13
+		(30,23\%) & 7 (16,27\%) \\\hline
+		Schröter & 1 (1,13 \%) & 40 (45,45\%) & 5 (5,68\%) & 11 (12,5\%) & 21
+		(23,86\%) & 10 (11,36\%) \\\hline
+		\end{tabular}
+		\end{table}
+		Alle Prozentangaben in der Tabelle wurden abgerundet.\\
+				
+		\begin{figure}[ht]
+		\centering
+		\includegraphics[width=1.0\textwidth]{pics/Vergleich-Algergawy-Schroeter_2016-11-22.png}
+		\caption{Vergleich Algergawy Schröter}
+		\label{fig6}
+		\end{figure}
+		
+		\subsubsection{Fazit und Verbesserungen des Simple Ontology Matchers}
+		Als erstes wurde für die gleichen Elemente, also solche mit gleicher URI, ein
+		eigener Matcher geschrieben und als Bedingung in die anderen Matcher
+		aufgenommen, dass die URI nicht mehr gleich sein darf. Dadurch können diese
+		trivialen Ergebnisse gezielt in die Ergebnismenge miteinbezogen oder
+		ausgeschlossen werden.\\
+		Für den Levenshtein Matcher ergibt sich die Verbesserung, dass die obere
+		Schranke für mögliche Änderungen nicht nur ein absolutes Maximum benötigt,
+		sondern eines, das an die Wortlänge angepasst ist.
+		
+		\subsection{Evaluation 2}
+		\label{subsec:Evaluation 2}
 		Anhand eines vorher festgelegten Satzes an Daten wurde der im Rahmen dieser
 		Masterarbeit entwickelte Simple Ontology Matcher mit der etablierten Matching
 		Software
@@ -361,25 +566,28 @@
 		verglichen. Dieser Vergleich dient dazu, die Matcher mittels \textit{Precision
 		and recall} zu verbessern.
 		
-		\subsection{Verwendete Ontologien}
+		\subsubsection{Verwendete Ontologien}
 		Für den Vergleich wurden zwei Ontologien verwendet, Human und Mouse. Human
 		ist beschreibt die menschliche Anatomie, Mouse die von Mäusen. Diese beiden
 		wurden ausgewählt, da eine hohe Überschneidung zu erwarten ist, wobei die
 		innerhalb der Ontolgien verwendeten Terminologie ähnlich sein dürfte.
 		
-		\subsection{Daten}
+		\subsubsection{Resultat}
 		Wenn man die Gesamtheit der Ergebnisse aus beiden Matching Tools betrachtet,
 		erhält man eine Gesamtmenge von 2421 potenziellen Matchings. Der Simple
 		Ontology Matcher hat 980 Ergebnisse, welche nicht in denen von AML enthalten
 		sind (diese werden im Anschluss noch genauer analysiert). AML hat 786
 		exklusive Ergebnisse. Der verbliebene Teil von 655 Matchings wurden von beiden
-		vorgeschlagen.
+		vorgeschlagen. Die vollständigen Ergebnisse sind in Appendix \ref{app:second_appendix}
+		aufgeführt.
 		
-		\subsection{Korrektheit der Resultate des Simple Ontology Matchers}
+		\subsubsection{Korrektheit der Resultate des Simple Ontology Matchers}
 		Die exklusiven Ergebnisse des Simple Ontology Matchers wurden händisch auf
 		Korrektheit überprüft und in verschiedene Kategorien unterteilt. Die
-		Kategorien sind \textit{gleiches} Element, \textit{direkte}, \textit{keine}, \textit{unsichere}
-		Verbindung.\\
+		Kategorien wurden gegenüber der ersten Evaluation geändert. Die Kategorien
+		indirekt und ähnlich wurden entfernt, um nur die konkret zutreffenden
+		Ergebnisse einzubeziehen. Die Kategorien sind \textit{gleiches} Element,
+		\textit{direkte}, \textit{keine}, \textit{unsichere} Verbindung.\\
 		Gleiche Element sind nicht nur Teile der Ontologie, die das
 		selbe Konzept darstellen, sondern solche, die die gleiche URI haben, also bei denen
 		es sich tatsächlich um ein und dasselbe handelt. Eine direkte Verbindung liegt
@@ -389,7 +597,6 @@
 		Kategorie "`unsicher"' einsortiert. Diese Ergebnisse benötigen zusätzliche
 		Betrachtung von Personen mit entsprechendem Hintergrundwissen in der Domäne.\\
 		
-		%\begin{center}
 		\begin{table}
 		\centering
 		\caption{Kategorisierte Ergebnisse}
@@ -401,9 +608,8 @@
 		Unsicher & 73\\ \hline
 		\end{tabular}
 		\end{table}
-		%\end{center}
 		
-		\subsection{Analyse und mögliche Verbesserung der Matcher}
+		\subsubsection{Analyse und mögliche Verbesserung der Matcher}
 		Wenn man die vom Simple Ontology Matcher nicht erfassten Ergebnispaare
 		betrachtet, fällt als erstes auf, dass es überwiegend Paare mit
 		unterschiedlicher Groß- und Kleinschreibung und mit bzw. ohne Unterstrichen
