@@ -1,0 +1,36 @@
+% ---------------------------------------------------
+% ----- Chapters of the template
+% ----- for Bachelor-, Master thesis and class papers
+% ---------------------------------------------------
+%  Created by C. Müller-Birn on 2012-08-17, CC-BY-SA 3.0.
+%  Freie Universität Berlin, Institute of Computer Science, Human Centered Computing. 
+%
+\chapter{Vorhandene Software}
+\label{chap:existingSoftware}
+		
+		Da es bereits Software für den Umgang mit Ontologien und das Matchen derselben gibt, wird sie an dieser Stelle betrachtet. Zum einen, um das Rad in diesem Bereich nicht neu und möglicherweise schlechter zu erfinden, sondern zu erweitern und/oder andere Aspekte zu behandeln. Und zum anderen soll von bestehenden Tools gelernt werden. Da die Auswahl an möglichen Tools groß ist \cite{Ber14} , können nicht alle in diesem Rahmen ausführlich vorgestellt werden. Daher erfolgt hier nur eine Auswahl. Reine Frameworks wurden bei der Bewertung nicht beachtet, da diese für die Zielgruppe nicht technischer Experten nicht geeignet sind, sondern für Entwickler von entsprechenden Tools.
+		
+		\section{AgreementMakerLight}
+		\textit{AgreementMakerLight} ist ein automatisiertes Ontologie Matching System,
+		das eine Weiterentwicklung der Software AgreementMaker ist und seit Anfang 2013 entwickelt wird. Der AgreementMakerLight ist Open Source, wird unter der Apache Lizenz Version 2.0 veröffentlicht und kann daher frei weiterentwickelt und verwendet werden. Es ist ein erweiterbares Framework und will Probleme bei umfangreichen Ontologie Matchings durch Effizienz angehen. Hauptsächlich finden Techniken Anwendung, die auf Elementebene arbeiten und durch domänspezifisches Wissen ergänzt werden.
+		Der AgreementMakerLight wird als vorbereitetes Projekt für die Integrated
+		Development Environment (IDE) Eclipse und als ausführbares Java-Archiv (jar) angeboten. Beides trifft die gewählte Zielgruppe aber nicht. Als Projekt ist es eher für Entwickler oder zumindest mit Softwareentwicklung vertrauten Personen gerichtet. Um eine jar-Datei auszuführen, ist eine Installation von Java nötig, was dem Gedanken des im Rahmen dieser Arbeit zu erstellenden Tools widerspricht, unkompliziert und sofort benutzbar zu sein.
+		
+		\section{PARIS}
+		\textit{PARIS}, kurz für Probabilistic Alignment of Relations, Instances, and
+		Schema, ist ein System, um Ontologien im RDF Format zu matchen. Dabei werden Verbindungen
+		auf Instanz- und Klassenebene gesucht und wirken sich aufeinander aus. Matchings wird eine Wahrscheinlichkeit zugerechnet, um ohne das Festlegen von Parametern zu arbeiten. In Tests mit großen Ontologien erzielt PARIS eine Trefferquote von etwa 90\%. PARIS steht unter einer Creative Commons Lizenz , die eine kommerzielle Nutzung untersagt und eine Namensnennung der Ersteller vorschreibt. Ansonsten ist die Erweiterung und Nutzung aber frei\\
+		PARIS wird neben dem reinen Quellcode als jar-Datei ausgeliefert. Wie beim AgreementMakerLight ist dies für die Zielgruppe kein idealer Anwendungsfall. Weiterhin wird PARIS über die Kommandozeile gestartet, im Gegensatz zu z.B. AgreementMakerLight, was eine zusätzliche Hürde darstellt.
+		
+		\section{COMA 3.0}
+		\textit{COMA 3.0} ist Matching Tool für Schemata und Ontologien und wurde am
+		Institut für Informatik an der Universität Leipzig entwickelt. Es gibt sowohl eine klassische Software- als auch eine Webversion. Beide wurden in Java entwickelt. Die Webversion wird als Java Applet angeboten. Die Vorgänger von COMA 3.0 hießen COMA und COMA++ und es ist eine Weiterentwickelung von diesen. Dafür wurden das Management des Workflows verbessert und Features hinzugefügt, darunter Ontologie Matching.
+		Da die im Rahmen dieser Mastarbeit entwickelte Software als Webapplikation entwickelt werden soll, wird wegen der Ähnlichkeit nur das Java Applet betrachtet. Als Java Applets wird Java Software in Java Bytecode bezeichnet, die über einen Webbrowser ausgeführt werden kann.  Dafür werden in Browsern Plug-Ins benötigt, die in der Regel aber nicht vorinstalliert sind. Auch gab es immer wieder Probleme mit Sicherheitslücken und „das Java-Plug-in war als einer der größten Türöffner für Sicherheitsangriffe bekannt und wurde in Untersuchungen immer wieder als Risiko Nummer eins auf den PCs dieser Welt bezeichnet“.  Zu Beginn des Jahres 2016 wurde von Oracle, dem Hersteller von Java, verkündet, dass diese Technologie nicht mehr weiterentwickelt wird.  Weiterhin ist die Portabilität über Betriebssysteme nicht unproblematisch, da Browser auf mobilen Geräten, die Plug-Ins fast ausnahmslos nicht unterstützen.  Das sind alles Gründe, die gegen einen Einsatz im Benutzerkreis sprechen, der im Rahmen dieser Mastarbeit angesprochen werden soll.
+		
+		\section{LODE}
+		\textit{LODE} (Linked Open Data Enhancer) ist ein webbasiertes Tool, um
+		Ontologien zu erkunden, zu matchen und zu erweitern. Es ist Open Source  und wird innerhalb des Play Frameworks   verwendet. Entwickelt wurde es in der Kooperation der Universitäten Mannheim, Washington und Indiana.
+		
+		\section{HerTUDA}
+		\textit{HerTUDA} ist ein Ontologie Matching Tool der Knowledge Engineering
+		Arbeitsgruppe des Fachbereichs Informatik an der Technischen Universität Darmstadt. Es ist auf schnelles und einfaches Arbeiten ausgelegt und arbeitet mit syntaktischen Vergleichen von Strings und Herausfiltern irrelevanter Matches.
