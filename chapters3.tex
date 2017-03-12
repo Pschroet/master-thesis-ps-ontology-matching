@@ -74,7 +74,7 @@
 		gefunden hat, die Gleichheit zwischen den Elementen ausdrücken (Kategorien
 		Gleich und Ähnlich).\\
 		
-		\begin{table}
+		\begin{table}[h!]
 		\centering
 		\small
 		\setlength\tabcolsep{2pt}
@@ -90,11 +90,11 @@
 		\end{table}
 		Alle Prozentangaben in der Tabelle wurden abgerundet.\\
 				
-		\begin{figure}[ht]
+		\begin{figure}[h!]
 		\centering
 		\includegraphics[width=1.0\textwidth]{pics/Vergleich-Algergawy-Schroeter_2016-11-22.png}
 		\caption{Vergleich Algergawy Schröter}
-		\label{fig6}
+		\label{fig16}
 		\end{figure}
 		
 		\subsection{Fazit und Verbesserungen des Simple Ontology Matchers}
@@ -105,7 +105,14 @@
 		ausgeschlossen werden.\\
 		Für den Levenshtein Matcher ergibt sich die Verbesserung, dass die obere
 		Schranke für mögliche Änderungen nicht nur ein absolutes Maximum benötigt,
-		sondern eines, das an die Wortlänge angepasst ist.
+		sondern eines, das an die Wortlänge angepasst ist.\\
+		Als Gesamterkenntnis hat sich gezeigt, dass es einen Unterschied in der
+		Herangehensweise gibt, der zu derartig unterschiedlichen Ergebnissen führt.
+		Die übliche Suche nach Verbindungen zwischen Ontologien bezieht sich auf
+		Gleichheit oder Ähnlichkeit. Im Rahmen dieser Masterarbeit wurde intuitiv der
+		Ansatz gewählt, dass jede möglich Art der Verbindung zu suchen ist, egal
+		welcher Art. Ob und wo diese Ansätze sinvoll sind, müssen Experten auf dem
+		jeweiligen Gebiet entscheiden, auf dem die Matchings erstellt werden.
 		
 		\section{Evaluation 2}
 		\label{subsec:Evaluation 2}
@@ -147,7 +154,7 @@
 		Kategorie "`unsicher"' einsortiert. Diese Ergebnisse benötigen zusätzliche
 		Betrachtung von Personen mit entsprechendem Hintergrundwissen in der Domäne.\\
 		
-		\begin{table}
+		\begin{table}[h!]
 		\centering
 		\caption{Kategorisierte Ergebnisse}
 		\begin{tabular}{|c|c|}\hline
@@ -161,8 +168,8 @@
 		
 		\subsection{Analyse und mögliche Verbesserung der Matcher}
 		Wenn man die vom Simple Ontology Matcher nicht erfassten Ergebnispaare
-		betrachtet, fällt als erstes auf, dass es überwiegend Paare mit
-		unterschiedlicher Groß- und Kleinschreibung und mit bzw. ohne Unterstrichen
+		betrachtet, fällt als erstes auf, dass es fast ausschließlich Paare mit
+		unterschiedlicher Groß- und Kleinschreibung und mit bzw. ohne Unterstriche
 		sind.\\
 		Beispiele:
 		\begin{itemize}

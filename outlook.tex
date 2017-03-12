@@ -1,0 +1,38 @@
+% ---------------------------------------------------
+% ----- Conclusion of the template
+% ----- for Bachelor-, Master thesis and class papers
+% ---------------------------------------------------
+%  Created by C. Müller-Birn on 2012-08-17, CC-BY-SA 3.0.
+%  Freie Universität Berlin, Institute of Computer Science, Human Centered Computing. 
+%
+\chapter{Ausblick}
+\label{chap:outlook}      
+
+\section{Das Matching von mehr als zwei Ontologien}
+Aktuell können nur jeweils zwei Ontologien miteinander gematcht werden. Durch
+einen einfachen Wrapper, der die Ontologien paarweise miteinander matcht, ließe
+sich dieser Nachteil beheben.
+
+\section{Nebenläufigkeit}
+Wie in Kapitel \ref{ImplementierteMatcher} Implementierte Matcher erwähnt, ist
+bei einigen Matchern die Laufzeit nicht ideal. Aber auch bei den anderen Matchern wäre eine schnellere
+Bearbeitung der Ongologien positiv. Daher ist eine angedachte Erweiterung für
+die Zukunft, die Matcher bzw.
+den Matching Prozess nebenläufig zu gestalten. Dafür eignen sich erfahrungsgemäß
+andere Sprachen als Python
+besser.\footnote{\url{https://www.chrisstucchio.com/blog/2013/why_not_python.html}}\footnote{\url{http://www.dabeaz.com/python/GIL.pdf}}
+Eine mögliche Lösung gegen dieses Problem vorzugehen, wäre es, Matcher Module
+außerhalb der Python Module zu implementieren und die Nebenläufigkeit dort unterzubringen.
+
+\section{Free Software}
+Die Entscheidung, den Simple Ontology Matcher als freie Software zu
+veröffentlichen, beruht auf zwei Punkten. Zum einen dient es dem
+wissenschaftlichen Gedanken, Wissen frei verfügbar zu machen, damit andere davon
+profitieren können. Zum anderen hilft es der Diskussion und Weiterentwicklung,
+da das Projekt für jeden einsehbar und benutzbar ist.\\
+Wie in Kapitel \ref{subsec:Evaluation 2} Evaluation 2 aufgeführt, wurde bei der
+Zielsetzung bzw. dem Verständnis der Matcher ein anderer Ansatz als der
+verbreitetere gewählt. Weder der eine noch der andere ist generell besser,
+sondern es hängt vom Einsatzgebiet und der Zielstellung ab. Mit freier Software
+kann frei darüber diskutiert werden und ein anderer Ansatz für die Matcher bzw.
+die gesamte Software gewählt werden.

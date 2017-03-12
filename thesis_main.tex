@@ -69,7 +69,7 @@
 %---------------------------------------------------
 %----- Customize page size
 %---------------------------------------------------
-\usepackage[top=3cm,right=3cm,bottom=4cm,left=4cm]{geometry}    
+\usepackage[top=3cm,right=3cm,bottom=4cm,left=4cm]{geometry}
 %
 %---------------------------------------------------
 %----- Customize header and footer\pagestyle{fancy} 
@@ -80,10 +80,11 @@
 
 \fancyhead[LE]{\leftmark}  % represent the current chapter heading in uppercase
 \renewcommand{\chaptermark}[1]{ % adapt the shown chapter name: show it in lower case and with chapter number 
-\markboth{\thechapter.\ #1}{}}   
+\markboth{\thechapter.\ #1}{}}
 
 \fancyhead[RO]{\rightmark}   % % represent the current section heading in uppercase 
-\renewcommand{\sectionmark}[1]{% adapt the shown section name: show it in lower case and with section number 
+\renewcommand{\sectionmark}[1]{% adapt the shown section name: show it in lower
+% case and with section number
 \markboth{\thesection.\ #1}{}}
 
 \renewcommand{\headrulewidth}{0pt} % remove lines from header
@@ -131,6 +132,7 @@ chapters1,
 chapters2,
 chapters3,
 conclusion,
+outlook,
 appendix
 }
 
@@ -165,9 +167,9 @@ appendix
 %		prebreak=\\,
         showstringspaces=true,
         tabsize=4,
-        captionpos=b,
+%        captionpos=b,
 %		framexrightmargin=-.2\textwidth,
-        float=htb,
+%        float=h!,
 		frame=tb,
 		frameshape={RYR}{n}{n}{RYR},
 		rulecolor=\color{darkyellow},
@@ -249,6 +251,7 @@ appendix
 \include{chapters2}
 \include{chapters3}
 \include{conclusion}
+\include{outlook}
 
 
 %---------------------------------------------------
