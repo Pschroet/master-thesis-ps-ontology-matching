@@ -20,7 +20,9 @@
 		Label und Levenshtein Distance Matchern. Anschließend wurden die Ergebnisse
 		händisch begutachtet, um die Qualität der Matchings zu beurteilen. Die
 		Algorithmen nehmen als Ausgangsbasis beide die Labels der Elemente der
-		Ontologien.
+		Ontologien. Dieser Vergleich dient als Orientierung und erste Überprüfung, ob
+		die Matcher anhand von realen Daten grundlegend funktionieren oder schlechte Ergebnisse
+		liefern.
 		
 		\subsection{Verwendete Ontologien}
 		Für den Vergleich wurden die Environment Ontology (EnvO) und die Phenotypic
@@ -67,6 +69,9 @@
 		  da das notwendige Domänenwissen aufgrund von Fachfremdheit fehlt.
 		\end{itemize}
 		
+		Diese Kategorien sind bewusst weit gefasst gewählt. Dadurch ist es
+		möglich, eine grobe Übersicht über die Arbeitsweise der Matcher und mögliche
+		Arten von Verbindungen zu bekommen und die Ergebnisse einordnen zu können.\\
 		Bei der Durchsicht der Ergebnisse fiel schnell auf, dass der Simple Ontology
 		Matcher sehr viele Matchings gefunden hat, die zwar verbunden sind, aber keine
 		Gleichheit ausdrücken (Kategorien Gegeteil und indirekt).
@@ -74,20 +79,23 @@
 		gefunden hat, die Gleichheit zwischen den Elementen ausdrücken (Kategorien
 		Gleich und Ähnlich).\\
 		
+		\begin{center}
 		\begin{table}[h!]
-		\centering
 		\small
 		\setlength\tabcolsep{2pt}
 		\caption{Kategorisierte Ergebnisse}
-		\begin{tabular}{|c|c|c|c|c|c|c|}\hline
-		Matching Algorithmus von & Gleich & Gegenteil & Indirekt & Ähnlich & Keine &
-		Unsicher \\\hline
-		Dr. Ing. Algergawy & 6 (13,95\%) & 0 & 1 (2,32\%) & 16 (37,2\%) & 13
-		(30,23\%) & 7 (16,27\%) \\\hline
-		Schröter & 1 (1,13 \%) & 40 (45,45\%) & 5 (5,68\%) & 11 (12,5\%) & 21
-		(23,86\%) & 10 (11,36\%) \\\hline
-		\end{tabular}
+		\noindent\makebox[\textwidth]{
+			\begin{tabular}{|c|c|c|c|c|c|c|}\hline
+			Matching Algorithmus von & Gleich & Gegenteil & Indirekt & Ähnlich & Keine &
+			Unsicher \\\hline
+			Dr. Ing. Algergawy & 6 (13,95\%) & 0 & 1 (2,32\%) & 16 (37,2\%) & 13
+			(30,23\%) & 7 (16,27\%) \\\hline
+			Schröter & 1 (1,13 \%) & 40 (45,45\%) & 5 (5,68\%) & 11 (12,5\%) & 21
+			(23,86\%) & 10 (11,36\%) \\\hline
+			\end{tabular}
+		}
 		\end{table}
+		\end{center}
 		Alle Prozentangaben in der Tabelle wurden abgerundet.\\
 				
 		\begin{figure}[h!]
@@ -116,72 +124,122 @@
 		
 		\section{Evaluation 2}
 		\label{subsec:Evaluation 2}
-		Anhand eines vorher festgelegten Satzes an Daten wurde der im Rahmen dieser
-		Masterarbeit entwickelte Simple Ontology Matcher mit der etablierten Matching
-		Software
-		AgreementMakerLight\footnote{\url{https://github.com/AgreementMakerLight/AML-Jar}}(\textit{AML})
-		verglichen. Dieser Vergleich dient dazu, die Matcher mittels \textit{Precision
-		and recall} zu verbessern.
-		
-		\subsection{Verwendete Ontologien}
-		Für den Vergleich wurden zwei Ontologien verwendet, Human und Mouse. Human
-		ist beschreibt die menschliche Anatomie, Mouse die von Mäusen. Diese beiden
-		wurden ausgewählt, da eine hohe Überschneidung zu erwarten ist, wobei die
-		innerhalb der Ontolgien verwendeten Terminologie ähnlich sein dürfte.
+		Für die zweite Evaluation wurden die zwei Ontologien des \textit{Anatomy track} der
+		\textit{2016 Campaign}\footnote{\url{http://oaei.ontologymatching.org/2016/}} der
+		\textit{Ontology Alignment Evaluation
+		Initiative}\footnote{\url{http://oaei.ontologymatching.org/}} verwendet,
+		die \textit{Adult Mouse Anatomy} und ein Teil des \textit{NCI Thesaurus}.\\
+		Das NCI Thesaurus beschreibt die menschliche Anatomie, Adult Mouse Anatomy die von
+		Mäusen. Ontologien, die aus der Domäne des Anatomy track stammen, sind
+		umfangreich, sorgfältig erstellt und beschreiben Konzepte in technischer
+		Sprache. Neben ihrer Größe und einer nur zum Teil in natürlicher Sprache
+		verfassten Konzeptualisierung unterscheiden sie sich von anderen Ontologien in
+		der Verwendung bestimmter Annotationen und Rollen, z.B. häufigen partOf
+		Beziehungen. Ein händisches Matching zeigt, dass es eine hohe Zahl an eher
+		einfachen Matchings gibt, die mit simplen String Vergleichen gefunden werden
+		kann. Gleichzeitig gibt es auch einige Paare, die nicht trivial sind und/oder
+		anatomisches Hintergrundwissen benötigen.\cite{OAEI16}\\
+		Anhand eines vorher festgelegten Satzes an Daten
+		wurde der im Rahmen dieser Masterarbeit entwickelte Simple Ontology Matcher
+		mit dem Referenzergebnis der 2016 Campaign verglichen.
 		
 		\subsection{Resultat}
-		Wenn man die Gesamtheit der Ergebnisse aus beiden Matching Tools betrachtet,
-		erhält man eine Gesamtmenge von 2421 potenziellen Matchings. Der Simple
-		Ontology Matcher hat 980 Ergebnisse, welche nicht in denen von AML enthalten
-		sind (diese werden im Anschluss noch genauer analysiert). AML hat 786
-		exklusive Ergebnisse. Der verbliebene Teil von 655 Matchings wurden von beiden
-		vorgeschlagen. Die vollständigen Ergebnisse sind in Appendix \ref{app:second_appendix}
-		aufgeführt.
+		Es wurden Ergebnisse verschiedener Matcher mit der Referenz abgeglichen und
+		Precision und Recall berechnet. Die Precision wurde durch folgende Formel
+		errechnet\\
 		
-		\subsection{Korrektheit der Resultate des Simple Ontology Matchers}
-		Die exklusiven Ergebnisse des Simple Ontology Matchers wurden händisch auf
-		Korrektheit überprüft und in verschiedene Kategorien unterteilt. Die
-		Kategorien wurden gegenüber der ersten Evaluation geändert. Die Kategorien
-		indirekt und ähnlich wurden entfernt, um nur die konkret zutreffenden
-		Ergebnisse einzubeziehen. Die Kategorien sind \textit{gleiches} Element,
-		\textit{direkte}, \textit{keine}, \textit{unsichere} Verbindung.\\
-		Gleiche Element sind nicht nur Teile der Ontologie, die das
-		selbe Konzept darstellen, sondern solche, die die gleiche URI haben, also bei denen
-		es sich tatsächlich um ein und dasselbe handelt. Eine direkte Verbindung liegt
-		vor, wenn zwischen zwei Elemente eine eindeutige Verknüpfung vorliegt, z.B.
-		Unterklasse (rdfs:subClassOf) oder Gegenteil (owl:differentFrom). Wenn
-		es unklar ist, ob sich ein korrektes Matching handelt, werden die entsprechenden Paare in die
-		Kategorie "`unsicher"' einsortiert. Diese Ergebnisse benötigen zusätzliche
-		Betrachtung von Personen mit entsprechendem Hintergrundwissen in der Domäne.\\
+		\subsubsection{Simple Ontology Matcher}
+		Da es bei diesem Matcher zwei mögliche Einstellungen gibt, wurden beide
+		getrennt getestet. Wenn nur exakt gleiche Labels als Matching ausgewählt
+		wurden, fand dieser Matcher 933 Paare. Von diesen waren lediglich 3 nicht in
+		der Menge der Referenzergebnisse.\\
 		
+		Wenn man die zusätzlich gefundenen Ergebnisse pauschal als false positives
+		einstuft, ergeben sich folgende Werte (alle Prozentangaben in der Tabelle
+		wurden mathematisch gerundet)
+		\begin{center}
 		\begin{table}[h!]
-		\centering
-		\caption{Kategorisierte Ergebnisse}
-		\begin{tabular}{|c|c|}\hline
-		Kategorie & Anzahl Paare\\ \hline
-		Gleich & 7\\ \hline
-		Direkt & 887\\ \hline
-		Keine & 13\\ \hline
-		Unsicher & 73\\ \hline
-		\end{tabular}
+		\small
+		\caption{Vergleich 1 Simple Ontology Matcher OAEI16 Referenz}
+		\noindent\makebox[\textwidth]{
+			\begin{tabular}{|c|c|c|c|c|}\hline
+			Gefunden insgesamt & davon nicht in Referenz & Aus Referenz nicht gefunden &
+			Precision & Recall \\\hline
+			933 & 3 & 586 & 99,68\% & 62,35\% \\\hline
+			\end{tabular}
+		}
 		\end{table}
+		\end{center}
+		Wenn man die Ergebnisse nicht nur auf exakte Matchings beschränkt (siehe
+		Kapitel \ref{simpleOntologyMatcher}), werden 4373 zusätzliche potenzielle
+		Matchings gefunden, also insgesamt 5306. Davon waren 102 zusätzlich auch in der Referenzmenge. Aus diesen Daten ergeben sich
+		folgende Werte
+		\begin{center}
+		\begin{table}[h!]
+		\small
+		\caption{Vergleich 2 Simple Ontology Matcher OAEI16 Referenz}
+		\noindent\makebox[\textwidth]{
+			\begin{tabular}{|c|c|c|c|c|}\hline
+			Gefunden insgesamt & davon nicht in Referenz & Aus Referenz nicht gefunden &
+			Precision & Recall \\\hline
+			5306 & 4274 & 484 & 19,46\% & 68,07\% \\\hline
+			\end{tabular}
+		}
+		\end{table}
+		\end{center}
 		
-		\subsection{Analyse und mögliche Verbesserung der Matcher}
-		Wenn man die vom Simple Ontology Matcher nicht erfassten Ergebnispaare
-		betrachtet, fällt als erstes auf, dass es fast ausschließlich Paare mit
-		unterschiedlicher Groß- und Kleinschreibung und mit bzw. ohne Unterstriche
-		sind.\\
-		Beispiele:
+		Wenn man sich die nicht in der Referenzmenge enthaltenen Ergebnisse ansieht,
+		kommt man zu der Erkenntnis, dass der Großteil dieser Ergebnisse trotzdem eine
+		korrekte und eindeutige Verbindung haben. Die drei bei der ersten Version des
+		Simple Label Matchers gefundenen Paare sind
 		\begin{itemize}
-		\item \url{http://mouse.owl#MA_0001849} (right main bronchus) und \url{http://human.owl#NCI_C33486} (Right\textunderscore Main\textunderscore Bronchus)
-		\item \url{http://mouse.owl#MA_0000638} (wrist skin) und \url{http://human.owl#NCI_C52752} (Wrist\textunderscore Skin)
-		\item \url{http://mouse.owl#MA_0000467} (foot digit 3) und \url{http://human.owl#NCI_C52841} (Foot\textunderscore Digit\textunderscore 3)
-		\item \url{http://mouse.owl#MA_0001432} (lumbar vertebra 5) und \url{http://human.owl#NCI_C32903} (L5\textunderscore Vertebra)
-		\item \url{http://mouse.owl#MA_0001106} (vagus X nerve) und \url{http://human.owl#NCI_C12812} (Vagus\textunderscore Nerve)
-		\item \url{http://mouse.owl#MA_0001426} (cervical vertebra 6) und \url{http://human.owl#NCI_C32244} (C6\textunderscore Vertebra)
-		\item \url{http://mouse.owl#MA_0001579} (lip skin) und \url{http://human.owl#NCI_C12291} (Skin\textunderscore of\textunderscore the\textunderscore Lip)
-		\item \url{http://mouse.owl#MA_0000370} (kidney capsule) und \url{http://human.owl#NCI_C12885} (Renal\textunderscore Capsule)
-		\item \url{http://mouse.owl#MA_0001320} (external naris) und \url{http://human.owl#NCI_C33178} (Nostril)
-		\item \url{http://mouse.owl#MA_0000715} (venous system smooth muscle) und \url{http://human.owl#NCI_C49321} (Venous\textunderscore System\textunderscore Smooth\textunderscore Muscle\textunderscore Tissue)
-		\item \url{http://mouse.owl#MA_0001735} (epididymal duct) und \url{http://human.owl#NCI_C32484} (Duct\textunderscore of\textunderscore the\textunderscore Epididymis)
+		  \item http://human.owl\#NCI\textunderscore C12378
+		  (Gastrointestinal\textunderscore System)\\ und
+		  http://mouse.owl\#MA\textunderscore 0000323 (gastrointestinal system)
+		  \item http://human.owl\#NCI\textunderscore C12685 (Capillary) und\\
+		  http://mouse.owl\#MA\textunderscore 0000065 (capillary)
+		  \item http://human.owl\#NCI\textunderscore C12919 (Organ\textunderscore
+		  System) und\\ http://mouse.owl\#MA\textunderscore 0000003 (organ system)
 		\end{itemize}
+		Alle drei sind bei näherer Prüfung der Elemente korrekte Matchings. Bei der
+		zweiten Version des Simple Label Matchers sind 3943 Paare korrekt erkannte
+		Matchings, 41 sind entweder false positives oder eine direkte Verbindung nicht
+		sinnvoll. Beispielsweise ist \url{http://human.owl#NCI_C12419 (Head)} und
+		\url{http://mouse.owl#MA_0000122} (pancreas head) ein eindeutiger false
+		positive. Beim Matching \url{http://human.owl#NCI_C32152}
+		(Ascending\textunderscore Frontal\textunderscore Artery) und \url{http://mouse.owl#MA_0000064} (artery)
+		ist die Verbindung nicht direkt falsch, aber da es bereits eine Verbindung
+		sowohl zwischen \url{http://human.owl#NCI_C32152} (Ascending\textunderscore Frontal\textunderscore Artery)
+		und \url{http://mouse.owl#MA_0001960} (frontal artery) als auch zwischen
+		\url{http://mouse.owl#MA_0000064} (artery) und
+		\url{http://mouse.owl#MA_0001960} (frontal artery) gibt, existiert hier
+		bereits eine indirekte Verbindung. Dadurch ist in den meisten Fällen nur
+		bedingt sinnvoll, noch eine zusätzliche Verbindung hinzuzufügen. Dire
+		restlichen 109 Matchings sind ohne entsprechendes Domänenwissen nicht
+		eindeutig auf Richtigkeit prüfbar.\\
+		Bei Betrachtung der zusätzlichen Matchings und Berechnung nach der Precision
+		obiger Formel würde ich sich folgende Werte ergeben
+		\begin{center}
+		\begin{table}[h!]
+		\small
+		\caption{Vergleich 3 Simple Ontology Matcher OAEI16 Referenz}
+		\noindent\makebox[\textwidth]{
+			\begin{tabular}{|c|c|c|c|c|}\hline
+			Gefunden insgesamt & true positives & false positives & nicht verifizierbar & Precision \\\hline
+			4274 & 3943 & 222 & 109 & 92,3\% \\\hline
+			\end{tabular}
+		}
+		\end{table}
+		\end{center}
+		Der Recall ist in diesem Fall nicht ohne weiteres bestimmbar, da hier die
+		Richtschnur ein "`perfekter Match"' zwischen den zwei Ontologien wäre.
+		Der Transparenz wegen sind die vollständigen Ergebnisse und ihre Zuteilung auf
+		\url{insert.link} aufgeführt, aus Platzgründen wurde diese Auflistung nicht in
+		diese Arbeit geschrieben.\\
+		Andere Matcher nicht in diesem Rahmen betrachtet, da erste Tests mit ihnen
+		keine zufriedenstellenden Ergebnisse mit dem gewählten Wörterbuch lieferten.
+		Dies ist darauf zurückzuführen, dass das Wörterbuch für die Domäne zu
+		allgemein ist und das in diesem Kontext benötigte Vokabular nicht in
+		ausreichendem Maße enthalten ist.
+		
+		\pagebreak[4]

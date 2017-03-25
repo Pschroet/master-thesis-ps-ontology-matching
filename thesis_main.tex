@@ -6,7 +6,7 @@
 %  Last upadte: C. Müller-Birn 2015-11-27
 %  Freie Universität Berlin, Institute of Computer Science, Human Centered Computing. 
 
-\documentclass[pdftex,a4paper,12pt,DIV=calc,BCOR5mm,ngerman,twoside,smallheadings,titlepage]{scrbook}   
+\documentclass[pdftex,a4paper,fontsize=13pt,version=first,DIV=calc,BCOR5mm,ngerman,twoside,headings=small,titlepage]{scrbook}
 % ----- weitere Optionen 
 %draft,			% Entwurfsmodus zum Anzeigen zu leerer/voller Boxen 
 %DIV=calc
@@ -36,13 +36,13 @@
 %
 \usepackage{amsmath}
 %
-\usepackage[pdftex]{graphicx}  
+\usepackage[pdftex]{graphicx}
 \usepackage{hyperref} % turn all your internal references into hyperlinks
 %\usepackage[pdfstartview=FitH,pdftitle={<<Titel der Arbeit>>}, pdfauthor={<<Autor>>}, pdfkeywords={<<Schlüsselwörter>>}, pdfsubject={<<Titel der Arbeit>>}, colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black, hypertexnames=false, bookmarksnumbered=true, bookmarksopen=true, pdfborder = {0 0 0}]{hyperref}
 %
 % table settings 
-\usepackage{booktabs}  
-\usepackage{tabularx}  
+\usepackage{booktabs}
+\usepackage{tabularx}
 \usepackage{rotating}
 \usepackage{longtable}
 \usepackage{pdflscape}
@@ -125,7 +125,6 @@ title,
 declaration,
 abstract_en,
 abstract_de,
-%preface,
 introduction,
 chapters,
 chapters1,
@@ -221,13 +220,13 @@ appendix
 %---------------------------------------------------
 
 \include{abstract_en}
-\include{abstract_de}  
+\include{abstract_de}
                                           
 %---------------------------------------------------
 %----- Directories   
 %---------------------------------------------------
 
-\frontmatter 
+\frontmatter
 \pagenumbering{roman}
 
 \tableofcontents
@@ -240,10 +239,8 @@ appendix
 %----- Main part
 %---------------------------------------------------
 \mainmatter
-\pagenumbering{arabic} 
-\pagestyle{fancy} 
-
-\include{preface} 
+\pagenumbering{arabic}
+%\pagestyle{fancy}
 
 \include{introduction}
 \include{chapters}

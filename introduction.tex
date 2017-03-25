@@ -18,7 +18,9 @@ Um die Domäne bzw. den Umfang einer Ontologie zu bestimmen, werden zwei Stufen
 definiert. Top Level Ontologien beziehen sich auf Definitionen, die unabhängig von spezifischen Domänen Anwendung finden. \cite{Bie02}  \cite{Hes02}  Ein Beispiel dafür ist der bereits erwähnte Dublin Core für jede Art von Dokumenten. Domain oder Task Ontologien beschäftigen sich mit Begriffe für einen bestimmten Anwendungsbereich. \cite{Bie02}  \cite{Hes02}  Beispielhaft dafür ist die Music Ontology, welche „Informationen mit Bezug zur Musikindustrie“   behandelt.\\
 Um Ontologien nicht nur isoliert zu betrachten und da bestimmte Dinge und
 Konzepte in mehr als einer Domäne vorzufinden sind, beispielsweise Dokumente als
-Ressourcen, bietet es sich an, Ontologien zu matchen. Eine Möglichkeit Ontologien und deren Matching zu beschreiben, ist eine Ontologie mathematisch zu definieren als ein Paar O = (S, A). Dabei ist S die (ontologische) Signatur, die den Wortschatz beschreibt, und A ein Set aus (ontologischen) Axiomen, die die Interpretation des Wortschatzes in der gewünschten Domäne festlegen. Im Rahmen dieser Definition ist ein Matching f: S1 -> S2 eine Verknüpfung der Wortschätze zweier Ontologien O1 = (S1, A1) und O2 = (S2, A2)  unter Beachtung der Struktur der Signaturen und der Interpretationen. Das Matching einer Ontologie ist dann mathematisch gesehen ein Morphismus der Signaturen, so dass gilt A2 |= f(A1). D.h. alle Interpretationen, die die Axiome A2 der Ontologie O2 erfüllen, müssen auch für die übersetzten Axiome f(A1) von Ontologie O1 gelten. \cite{Hoo14}\\
+Ressourcen, bietet es sich an, Ontologien zu matchen. Ein alternative Begriff zu
+ontology matching ist \textit{ontology alignment} Eine Möglichkeit
+Ontologien und deren Matching zu beschreiben, ist eine Ontologie mathematisch zu definieren als ein Paar O = (S, A). Dabei ist S die (ontologische) Signatur, die den Wortschatz beschreibt, und A ein Set aus (ontologischen) Axiomen, die die Interpretation des Wortschatzes in der gewünschten Domäne festlegen. Im Rahmen dieser Definition ist ein Matching f: S1 -> S2 eine Verknüpfung der Wortschätze zweier Ontologien O1 = (S1, A1) und O2 = (S2, A2)  unter Beachtung der Struktur der Signaturen und der Interpretationen. Das Matching einer Ontologie ist dann mathematisch gesehen ein Morphismus der Signaturen, so dass gilt A2 |= f(A1). D.h. alle Interpretationen, die die Axiome A2 der Ontologie O2 erfüllen, müssen auch für die übersetzten Axiome f(A1) von Ontologie O1 gelten. \cite{Hoo14}\\
 Unter dem Begriff Konzept wird im Bereich der Ontologien nahezu alles verstanden, z.B. Dinge, Gedanken oder Begriffe. \cite{Usc95}  Diese Konzepte dienen dazu, Teile der Realität, Daten oder Strukturen in eben diesen Ontologien abzubilden.
 
 \section{Zielsetzung der Arbeit}
@@ -57,3 +59,5 @@ als Gesamtstück mit dem Frontend zu kommunizieren. Dadurch sind umfangreiche un
 rechenintensive Arbeiten möglich. Das ist zwar theoretisch innerhalb von
 Browsern möglich, jedoch eher ungewöhnlich und wird in der Regel durch die Dauer
 der Operationen von Browsern als unerwünschtes Verhalten gewertet.
+
+\pagebreak[4]

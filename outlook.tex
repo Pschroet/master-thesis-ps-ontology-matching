@@ -24,9 +24,27 @@ besser.\footnote{\url{https://www.chrisstucchio.com/blog/2013/why_not_python.htm
 Eine mögliche Lösung gegen dieses Problem vorzugehen, wäre es, Matcher Module
 außerhalb der Python Module zu implementieren und die Nebenläufigkeit dort unterzubringen.
 
-\section{Free Software}
-Die Entscheidung, den Simple Ontology Matcher als freie Software zu
-veröffentlichen, beruht auf zwei Punkten. Zum einen dient es dem
+\section{Zwischenergebnisse speichern und laden}
+Da beim Matching Prozess abhängig vom Umfang der bearbeiteten Ontologien
+potenziell sehr viele Paare ermittelt werden, wäre es hilfreich, die
+unbearbeiteten Ergebnisse zwischenspeichern zu können, um die Arbeit später
+wiederaufnehmen zu können.\\
+Eine denkbare Umsetzung wäre die Stelle in den Ergebnissen auf der
+Ergebnisseite zu markieren und alle folgenden exportierbar separat zu machen.
+
+\section{Zusätzliche Matcher}
+Die im Rahmen dieser Arbeit implementierten Matcher decken einige Möglichkeiten
+ab, Ontologien zu matchen. Weitere mögliche Matcher lassen sich aus den in
+Kapitel \ref{MatcherKategorien} vorgestellten Methoden entwickeln. Darüber
+hinaus ist es denkbar, für Matcher, die auf Wörterbücher zurückgreifen, andere 
+als die hier verwendeten zu nutzen, z.B.
+Wiktionary\footnote{\url{https://de.wiktionary.org/wiki/Wiktionary:Hauptseite}},
+WordNet\footnote{\url{https://wordnet.princeton.edu/}} oder Words
+API\footnote{\url{https://www.wordsapi.com/}}.
+
+\section{Free Software/Freie Software}
+Die Entscheidung, den Simple Ontology Matcher als freie
+Software\footnote{\url{https://www.gnu.org/philosophy/free-sw}} zu veröffentlichen, beruht auf zwei Punkten. Zum einen dient es dem
 wissenschaftlichen Gedanken, Wissen frei verfügbar zu machen, damit andere davon
 profitieren können. Zum anderen hilft es der Diskussion und Weiterentwicklung,
 da das Projekt für jeden einsehbar und benutzbar ist.\\
@@ -36,3 +54,6 @@ verbreitetere gewählt. Weder der eine noch der andere ist generell besser,
 sondern es hängt vom Einsatzgebiet und der Zielstellung ab. Mit freier Software
 kann frei darüber diskutiert werden und ein anderer Ansatz für die Matcher bzw.
 die gesamte Software gewählt werden.
+
+\cleardoublepage
+\pagebreak[4]

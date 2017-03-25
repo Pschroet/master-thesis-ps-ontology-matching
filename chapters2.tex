@@ -54,6 +54,9 @@
 		übergeben und später als Default Wert angezeigt. Die Gesamtergebnisse werden
 		dann an einen \textit{Output Writer} übergeben, um sie dann weiter bearbeiten zu können.\\
 		
+		\cleardoublepage
+		\pagebreak[4]
+		
 		\subsection{Anwendungsszenario 1: Django App}
 		Um von nichttechnischen Experten leicht und ohne zusätzlichen Aufwand
 		benutzbar zu sein, kann man die Module des Simple Ontology Matcher als App
@@ -66,29 +69,39 @@
 		\caption{Module Django App}
 		\label{fig2}
 		\end{figure}
+		
 		Dabei können, wie erwähnt, verschiedene Quellen verwendet werden. Für
 		Ontologien sind lokale und auf externen Servern gespeicherte Dateien und in Datenbank
 		eingepflegte Daten möglich. Bei Matchern werden nur lokal vorhandene Python
 		Module berücksichtigt. Die gefundenen Ontologien und Matcher werden dann in
 		ein HTML Template eingebetet, dass mit der textit{Django Template Engine} erstellt wird. Dabei wird auch die Quelle gespeichert, also der Dateiname mit Pfad oder
 		die URL.
+		
 		\pagebreak[4]
+		
 		Über die dann erstellte Seite können Ontologien ausgewählt werden, die
 		analyisert werden sollen, und Matcher, mit denen dies durchgeführt wird.\\
 		Das Design ist möglichst simpel gewählt, wie in \ref{fig3} gezeigt. Es gibt
 		keine Menüs oder Einstellmöglichkeiten, sondern es können nur
-		lokale oder externe Ontologien, Terminologien vom GFBio Terminology
-		Server\footnote{\url{http://terminologies.gfbio.org/}} und Matcher ausgewählt
-		werden.
-		Dadurch wird die Bedienung und gleichzeitig die Komplexität zu verringert, da die
-		Optionen und Bedienung limitiert sind. Die GUI ist auf das Nötigste
-		reduziert. Ein einfaches User Interface hilft auch bei
-		der Akzeptanz, da der Einstieg ohne Vorkenntnisse auch für nichttechnische
-		Experten erleichtert wird.
+		lokale oder externe Ontologien und Matcher ausgewählt
+		werden. Ontologien können dabei aus verschiedenen Quellen stammen. Aktuell
+		sind lokal auf dem Server gespeicherte und externe Ontologien, wie
+		die Terminologien vom GFBio Terminology
+		Server\footnote{\url{http://terminologies.gfbio.org/}} als Quellen festgelegt.
+		Durch die Auslassung von Konfigurationsmöglichkeiten wird die Bedienung und
+		gleichzeitig die Komplexität zu verringert. Die GUI ist auf das Nötigste reduziert. Ein einfaches User Interface hilft auch bei der Akzeptanz, da der Einstieg ohne Vorkenntnisse auch für nichttechnische
+		Experten erleichtert wird. Es ist keine Installation oder Konfiguration für
+		den Anwender nötig, insbesondere wird außer einem Browser keine zusätzliche
+		Software beim Anwender vorausgesetzt.
+		\pagebreak[4]
+		\subsubsection{Matching Prozessablauf}
+		Auf den nächsten Seiten wird beispielhaft und mit Bildern der Matching Prozess
+		mit dem Simple Ontology Matcher dargestellt.
+		Nach dem Aufurf der URL kann direkt mit dem Matching Prozess begonnen werden.
 		\begin{figure}[h!]
 		\centering
 		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher.png}
-		\caption{Startseite Django App 1}
+		\caption{Startseite Django App}
 		\label{fig3}
 		\end{figure}
 		
@@ -142,7 +155,7 @@
 		\begin{figure}[h!]
 		\centering
 		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process4.png}
-		\caption{Matching Prozess Django App 4}
+		\caption{Matching Prozess Django App 5}
 		\label{fig8}
 		\end{figure}
 		
@@ -152,7 +165,7 @@
 		\begin{figure}[h!]
 		\centering
 		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process5.png}
-		\caption{Matching Prozess Django App 5}
+		\caption{Matching Prozess Django App 6}
 		\label{fig9}
 		\end{figure}
 		
@@ -161,7 +174,7 @@
 		\begin{figure}[h!]
 		\centering
 		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process6.png}
-		\caption{Matching Prozess Django App 6}
+		\caption{Matching Prozess Django App 7}
 		\label{fig10}
 		\end{figure}
 		
@@ -175,7 +188,7 @@
 		\begin{figure}[h!]
 		\centering
 		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process7.png}
-		\caption{Matching Prozess Django App 7}
+		\caption{Matching Prozess Django App 8}
 		\label{fig11}
 		\end{figure}
 		
@@ -186,7 +199,7 @@
 		\begin{figure}[h!]
 		\centering
 		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process9.png}
-		\caption{Matching Prozess Django App 8}
+		\caption{Matching Prozess Django App 9}
 		\label{fig12}
 		\end{figure}
 		
@@ -197,7 +210,7 @@
 		\begin{figure}[h!]
 		\centering
 		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process10.png}
-		\caption{Matching Prozess Django App 9}
+		\caption{Matching Prozess Django App 10}
 		\label{fig13}
 		\end{figure}
 		
@@ -206,7 +219,7 @@
 		\begin{figure}[h!]
 		\centering
 		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process11.png}
-		\caption{Matching Prozess Django App 10}
+		\caption{Matching Prozess Django App 11}
 		\label{fig14}
 		\end{figure}
 		\pagebreak[4]
@@ -261,28 +274,42 @@
 		\end{lstlisting}
 		
 		\subsection{Simple Label Matcher}
+		\label{simpleOntologyMatcher}
 		Bei diesem Matcher werden die Labels der Elemente auf Ähnlichkeiten
 		untersucht.
 		Zuerst werden die Labels auf Gleichheit überprüft.
 		\begin{lstlisting}
 		match_result = re.match("^" + item.get_text().replace("_", " ") + "$", item1.get_text().replace("_", " "), re.IGNORECASE) if not already_matched and match_result and not re.match(i.name, j.name, re.IGNORECASE):
 		\end{lstlisting}
-		Anschließend wird einfach nach Übereinstimmungen in den Labels gesucht.
+		Anschließend wird nach Übereinstimmungen in den Labels gesucht.
 		\begin{lstlisting}
-		elif not already_matched and ((re.match(item.get_text().replace("_", " "), item1.get_text().replace("_", " "), re.IGNORECASE) and len(item.get_text()) > 3) or (re.match(item1.get_text().replace("_", " "), item.get_text().replace("_", " "), re.IGNORECASE) and len(item1.get_text()) > 3)) and not re.match(i.name, j.name, re.IGNORECASE):
+		elif not exact_match and not already_matched and len(item.get_text()) > 3 and len(item1.get_text()) > 3 and not re.match(i.name, j.name, re.IGNORECASE):
+            #check the first of the two labels
+            if re.match("^" + item.get_text().replace("_", " ") + "\s", item1.get_text().replace("_", " "), re.IGNORECASE):
+                connections["matches"].append([i.name, item.get_text(), j.name, item1.get_text(), " share part of the label\n", "dcterms:hasPart"])
+                already_matched = True
+            elif re.search("\s" + item.get_text().replace("_", " ") + "$", item1.get_text().replace("_", " "), re.IGNORECASE):
+                connections["matches"].append([i.name, item.get_text(), j.name, item1.get_text(), " share part of the label\n", "rdfs:subClassOf"])
+                already_matched = True
+            elif re.match("^" + item1.get_text().replace("_", " ") + "\s", item.get_text().replace("_", " "), re.IGNORECASE):
+                connections["matches"].append([i.name, item.get_text(), j.name, item1.get_text(), " share part of the label\n", "dcterms:partOf"])
+                already_matched = True
+            elif re.search("\s" + item1.get_text().replace("_", " ") + "$", item.get_text().replace("_", " "), re.IGNORECASE):
+                connections["matches"].append([i.name, item.get_text(), j.name, item1.get_text(), " share part of the label\n", "rdfs:subClassOf"])
+                already_matched = True
 		\end{lstlisting}
 		Die reguläre Ausdrucküberprüfung wird in beide Richtungen durchgeführt, da in
-		der Python re.match Funktion der im ersten Argument übergebene Ausdruck im
-		zweiten gesucht wird. In beiden Fällen darf der gesuchte Ausdruck aber nicht
-		kürzer als vier Zeichen sein. In früheren Tests, wo es diese Einschränkung
-		noch nicht gab, waren in der Ergebnismenge viele false positives.
-		Die erste Bedingung in beiden Abfragen ist nach der Variable
-		\textit{already\textunderscorematched}, diese dient dazu festzuhalten, ob zwei Elemente
-		bereits als mögliches Matching vorgemerkt wurde. Dies ist für den Fall
-		gedacht, dass es mehr als ein Label für ein Element gibt. Sollte dies
-		vorkommen, werden nicht alle Kombinationen von Labels überprüft, falls es
-		bereits bei einem Paar ein Treffer gab. Dadurch können potenziell Vergleiche
-		und damit Zeit eingespart werden.
+		den Python \textit{re.match} und textit{re.search} Funktionen der im ersten
+		Argument übergebene Ausdruck im zweiten gesucht wird. In beiden Fällen darf
+		der gesuchte Ausdruck aber nicht schon vorher als Match markiert worden, die
+		gleiche URI oder kürzer als vier Zeichen sein.\\
+		In früheren Tests, wo es die Einschränkung der Länge der Labels noch nicht
+		gab, waren in der Ergebnismenge viele false positives. Zusätzlich wurde in
+		früheren Versionen dieses Matchers einfach nach Vorkommen der Label Wörter in
+		dem anderen Label geprüft. Dies führte ebenfalls zu vielen false positives.
+		Dies wurde dann dahingehend geändert, dass der komplete Ausdruck entweder am
+		Anfang gefolgt von einem Leerzeichen stehen muss oder am Ende des Labels mit
+		einem Leerzeichen direkt davor.
 		
 		\subsection{Levenshtein Distance Matcher}
 		Dieser Matcher berechnet die Levenshtein Distanz bzw. den Editierabstand
@@ -392,20 +419,20 @@
 		Arbeitsspeicher belegt werden. Dieser Angriff ist auch als \textit{billion laughs} oder XML
 		Bombe bekannt.\cite{Sul09} Ein Beispiel für solch einen Angriff ist hier aufgeführt:
 		\begin{lstlisting}
-		<?xml version="1.0"?>
-		<!DOCTYPE lolz [
-		 <!ENTITY lol "lol">
-		 <!ELEMENT lolz (#PCDATA)>
-		 <!ENTITY lol1 "&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;">
-		 <!ENTITY lol2 "&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;">
-		 <!ENTITY lol3 "&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;">
-		 <!ENTITY lol4 "&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;">
-		 <!ENTITY lol5 "&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;">
-		 <!ENTITY lol6 "&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;">
-		 <!ENTITY lol7 "&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;">
-		 <!ENTITY lol8 "&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;">
-		 <!ENTITY lol9 "&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;">
-		]>
+<?xml version="1.0"?>
+<!DOCTYPE lolz [
+ <!ENTITY lol "lol">
+ <!ELEMENT lolz (#PCDATA)>
+ <!ENTITY lol1 "&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;">
+ <!ENTITY lol2 "&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;">
+ <!ENTITY lol3 "&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;">
+ <!ENTITY lol4 "&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;">
+ <!ENTITY lol5 "&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;">
+ <!ENTITY lol6 "&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;">
+ <!ENTITY lol7 "&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;">
+ <!ENTITY lol8 "&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;">
+ <!ENTITY lol9 "&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;">
+]>
 		<lolz>&lol9;</lolz>
 		\end{lstlisting}
 		Dabei handelt es sich um valides und wohlgeformtes XML. Wenn ein XML Parser
