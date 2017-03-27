@@ -17,8 +17,8 @@
 		\label{subsec:Evaluation 1}
 		Als erste Evaluation wurde ein Vergleich zwischen einem von Dr. Ing. Alsayed
 		Algergawy entwickelten Algorithmus und einem Matching Prozess mit den Simple
-		Label und Levenshtein Distance Matchern. Anschließend wurden die Ergebnisse
-		händisch begutachtet, um die Qualität der Matchings zu beurteilen. Die
+		Label und Levenshtein Distance Matchern durchgeführt. Anschließend wurden die
+		Ergebnisse händisch begutachtet, um die Qualität der Matchings zu beurteilen. Die
 		Algorithmen nehmen als Ausgangsbasis beide die Labels der Elemente der
 		Ontologien. Dieser Vergleich dient als Orientierung und erste Überprüfung, ob
 		die Matcher anhand von realen Daten grundlegend funktionieren oder schlechte Ergebnisse
@@ -37,14 +37,16 @@
 		Organismen.\footnote{\url{http://obofoundry.org/ontology/pato.html}}
 		
 		\subsection{Resultat}
-		Insgesamt wurden 203 Matchings von beiden Algorithmen gefunden, bis auf neun
-		Ergebnisse beschrieben alle das gleiche, d.h. sie hatten die selbe URI.
-		Wenn man die exklusiven Ergebnisse betrachtet, also solche, die nur einer
-		der beiden Matching Algorithmen gefunden hat, dann hat der Simple Ontology
-		Matcher fand 89 potenzielle Matchings, während der Algorithmus von Dr. Ing.
-		Algergawy 62 vorschlug. Von diesen Matchings war beim Simple Ontology Matcher
-		lediglich eines dabei, bei welchem beide Elemente die gleiche URI hatten. Bei
-		den Ergebnissen anderen Algorithmus war dies bei 19 Matchings der Fall.\\
+		Es wurden 203 gleiche Matchings von beiden Algorithmen gefunden, bis auf neun
+		Ergebnisse beschrieben alle das gleiche Konzept, d.h. sie hatten die selbe
+		URI.
+		Wenn man die Unterschiede in den Ergebnissen betrachtet, also solche, die nur
+		einer der beiden Matching Algorithmen gefunden hat, dann hat der Simple
+		Ontology Matcher 89 potenzielle Matchings gefunden, während der Algorithmus
+		von Dr. Ing. Algergawy 62 vorschlug. Von diesen Matchings war beim Simple
+		Ontology Matcher lediglich eines dabei, bei welchem beide Elemente die gleiche
+		URI hatten. Bei den Ergebnissen des anderen Algorithmus war dies bei 19
+		Matchings der Fall.\\
 		Alle Paare und die konkrete Einteilung in die Kategorien sind im Appendix
 		\ref{app:first_appendix}
 		aufgeführt.
@@ -53,18 +55,18 @@
 		Die erste Evaluation sollte als erste grobe Einordnung dienen, inwiefern
 		der Simple Ontology Matcher seinem Ziel nahe kommt, zwei beliebige Ontologien
 		zu vergleichen und Verbindungen zwischen ihnen zu finden. Für die Einordnung
-		wurden folgende Kategorien verwendet:\\
+		wurden daher folgende Kategorien verwendet:\\
 		\begin{itemize}
-		  \item Gleich: Zwei Elemente beschreiben das selbe Konzept
-		  \item Gegenteil: Zwei Elemente sind das Gegenteil voneinander
-		  \item Indirekt: Die beiden Elemente können über ein anderes Elemente
+		  \item Gleich: Zwei Elemente beschreiben das selbe Konzept.
+		  \item Gegenteil: Zwei Elemente sind das Gegenteil voneinander.
+		  \item Indirekt: Die beiden Elemente können über ein anderes Elemente.
 		  miteinander verbunden werden, unabhängig davon, ob es Teil einer der beiden
-		  Ontologien ist
+		  Ontologien ist.
 		  \item Ähnlich: Zwei Elemente sind zwar verbunden, es lässt sich aber keine
 		  direkte Verbindung angeben, meist ist eines eine Beschreibung des anderen
-		  oder beide haben den selbst Wortstamm
+		  oder beide haben den selben Wortstamm.
 		  \item Keine: Es besteht keine Verbindung und das Matching ist ein false
-		  positive
+		  positive.
 		  \item Unsicher: Es ist unklar ob zwei Elemente miteinander verbunden sind,
 		  da das notwendige Domänenwissen aufgrund von Fachfremdheit fehlt.
 		\end{itemize}
@@ -135,18 +137,16 @@
 		Sprache. Neben ihrer Größe und einer nur zum Teil in natürlicher Sprache
 		verfassten Konzeptualisierung unterscheiden sie sich von anderen Ontologien in
 		der Verwendung bestimmter Annotationen und Rollen, z.B. häufigen partOf
-		Beziehungen. Ein händisches Matching zeigt, dass es eine hohe Zahl an eher
-		einfachen Matchings gibt, die mit simplen String Vergleichen gefunden werden
+		Beziehungen. Ein als Referenz vorgegebenes Matching zeigt, dass es eine hohe
+		Zahl an eher einfachen Matchings gibt, die mit simplen String Vergleichen gefunden werden
 		kann. Gleichzeitig gibt es auch einige Paare, die nicht trivial sind und/oder
 		anatomisches Hintergrundwissen benötigen.\cite{OAEI16}\\
-		Anhand eines vorher festgelegten Satzes an Daten
-		wurde der im Rahmen dieser Masterarbeit entwickelte Simple Ontology Matcher
-		mit dem Referenzergebnis der 2016 Campaign verglichen.
+		Anhand vorher festgelegter Matcher wurde der im Rahmen dieser Masterarbeit
+		entwickelte Simple Ontology Matcher mit dem Referenzergebnis der 2016 Campaign verglichen.
 		
 		\subsection{Resultat}
 		Es wurden Ergebnisse verschiedener Matcher mit der Referenz abgeglichen und
-		Precision und Recall berechnet. Die Precision wurde durch folgende Formel
-		errechnet\\
+		Precision und Recall berechnet.\\
 		
 		\subsubsection{Simple Ontology Matcher}
 		Da es bei diesem Matcher zwei mögliche Einstellungen gibt, wurden beide
@@ -214,11 +214,12 @@
 		\url{http://mouse.owl#MA_0000064} (artery) und
 		\url{http://mouse.owl#MA_0001960} (frontal artery) gibt, existiert hier
 		bereits eine indirekte Verbindung. Dadurch ist in den meisten Fällen nur
-		bedingt sinnvoll, noch eine zusätzliche Verbindung hinzuzufügen. Dire
+		bedingt sinnvoll, noch eine zusätzliche Verbindung hinzuzufügen. Die
 		restlichen 109 Matchings sind ohne entsprechendes Domänenwissen nicht
 		eindeutig auf Richtigkeit prüfbar.\\
 		Bei Betrachtung der zusätzlichen Matchings und Berechnung nach der Precision
-		obiger Formel würde ich sich folgende Werte ergeben
+		obiger Formel würden sich folgende Werte für die zusätzlichen Matchings
+		ergeben
 		\begin{center}
 		\begin{table}[h!]
 		\small
@@ -234,10 +235,11 @@
 		Der Recall ist in diesem Fall nicht ohne weiteres bestimmbar, da hier die
 		Richtschnur ein "`perfekter Match"' zwischen den zwei Ontologien wäre.
 		Der Transparenz wegen sind die vollständigen Ergebnisse und ihre Zuteilung auf
-		\url{insert.link} aufgeführt, aus Platzgründen wurde diese Auflistung nicht in
-		diese Arbeit geschrieben.\\
-		Andere Matcher nicht in diesem Rahmen betrachtet, da erste Tests mit ihnen
-		keine zufriedenstellenden Ergebnisse mit dem gewählten Wörterbuch lieferten.
+		\url{insert.link} aufgeführt, aus Platzgründen ist diese Auflistung nicht in
+		dieser Arbeit enthalten.\\
+		Andere Matcher wurden nicht in diesem Rahmen betrachtet, da erste Tests mit
+		ihnen schon vorher keine zufriedenstellenden Ergebnisse mit dem gewählten
+		Wörterbuch lieferten.
 		Dies ist darauf zurückzuführen, dass das Wörterbuch für die Domäne zu
 		allgemein ist und das in diesem Kontext benötigte Vokabular nicht in
 		ausreichendem Maße enthalten ist.

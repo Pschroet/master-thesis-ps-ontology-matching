@@ -8,14 +8,13 @@
 \chapter{Umsetzung}
 \label{chap:implementation}
 		
-		Die im Rahmen dieser Masterarbeit entwickelte Software besteht aus einem
-		modularen Kern und ist über verschiedene Technologien ansprechbar. Aktuell
-		sind die Matcher als App
-		für Django\footnote{\url{https://www.djangoproject.com/}} verfügbar, können
+		Die im Rahmen dieser Masterarbeit entwickelte Software hat den Namen
+		\textit{Simple Ontology Matcher} erhalten und besteht aus einem modularen Kern
+		und ist über verschiedene Technologien ansprechbar. Aktuell sind die Module
+		der Software als App für Django\footnote{\url{https://www.djangoproject.com/}} verfügbar, können
 		aber auch direkt in Python Skripten benutzt werden.\\
-		Der Kernteil besteht aus mehreren Modulen, für die weitere Module
-		implementiert werden können, um verschiedene Arten von Daten eingelesen
-		werden können, z.B.
+		Der Kernteil besteht zuerst aus mehreren Modulen, um verschiedene Arten von
+		Daten eingelesen werden können, z.B.
 		Formate wie OWL/XML, Query Languages wie SPARQL oder REST-Schnittstellen.
 		Zusätzlich können unterschiedliche Arten und Implementierungen von Matchern
 		verwendet werden. Um dies zu realisieren, gibt es eine Klasse, um Ontologien,
@@ -23,10 +22,12 @@
 		Die Elemente dieser Instanzen bestehen wiederum aus Instanzen der Klasse
 		\textit{onto element}. Dort enthalten sind alle Informationen, die das Element
 		beschreiben. Diese beiden Klassen dienen als Schnittstellen, um innerhalb der
-		Software mit Ontologien und deren Elementen zu interagieren.\\
-		Python als Programmiersprache hatte zwei Gründe, Python ist sie weit
-		verbreitet und bietet mit Django eine gute Möglichkeit, eine Web Applikation
-		zu erstellen.
+		Software mit Ontologien und deren Elementen zu interagieren. Für diese beiden
+		Teile können weitere Module implementiert werden, um zusätzliche
+		Funktionalität zu erhalten, z.B. andere Datenquellen einzulesen.\\
+		Die Wahl auf Python als verwendete Programmiersprache hatte zwei Gründe,
+		Python ist weit verbreitet und bietet mit Django eine gute Möglichkeit, eine
+		Web Applikation zu erstellen.
 		
 		\section{Architektur}
 		Sowohl die Kernmodule als auch die einzelnen, konkreten Ausführungen dieser
@@ -74,8 +75,8 @@
 		Ontologien sind lokale und auf externen Servern gespeicherte Dateien und in Datenbank
 		eingepflegte Daten möglich. Bei Matchern werden nur lokal vorhandene Python
 		Module berücksichtigt. Die gefundenen Ontologien und Matcher werden dann in
-		ein HTML Template eingebetet, dass mit der textit{Django Template Engine} erstellt wird. Dabei wird auch die Quelle gespeichert, also der Dateiname mit Pfad oder
-		die URL.
+		ein HTML Template eingebetet, dass mit der \textit{Django Template Engine}
+		erstellt wird. Dabei wird auch die Quelle gespeichert, also der Dateiname mit Pfad oder die URL.
 		
 		\pagebreak[4]
 		
@@ -88,11 +89,13 @@
 		sind lokal auf dem Server gespeicherte und externe Ontologien, wie
 		die Terminologien vom GFBio Terminology
 		Server\footnote{\url{http://terminologies.gfbio.org/}} als Quellen festgelegt.
-		Durch die Auslassung von Konfigurationsmöglichkeiten wird die Bedienung und
-		gleichzeitig die Komplexität zu verringert. Die GUI ist auf das Nötigste reduziert. Ein einfaches User Interface hilft auch bei der Akzeptanz, da der Einstieg ohne Vorkenntnisse auch für nichttechnische
-		Experten erleichtert wird. Es ist keine Installation oder Konfiguration für
-		den Anwender nötig, insbesondere wird außer einem Browser keine zusätzliche
-		Software beim Anwender vorausgesetzt.
+		Durch die Auslassung von Konfigurationsmöglichkeiten wird die Bedienung
+		vereinfacht, aber gleichzeitig die Komplexität zu verringert. Die GUI ist auf
+		das Nötigste reduziert. Ein einfaches User Interface hilft auch bei der Akzeptanz, da der
+		Einstieg ohne Vorkenntnisse auch für nichttechnische Experten erleichtert
+		wird. Es ist keine Installation oder Konfiguration für den Anwender nötig,
+		insbesondere wird außer einem Browser keine zusätzliche Software beim Anwender
+		vorausgesetzt.
 		\pagebreak[4]
 		\subsubsection{Matching Prozessablauf}
 		Auf den nächsten Seiten wird beispielhaft und mit Bildern der Matching Prozess
@@ -106,9 +109,8 @@
 		\end{figure}
 		
 		\pagebreak[4]
-		Zuerst werden zwei Ontologien, zwei Terminologien oder jeweils eines von
-		beidem und ein oder mehrere Matcher durch klicken auf die entsprechenden
-		Buttons ausgewählt.
+		Zuerst werden zwei Ontologien aus beliebigen Quellen und ein oder
+		mehrere Matcher durch klicken auf die entsprechenden Buttons ausgewählt.
 		\begin{figure}[h!]
 		\centering
 		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process.png}
@@ -142,7 +144,7 @@
 		
 		\pagebreak[4]
 		Wenn der Matching Prozess abgeschlossen ist, wird eine Ergebnisseite
-		angezeigt, wie in \ref{fig7} gezeigt.
+		angezeigt, wie in \ref{fig7} dargestellt.
 		\begin{figure}[h!]
 		\centering
 		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process3.png}
@@ -195,7 +197,7 @@
 		\pagebreak[4]
 		Zur Auswahl für Verbindungen stehen eine Reihe von im \textit{Web Ontology
 		Language} (OWL) Standard definierten
-		Axiomen.\footnote{https://www.w3.org/TR/owl-ref/}
+		Axiomen.\footnote{\url{https://www.w3.org/TR/owl-ref/}}
 		\begin{figure}[h!]
 		\centering
 		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process9.png}
@@ -231,7 +233,7 @@
 		Django durchgeführt und dann an das \textit{Reader} Modul weitergeleitet. Dieses
 		bindet die passenden Module ein, startet das Parsen und liefert die Ergebnisse
 		in Form einer Instanz der Klasse \textit{ontology} zurück. Die Ergebnisse
-		aller Reader in einer Liste gesammelt.\\
+		aller Reader werden in einer Liste gesammelt.\\
 		Mit den übergebenen Matchern wird eine \textit{Matching Tool Chain} im
 		gleichnamigen Modul erstellt, welche die Matcher in der vom
 		Benutzer ausgewählten Reihenfolge ausführt. Die Ergebnisse jedes Matching
@@ -256,6 +258,38 @@
 		als Basis zu benutzen und den Vorgang des Ontology Matchings zu
 		automatisieren und unabhängig von der GUI zu arbeiten.
 		
+		\section{Implementierte Reader}
+		Um Ontologien aus verschiedenen Quellen nutzen zu können, wurden einige Reader
+		implementiert, um die Ontologien zu parsen und die Inhalte der Ontologien in
+		Instanzen der Klassen \textit{onto\_elem} aus dem Modul \textit{onto\_element}
+		und \textit{ontology} aus dem gleichnamigen Modul zu überführen. Da alle
+		Reader Instanzen dieser Klassen nutzen, können die Ontologien unabhängig von
+		ihrem Ursprung auf die gleiche Weise verwendet werden.
+		
+		\subsection{RDF XML Parser}
+		Mit diesem Reader werden lokal vorliegende XML Dateien geparst, in denen
+		Ontologien im RDF Format enthalten sind.
+		
+		\subsection{OWL RDF XML Parser}
+		Dieser Matcher unterscheidet sich in seinem Aufbau und Ablauf nur geringfügig
+		vom RDF XML Parser. Es werden andere Elemente bzw. Tags erkannt, um die
+		Ontologie einzulesen.
+		
+		\subsection{OWL RDF XML Web Parser}
+		Damit auch externe Ressourcen für Ontologien verwendbar sind, wurde der OWL
+		RDF XML Parser modifiziert, um Dateien aus Web Ressourcen anstatt lokale
+		Dateien zu parsen.
+		
+		\subsection{GFBio Terminology Server Parser}
+		Um Ontologien, die auf dem GFBio Terminology Server vorgehalten werden zu
+		verwenden, wurde ein Reader implementiert, der erst alle Elemente der
+		übergebenen Ontologie und dann die Attribute der einzelnen Elemente abfragt.
+		
+		\subsection{GFBio JSON Parser}
+		Die Ontologien des GFBio Terminology Servers können auch im JSON Format
+		heruntergeladen werden. Damit diese auch genutzt werden können, wurde
+		dieser Reader implementiert. 
+		
 		\section{Implementierte Matcher}
 		\label{ImplementierteMatcher}
 		Im Rahmen dieser Masterarbeit wurden verschiedene Matching Algorithmen
@@ -277,7 +311,7 @@
 		\label{simpleOntologyMatcher}
 		Bei diesem Matcher werden die Labels der Elemente auf Ähnlichkeiten
 		untersucht.
-		Zuerst werden die Labels auf Gleichheit überprüft.
+		Zuerst werden die Labels auf exakte Gleichheit überprüft.
 		\begin{lstlisting}
 		match_result = re.match("^" + item.get_text().replace("_", " ") + "$", item1.get_text().replace("_", " "), re.IGNORECASE) if not already_matched and match_result and not re.match(i.name, j.name, re.IGNORECASE):
 		\end{lstlisting}
@@ -307,8 +341,8 @@
 		gab, waren in der Ergebnismenge viele false positives. Zusätzlich wurde in
 		früheren Versionen dieses Matchers einfach nach Vorkommen der Label Wörter in
 		dem anderen Label geprüft. Dies führte ebenfalls zu vielen false positives.
-		Dies wurde dann dahingehend geändert, dass der komplete Ausdruck entweder am
-		Anfang gefolgt von einem Leerzeichen stehen muss oder am Ende des Labels mit
+		Dies wurde dann dahingehend geändert, dass der vollständige Ausdruck entweder
+		am Anfang gefolgt von einem Leerzeichen stehen muss oder am Ende des Labels mit
 		einem Leerzeichen direkt davor.
 		
 		\subsection{Levenshtein Distance Matcher}
@@ -321,7 +355,7 @@
 		als eins und kleiner als fünf sein. Zusätzlich darf der Abstand nicht größer
 		als ein Drittel der Länge beider Label sein.\\
 		In der ersten Version dieses Matchers war die einzige Bedingung, dass der
-		Editierabstand größer als eins und kleiner als fünf sein musste.
+		Editierabstand größer als eins und kleiner als fünf sein musste:
 		\begin{lstlisting}
 		if 1 < distance and distance < 5 and (distance < len(item.get_text())/3) and not already_matched:
 		\end{lstlisting}
@@ -336,7 +370,8 @@
 		\subsection{Dictionary Synonym Matcher}
 		Mit diesem Matcher werden über die PyDictionary
 		API\footnote{\url{https://pypi.python.org/pypi/PyDictionary}} Synonyme der
-		Labels abgefragt und diese mit den anderen Labels verglichen. Sobald es eine Übereinstimmung in den Synonymen eines Labels mit einem anderen gibt, wird
+		Labels abgefragt und diese mit den anderen Labels verglichen. Sobald es eine
+		Übereinstimmung in den Synonymen eines Labels mit einem anderen gibt, wird
 		dieses Elementenpaar als mögliches Matching vorgemerkt.\\
 		Bei diesem Matcher hat sich der Kontext der Ontologie als Schwachstelle
 		herausgestellt, da viele Begriffe verschiedene Bedeutungen haben, insbesondere
@@ -371,9 +406,9 @@
 		\subsection{Synonym Attribute Matcher}
 		Um das Problem mit den Synonymen anzugehen, wurden bei der German Federation
 		for Biological Data (GFBio)\footnote{\url{http://www.gfbio.org}} Synonyme als
-		Eigenschaft eingeführt. Dieser Matcher bedient sich dieser Synonyme, um nach passenden
-		Matchings zu suchen. Dies verringert die Zeit, die das Nachschlagen der
-		Synonyme braucht erheblich.
+		Eigenschaft der Elemente eingeführt. Dieser Matcher bedient sich dieser
+		Synonyme, um nach passenden Matchings zu suchen. Dies verringert die Zeit, die
+		das Nachschlagen der Synonyme braucht erheblich.
 		\begin{lstlisting}
 		if i.get_attribute("synonyms") is not None:
             synonyms = synonyms + i.get_attribute("synonyms")
@@ -396,10 +431,10 @@
 		\subsection{XML}
 		Daten, die in XML vorliegen, lassen sich grundsätzlich so gestalten, dass sie
 		schädliches Verhalten hervorrufen. Denkbar sind
-		\textit{Denial of Service} (DoS) Attacke, Zugriff auf lokale Dateien,
+		\textit{Denial of Service} (DoS) Attacken, Zugriff auf lokale Dateien,
 		Erstellen von Netzwerkverbindungen oder Umgehung von
-		Schutzmaßnahmen.\footnote{\url{https://docs.python.org/2/library/xml.html#xml-vulnerabilities}}
-		Das Modul aus der Python Standardbibliothek, um XML Dateien bzw. XML
+		Schutzmaßnahmen.\cite{defusedxml}
+		Das Modul aus der Python Standardbibliothek um XML Dateien bzw. XML
 		formatierte Strings zu lesen, ist gegen derartige Angriffe nicht explizit
 		geschützt. Es gibt zwei Bibliotheken, die in der Dokumentation von Python 2
 		erwähnt werden, die die Sicherheitsproblematik angehen (\textit{defused
@@ -441,8 +476,9 @@
 		Zeichenkette “&lol8;” besteht. Dieses setzt sich aus zehn mal
 		dem Ausdruck “&lol7;”  zusammen. Dies wird nun weitergeführt, bis alle
 		Entitäten aufgedröselt wurden. Danach bestehen die Daten aus einer Milliarde
-		mal dem Ausdruck "`lol"'. Daher auch die Bezeichnung billion laughs. Die Menge an
-		Daten ist dadurch von weniger als einem Kilobyte auf fast drei GB
+		mal dem Ausdruck "`lol"' (Abkürzung für \textit{laughing out loud}). Daher
+		auch die Bezeichnung billion laughs.
+		Die Menge an Daten ist dadurch von weniger als einem Kilobyte auf fast drei GB
 		angewachsen.\cite{Sul09}
 		
 		\subsection{Quadratic Blowup Entity Expansion}
@@ -450,9 +486,9 @@
 		aber keine Verschachtelung von Entitäten, sondern wiederholt eine sehr lange
 		Zeichenkette mehrfach. Dadurch ist die Menge an Daten, die hinzugewonnen wird,
 		potenziell nicht so groß, wie bei der Exponential Entity Expansion. Jedoch
-		wirken hier einige Schutzmechanismen, die extra gegen diese Verschachtelung in
-		Parser eingebaut wurden, nicht mehr. Dafür lassen sich beide Angriffe
-		kombinieren.\footnote{\url{https://pypi.python.org/pypi/defusedxml#quadratic-blowup-entity-expansion}}
+		wirken hier einige Schutzmechanismen, die extra gegen die Verschachtelung im
+		Parser eingebaut wurden, nicht mehr. Beide Angriffe lassen sich auch
+		kombinieren.\cite{defusedxml}
 		
 		\subsection{External Entity Attacks}
 		XML erlaubt es auch, externe Ressourcen einzubinden, indem eine URL in einer
@@ -463,24 +499,23 @@
 		Alternativ kann man auch sehr große Menge an Daten oder sogar unendlich viel
 		übertragen werden.\cite{Sul09}
 		Es ist auch möglich, Dateien auf dem selben System, wie der XML Parser
-		anzugeben, sie dadurch einzulesen und an den Inhalt zu gelangen.
-		\footnote{\url{https://pypi.python.org/pypi/defusedxml#external-entity-expansion-local-file}}
+		anzugeben, sie dadurch einzulesen und an den Inhalt zu gelangen.\cite{defusedxml}
 		\\
 		\\
 		Beim vom Simple Ontology Matcher verwendeten XML Parser defusedxml sind
 		Entitäten standardmäßig nicht erlaubt und lösen eine
-		Exception aus, sofern welche gefunden werden.\footnote{\url{https://pypi.python.org/pypi/defusedxml}}
+		Exception aus, sofern welche gefunden werden.\cite{defusedxml}
 		Dadurch können die Vorteile von Entitäten nicht genutzt werden, es erschwert
-		aber auch das 
+		aber auch das Einschleusen von schädlichem Code.
 		
 		\subsection{Django}
 		Wenn der Simple Ontology Matcher als Django App verwendet wird, nimmt er
-		Eingaben von Nutzern, also von extern, entgegen und verarbeitet sie. Bei den
+		Eingaben von Nutzern, also von außen, entgegen und verarbeitet sie. Bei den
 		URLs sind nur bestimmte Ausdrücke erlaubt, bei denen auf Gleichheit geprüft
 		wird. Andere Pfade sind in der URL nicht gestattet. In zwei Fällen ist das
 		Abfragen von Dokumenten zulässig.
 		Entweder wenn es eine Anfrage nach der Datei \textit{scripts.js} gibt oder das Ergebnis
-		eines Matchings angezeigt werden soll. In diesem Fall werden auch drei Arten
+		eines Matchings angezeigt werden soll. In diesem Fall werden auch zwei Arten
 		von Parametern in der URL übergeben, ausgelesen und verwendet. Dabei werden
 		die Eingaben in die Zwischenmodule gegeben. Erwartet werden Namen von
 		vorhandenen Python Modulen. Sollten diese nicht existieren, werden die
@@ -493,8 +528,8 @@
 		\section{Zusätzliche Module}
 		Neben den Modulen, die für das Matching nötig sind, gibt es einige zusätzliche
 		Module zur Durchführung verschiedener Aufgaben mit den Resultaten.\\
-		Implementiert wurde eine Klasse, die die Matchings abbildet und welche die
-		Elemente und Informationen über das Matching enthält. Instanzen davon werden
+		Implementiert wurde eine Klasse, die die Matchings abbildet. Dort sind
+		Elemente und Informationen über das Matching enthalten. Instanzen davon werden
 		über einen Reader aus den XML formatierten Ergebnissen erstellt und als Liste
 		übergeben. Dadurch können verschiedene Matcher und Algorithmen miteinander
 		verglichen werden.\\

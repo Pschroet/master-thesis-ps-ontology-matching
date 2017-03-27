@@ -10,13 +10,13 @@
 
 \section{Das Matching von mehr als zwei Ontologien}
 Aktuell können nur jeweils zwei Ontologien miteinander gematcht werden. Durch
-einen einfachen Wrapper, der die Ontologien paarweise miteinander matcht, ließe
-sich dieser Nachteil beheben.
+Änderung der Matching Tool Chain, ließe sich dieser Nachteil beheben, indem die
+Ontologien paarweise miteinander gematcht werden.
 
 \section{Nebenläufigkeit}
-Wie in Kapitel \ref{ImplementierteMatcher} Implementierte Matcher erwähnt, ist
-bei einigen Matchern die Laufzeit nicht ideal. Aber auch bei den anderen Matchern wäre eine schnellere
-Bearbeitung der Ongologien positiv. Daher ist eine angedachte Erweiterung für
+Wie in Kapitel \ref{ImplementierteMatcher} \textit{Implementierte Matcher}
+erwähnt, ist bei einigen Matchern die Laufzeit nicht ideal. Aber auch bei den anderen Matchern wäre eine schnellere
+Bearbeitung der Ontologien positiv. Daher ist eine angedachte Erweiterung für
 die Zukunft, die Matcher bzw.
 den Matching Prozess nebenläufig zu gestalten. Dafür eignen sich erfahrungsgemäß
 andere Sprachen als Python
@@ -30,30 +30,31 @@ potenziell sehr viele Paare ermittelt werden, wäre es hilfreich, die
 unbearbeiteten Ergebnisse zwischenspeichern zu können, um die Arbeit später
 wiederaufnehmen zu können.\\
 Eine denkbare Umsetzung wäre die Stelle in den Ergebnissen auf der
-Ergebnisseite zu markieren und alle folgenden exportierbar separat zu machen.
+Ergebnisseite zu markieren und alle folgenden Matching Vorschläge separat
+exportierbar zu machen.
+
+\section{Mehr Informationen auf der Ergebnisseite}
+Für die sichtenden Experten wäre es vorteilhaft, leicht mehr Informationen über
+die Elemente zu erhalten, ohne die Ergebnisseite verlassen zu müssen. Daher wäre
+es gut, bei Bedarf, z.B. als Tooltip, mehr Informationen, wie eine Beschreibung
+oder Attribute zu einem Element anzuzeigen.
 
 \section{Zusätzliche Matcher}
 Die im Rahmen dieser Arbeit implementierten Matcher decken einige Möglichkeiten
 ab, Ontologien zu matchen. Weitere mögliche Matcher lassen sich aus den in
-Kapitel \ref{MatcherKategorien} vorgestellten Methoden entwickeln. Darüber
-hinaus ist es denkbar, für Matcher, die auf Wörterbücher zurückgreifen, andere 
-als die hier verwendeten zu nutzen, z.B.
+Kapitel \ref{MatcherKategorien} vorgestellten Methoden entwickeln, wie die
+Verknüpfung der Elemente untereinander mittels Properties.\\
+Darüber hinaus ist es denkbar, für Matcher, die auf Wörterbücher zurückgreifen,
+andere als die hier verwendeten zu nutzen, z.B.
 Wiktionary\footnote{\url{https://de.wiktionary.org/wiki/Wiktionary:Hauptseite}},
 WordNet\footnote{\url{https://wordnet.princeton.edu/}} oder Words
-API\footnote{\url{https://www.wordsapi.com/}}.
+API\footnote{\url{https://www.wordsapi.com/}}.\\
 
-\section{Free Software/Freie Software}
-Die Entscheidung, den Simple Ontology Matcher als freie
-Software\footnote{\url{https://www.gnu.org/philosophy/free-sw}} zu veröffentlichen, beruht auf zwei Punkten. Zum einen dient es dem
-wissenschaftlichen Gedanken, Wissen frei verfügbar zu machen, damit andere davon
-profitieren können. Zum anderen hilft es der Diskussion und Weiterentwicklung,
-da das Projekt für jeden einsehbar und benutzbar ist.\\
-Wie in Kapitel \ref{subsec:Evaluation 2} Evaluation 2 aufgeführt, wurde bei der
-Zielsetzung bzw. dem Verständnis der Matcher ein anderer Ansatz als der
-verbreitetere gewählt. Weder der eine noch der andere ist generell besser,
-sondern es hängt vom Einsatzgebiet und der Zielstellung ab. Mit freier Software
-kann frei darüber diskutiert werden und ein anderer Ansatz für die Matcher bzw.
-die gesamte Software gewählt werden.
+\section{Information Visualization und Graphen}
+Eine schöne Möglichkeit, die Ergebnisse darzustellen, wäre es, Methoden aus der
+Information Visualization zu nutzen und/oder Graphen zu verwenden, um die
+Elemente der Matchings zusammen mit der Verbindung darzustellen. Aufgrund der
+Komplexität ist dies aber keine triviale Aufgabe.
 
 \cleardoublepage
 \pagebreak[4]
