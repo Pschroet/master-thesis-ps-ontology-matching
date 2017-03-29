@@ -36,7 +36,7 @@ exportierbar zu machen.
 \section{Mehr Informationen auf der Ergebnisseite}
 Für die sichtenden Experten wäre es vorteilhaft, leicht mehr Informationen über
 die Elemente zu erhalten, ohne die Ergebnisseite verlassen zu müssen. Daher wäre
-es gut, bei Bedarf, z.B. als Tooltip, mehr Informationen, wie eine Beschreibung
+es gut, bei Bedarf, z. B. als Tooltip, mehr Informationen, wie eine Beschreibung
 oder Attribute zu einem Element anzuzeigen.
 
 \section{Zusätzliche Matcher}
@@ -44,11 +44,18 @@ Die im Rahmen dieser Arbeit implementierten Matcher decken einige Möglichkeiten
 ab, Ontologien zu matchen. Weitere mögliche Matcher lassen sich aus den in
 Kapitel \ref{MatcherKategorien} vorgestellten Methoden entwickeln, wie die
 Verknüpfung der Elemente untereinander mittels Properties.\\
-Darüber hinaus ist es denkbar, für Matcher, die auf Wörterbücher zurückgreifen,
-andere als die hier verwendeten zu nutzen, z.B.
+Der Levenshtein Distance Matcher findet oft Antonyme, sofern es
+"`typische"' Änderungen der Vorsilben sind, z. B. \textit{ascending}
+und \textit{descending}. Mit diesem lexikalischem Wissen kann man auch einen
+Matcher implementieren, der speziell nach solchen Unterschieden in den Labels
+sucht.\\
+Darüber hinaus ist es denkbar, für Matcher, die auf Wörterbücher
+zurückgreifen, andere als die hier verwendeten zu nutzen, z. B.
 Wiktionary\footnote{\url{https://de.wiktionary.org/wiki/Wiktionary:Hauptseite}},
 WordNet\footnote{\url{https://wordnet.princeton.edu/}} oder Words
-API\footnote{\url{https://www.wordsapi.com/}}.\\
+API\footnote{\url{https://www.wordsapi.com/}}. Durch andere Wörterbücher
+lassen sich möglicherweise auch Techniken wie \textit{Stemming} in die Matcher
+integrieren.\\
 
 \section{Information Visualization und Graphen}
 Eine schöne Möglichkeit, die Ergebnisse darzustellen, wäre es, Methoden aus der

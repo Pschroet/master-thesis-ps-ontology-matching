@@ -13,8 +13,8 @@
 		und ist über verschiedene Technologien ansprechbar. Aktuell sind die Module
 		der Software als App für Django\footnote{\url{https://www.djangoproject.com/}} verfügbar, können
 		aber auch direkt in Python Skripten benutzt werden.\\
-		Der Kernteil besteht zuerst aus mehreren Modulen, um verschiedene Arten von
-		Daten eingelesen werden können, z.B.
+		Der Kernteil besteht aus mehreren Modulen, um verschiedene Arten von
+		Daten einlesen zu können, z. B.
 		Formate wie OWL/XML, Query Languages wie SPARQL oder REST-Schnittstellen.
 		Zusätzlich können unterschiedliche Arten und Implementierungen von Matchern
 		verwendet werden. Um dies zu realisieren, gibt es eine Klasse, um Ontologien,
@@ -24,7 +24,7 @@
 		beschreiben. Diese beiden Klassen dienen als Schnittstellen, um innerhalb der
 		Software mit Ontologien und deren Elementen zu interagieren. Für diese beiden
 		Teile können weitere Module implementiert werden, um zusätzliche
-		Funktionalität zu erhalten, z.B. andere Datenquellen einzulesen.\\
+		Funktionalität zu erhalten, z. B. andere Datenquellen einzulesen.\\
 		Die Wahl auf Python als verwendete Programmiersprache hatte zwei Gründe,
 		Python ist weit verbreitet und bietet mit Django eine gute Möglichkeit, eine
 		Web Applikation zu erstellen.
@@ -37,7 +37,7 @@
 		\centering
 		\includegraphics[width=1.0\textwidth]{pics/Module-overview.png}
 		\caption{Prozessablauf der Module}
-		\label{fig1}
+		\label{fig2}
 		\end{figure}
 		An erster Stelle stehen der oder die Parser, die die Ontologien einlesen und
 		die Daten in Instanzen der Klasse \textit{ontology} einpflegen. Hierbei können
@@ -49,7 +49,7 @@
 		Dann werden die Ontologien an verschiedene Matcher übergeben. Dabei werden
 		die Ergebnisse von einem Matcher zum nächsten weitergegeben, so ist es zum
 		einen möglich, diese Ergebnisse zu akkumulieren und zum
-		anderen, weitergehende Analysen z.B. der Struktur oder Hierarchie vorzunehmen. Je nachdem, auf welche Eigenschaften
+		anderen, weitergehende Analysen z. B. der Struktur oder Hierarchie vorzunehmen. Je nachdem, auf welche Eigenschaften
 		eines Elements ein Matcher achtet, können sinnvolle Arten von Verbindungen
 		festgelegt werden. Diese werden ebenfalls mit den einzelnen Matchings
 		übergeben und später als Default Wert angezeigt. Die Gesamtergebnisse werden
@@ -62,26 +62,27 @@
 		Um von nichttechnischen Experten leicht und ohne zusätzlichen Aufwand
 		benutzbar zu sein, kann man die Module des Simple Ontology Matcher als App
 		einer Django Installation verwenden. Dann werden über ein
-		Skript\footnote{SimpleOntologyMatcher/OntologyMatcher/settings.py} von Django mögliche Ontologien und Matcher gesammelt.
+		Skript\footnote{SimpleOntologyMatcher/OntologyMatcher/settings.py} von Django
+		mögliche Ontologien und Matcher gesammelt.
 		
 		\begin{figure}[h!]
 		\centering
 		\includegraphics[width=1.0\textwidth]{pics/Module-overview1.png}
 		\caption{Module Django App}
-		\label{fig2}
+		\label{fig3}
 		\end{figure}
 		
 		Dabei können, wie erwähnt, verschiedene Quellen verwendet werden. Für
-		Ontologien sind lokale und auf externen Servern gespeicherte Dateien und in Datenbank
-		eingepflegte Daten möglich. Bei Matchern werden nur lokal vorhandene Python
-		Module berücksichtigt. Die gefundenen Ontologien und Matcher werden dann in
-		ein HTML Template eingebetet, dass mit der \textit{Django Template Engine}
+		Ontologien sind lokale und auf externen Servern gespeicherte Dateien und in
+		Datenbanken eingepflegte Daten möglich. Bei Matchern werden nur lokal
+		vorhandene Python Module berücksichtigt. Die gefundenen Ontologien und Matcher werden dann in
+		ein HTML Template eingebettet, dass mit der \textit{Django Template Engine}
 		erstellt wird. Dabei wird auch die Quelle gespeichert, also der Dateiname mit Pfad oder die URL.
 		
 		\pagebreak[4]
 		
-		Über die dann erstellte Seite können Ontologien ausgewählt werden, die
-		analyisert werden sollen, und Matcher, mit denen dies durchgeführt wird.\\
+		Über die dann erstellte Seite können Ontologien, die
+		analyisert werden sollen, ausgewählt werden und Matcher, mit denen dies durchgeführt wird.\\
 		Das Design ist möglichst simpel gewählt, wie in \ref{fig3} gezeigt. Es gibt
 		keine Menüs oder Einstellmöglichkeiten, sondern es können nur
 		lokale oder externe Ontologien und Matcher ausgewählt
@@ -90,140 +91,133 @@
 		die Terminologien vom GFBio Terminology
 		Server\footnote{\url{http://terminologies.gfbio.org/}} als Quellen festgelegt.
 		Durch die Auslassung von Konfigurationsmöglichkeiten wird die Bedienung
-		vereinfacht, aber gleichzeitig die Komplexität zu verringert. Die GUI ist auf
+		vereinfacht, aber gleichzeitig die Komplexität verringert. Die GUI ist auf
 		das Nötigste reduziert. Ein einfaches User Interface hilft auch bei der Akzeptanz, da der
 		Einstieg ohne Vorkenntnisse auch für nichttechnische Experten erleichtert
 		wird. Es ist keine Installation oder Konfiguration für den Anwender nötig,
 		insbesondere wird außer einem Browser keine zusätzliche Software beim Anwender
 		vorausgesetzt.
-		\pagebreak[4]
-		\subsubsection{Matching Prozessablauf}
+		
+		\subsection{Matching Prozessablauf}
 		Auf den nächsten Seiten wird beispielhaft und mit Bildern der Matching Prozess
-		mit dem Simple Ontology Matcher dargestellt.
-		Nach dem Aufurf der URL kann direkt mit dem Matching Prozess begonnen werden.
-		\begin{figure}[h!]
-		\centering
-		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher.png}
-		\caption{Startseite Django App}
-		\label{fig3}
-		\end{figure}
+		mit dem Simple Ontology Matcher dargestellt.\\
+		Nach dem Aufruf der URL erscheint die in Abbildung \ref{fig4} gezeigte
+		Startseite und es kann direkt mit dem Matching Prozess begonnen werden.\\
+		\begin{minipage}{\linewidth}
+			\makebox[\linewidth]{
+				\includegraphics[keepaspectratio=true,width=0.8\textwidth]{pics/SimpleOntologyMatcher.png}}
+			\captionof{figure}{Startseite Django App}\label{fig4}
+		\end{minipage}
 		
 		\pagebreak[4]
+		
 		Zuerst werden zwei Ontologien aus beliebigen Quellen und ein oder
-		mehrere Matcher durch klicken auf die entsprechenden Buttons ausgewählt.
-		\begin{figure}[h!]
-		\centering
-		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process.png}
-		\caption{Matching Prozess Django App 1}
-		\label{fig4}
-		\end{figure}
-		
-		\pagebreak[4]
-		Die vom Benutzer ausgewählten Ontologien, Terminologien und Matcher werden
-		unten angezeigt.
-		Dort können sie auch abgewählt werden, indem man auf die Buttons klickt. Die Matcher werden in der
-		Reihenfolge, in der sie unten aufgeführt werden, ausgeführt. Das ist bei
-		Matchern wichtig, die auf vorhergehende Ergebnisse zugreifen oder diese
-		benötigen.
-		\begin{figure}[h!]
-		\centering
-		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process1.png}
-		\caption{Matching Prozess Django App 2}
-		\label{fig5}
-		\end{figure}
-		
-		\pagebreak[4]
+		mehrere Matcher durch klicken auf die entsprechenden Buttons ausgewählt,
+		die in Abbildung \ref{fig5} hervorgehoben wurden.\\
+		\begin{minipage}{\linewidth}
+			\makebox[\linewidth]{
+				\includegraphics[keepaspectratio=true,width=0.8\textwidth]{pics/SimpleOntologyMatcher-Process.png}}
+			\captionof{figure}{Matching Prozess Django App 1}\label{fig5}
+		\end{minipage}
+		\\
+		Die vom Benutzer ausgewählten Ontologien und Matcher werden
+		unten angezeigt, wie Abbildung \ref{fig6} dargestellt.
+		Dort können sie auch abgewählt werden, indem man auf die entsprechenden
+		Buttons klickt.
+		Die Matcher werden in der unten aufgeführten Reihenfolge ausgeführt. Das ist
+		besonders bei den Matchern wichtig, die auf vorhergehende Ergebnisse zugreifen
+		oder diese benötigen.\\
+		\begin{minipage}{\linewidth}
+			\makebox[\linewidth]{
+				\includegraphics[keepaspectratio=true,width=0.8\textwidth]{pics/SimpleOntologyMatcher-Process1.png}}
+			\captionof{figure}{Matching Prozess Django App 2}\label{fig6}  
+		\end{minipage}
+		\\
 		Anschließend kann der Matching Prozess durch einen Klick auf \textit{Find
-		Matches} gestartet werden.
-		\begin{figure}[h!]
-		\centering
-		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process2.png}
-		\caption{Matching Prozess Django App 3}
-		\label{fig6}
-		\end{figure}
-		
-		\pagebreak[4]
+		Matches} gestartet werden, siehe Abbildung \ref{fig7}.\\
+		\begin{minipage}{\linewidth}
+			\makebox[\linewidth]{
+				\includegraphics[keepaspectratio=true,width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process2.png}}
+			\captionof{figure}{Matching Prozess Django App 3}\label{fig7}  
+		\end{minipage}
+		\\
 		Wenn der Matching Prozess abgeschlossen ist, wird eine Ergebnisseite
-		angezeigt, wie in \ref{fig7} dargestellt.
-		\begin{figure}[h!]
-		\centering
-		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process3.png}
-		\caption{Matching Prozess Django App 4}
-		\label{fig7}
-		\end{figure}
+		angezeigt, wie in Abbildung \ref{fig8} dargestellt.\\
+		\begin{minipage}{\linewidth}
+			\makebox[\linewidth]{
+				\includegraphics[keepaspectratio=true,width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process3.png}}
+			\captionof{figure}{Matching Prozess Django App 4}\label{fig8}  
+		\end{minipage}
 		
 		\pagebreak[4]
-		Dort werden oben die ausgewählten Ontologien oder Terminologien angezeigt.
-		\begin{figure}[h!]
-		\centering
-		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process4.png}
-		\caption{Matching Prozess Django App 5}
-		\label{fig8}
-		\end{figure}
 		
-		\pagebreak[4]
+		Dort werden, wie in Abbildung \ref{fig9} hervorgehoben, oben die ausgewählten
+		Ontologien angezeigt.\\
+		\begin{minipage}{\linewidth}
+			\makebox[\linewidth]{
+				\includegraphics[keepaspectratio=true,width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process4.png}}
+			\captionof{figure}{Matching Prozess Django App 5}\label{fig9}  
+		\end{minipage}
+		\\
 		Die Matchings sind in verschiedene Kategorien unterteilt, für
-		jeden Matcher eine.
-		\begin{figure}[h!]
-		\centering
-		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process5.png}
-		\caption{Matching Prozess Django App 6}
-		\label{fig9}
-		\end{figure}
+		jeden Matcher eine, wie in Abbildung \ref{fig10} exemplarisch gezeigt.\\
+		\begin{minipage}{\linewidth}
+			\makebox[\linewidth]{
+				\includegraphics[keepaspectratio=true,width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process5.png}}
+			\captionof{figure}{Matching Prozess Django App 6}\label{fig10}  
+		\end{minipage}
 		
 		\pagebreak[4]
-		In den Kategorien sind die gefundenen Matchings aufgeführt.
-		\begin{figure}[h!]
-		\centering
-		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process6.png}
-		\caption{Matching Prozess Django App 7}
-		\label{fig10}
-		\end{figure}
+		
+		In den Kategorien sind die gefundenen Matchings aufgeführt, wie Abbildung
+		\ref{fig11} hervorhebt.\\
+		\begin{minipage}{\linewidth}
+			\makebox[\linewidth]{
+				\includegraphics[keepaspectratio=true,width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process6.png}}
+			\captionof{figure}{Matching Prozess Django App 7}\label{fig11}
+		\end{minipage}
+		\\
+		Die einzelnen Zeilen enthalten ein Matching Paar, wie in Abbildung \ref{fig12}
+		hervorgehoben. Angezeigt werden die URIs, die Labels, sofern vorhanden, eine
+		kurze Begründung, warum dieser Matcher dieses Matching vorschlägt.\\
+		\begin{minipage}{\linewidth}
+			\makebox[\linewidth]{
+				\includegraphics[keepaspectratio=true,width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process7.png}}
+			\captionof{figure}{Matching Prozess Django App 8}\label{fig12}  
+		\end{minipage}
 		
 		\pagebreak[4]
-		Angezeigt werden die URIs, die Labels, sofern vorhanden, eine kurze
-		Begründung, warum dieser Matcher dieses Matching vorschlägt und ein Dropdown
-		Menü, aus dem ausgewählt werden kann, wie und ob eine Verbinduing zwischen
-		diesen zwei Elemente besteht. Da es für einige Matcher sinnvolle
-		Verbindungstypen gibt, sind diese bereits als Default Wert angewählt. Das
-		wird vom jeweiligen Matcher bestimmt.
-		\begin{figure}[h!]
-		\centering
-		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process7.png}
-		\caption{Matching Prozess Django App 8}
-		\label{fig11}
-		\end{figure}
 		
-		\pagebreak[4]
-		Zur Auswahl für Verbindungen stehen eine Reihe von im \textit{Web Ontology
-		Language} (OWL) Standard definierten
-		Axiomen.\footnote{\url{https://www.w3.org/TR/owl-ref/}}
-		\begin{figure}[h!]
-		\centering
-		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process9.png}
-		\caption{Matching Prozess Django App 9}
-		\label{fig12}
-		\end{figure}
+		Zusätzlich gibt es ein Dropdown Menü, aus dem ausgewählt werden kann, wie und
+		ob eine Verbindung zwischen diesen zwei Elementen besteht, siehe Abbildung \ref{fig13}. Da es für
+		einige Matcher sinnvolle Verbindungstypen gibt, sind diese bereits als Default
+		Wert angewählt. Das wird vom jeweiligen Matcher bestimmt. Zur Auswahl für
+		Verbindungen stehen eine Reihe von im \textit{Web Ontology Language} (OWL)
+		Standard definierten.
+		Axiomen.\footnote{\url{https://www.w3.org/TR/owl-ref/}}\\
+		\begin{minipage}{\linewidth}
+			\makebox[\linewidth]{
+				\includegraphics[keepaspectratio=true,width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process9.png}}
+			\captionof{figure}{Matching Prozess Django App 9}\label{fig13}  
+		\end{minipage}
+		\\
+		Durch einen Klick auf \textit{Save Results}, siehe Abbildung \ref{fig14}, kann
+		man die bestätigten Verbindungen und ihre Elemente in RDF XML exportieren. Matchings für die keine
+		Verbindung ausgewählt wurde, werden nicht gespeichert.\\
+		\begin{minipage}{\linewidth}
+			\makebox[\linewidth]{
+				\includegraphics[keepaspectratio=true,width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process10.png}}
+			\captionof{figure}{Matching Prozess Django App 10}\label{fig14}  
+		\end{minipage}
+		\\
+		In Abbildung \ref{fig15} ist exemplarisch der XML Code für ein Matching
+		aufgeführt.\\
+		\begin{minipage}{\linewidth}
+			\makebox[\linewidth]{
+				\includegraphics[keepaspectratio=true,width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process11.png}}
+			\captionof{figure}{Matching Prozess Django App 11}\label{fig15}  
+		\end{minipage}
 		
-		\pagebreak[4]
-		Durch einen Klick auf \textit{Save Results} kann man die bestätigten
-		Verbindungen und ihre Elemente in RDF XML exportieren. Matchings für die keine
-		Verbindung ausgewählt wurde, werden nicht gespeichert.
-		\begin{figure}[h!]
-		\centering
-		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process10.png}
-		\caption{Matching Prozess Django App 10}
-		\label{fig13}
-		\end{figure}
-		
-		\pagebreak[4]
-		In \ref{fig14} ist exemplarisch der XML Code für ein Matching aufgeführt.
-		\begin{figure}[h!]
-		\centering
-		\includegraphics[width=1.0\textwidth]{pics/SimpleOntologyMatcher-Process11.png}
-		\caption{Matching Prozess Django App 11}
-		\label{fig14}
-		\end{figure}
 		\pagebreak[4]
 		
 		Intern werden die ausgewählten Ontologien mit entsprechenden
@@ -239,7 +233,7 @@
 		Benutzer ausgewählten Reihenfolge ausführt. Die Ergebnisse jedes Matching
 		Vorgangs werden von einem Matcher an den nächsten in Form des Python Datentyps \textit{Dictionary}
 		weitergegeben. Durch das weiterleiten der Ergebnisse zwischen den Matchern
-		ist es möglich, auf vorherige Ergebnisse zuzugreifen, um z.B. die Struktur von
+		ist es möglich, auf vorherige Ergebnisse zuzugreifen, um z. B. die Struktur von
 		Elementen innerhalb der Ontologien zu analysieren,
 		siehe auch Kapitel \ref{StrukturellesMapping} Strukturelles Mapping.
 		Die Ergebnisse eines Matchers werden dann zum Ergebnis Dictionary
@@ -300,7 +294,7 @@
 		\subsection{Same Entity Matcher}
 		Der einfachste Matcher überprüft die URI der Elemente, um festzustellen, ob es
 		in den übergebenen Ontologien gleiche Elemente gibt. Dies wird über eine
-		einfach Abfrage auf Gleichheit der gesicherten URIs getan.
+		einfache Abfrage auf Gleichheit der gesicherten URIs getan.
 		\begin{lstlisting}
 		for i in onto_elements:
 			for j in onto1_elements:
@@ -335,8 +329,8 @@
 		Die reguläre Ausdrucküberprüfung wird in beide Richtungen durchgeführt, da in
 		den Python \textit{re.match} und textit{re.search} Funktionen der im ersten
 		Argument übergebene Ausdruck im zweiten gesucht wird. In beiden Fällen darf
-		der gesuchte Ausdruck aber nicht schon vorher als Match markiert worden, die
-		gleiche URI oder kürzer als vier Zeichen sein.\\
+		der gesuchte Ausdruck aber nicht schon vorher als Match markiert worden sein,
+		die gleiche URI besitzen oder kürzer als vier Zeichen sein.\\
 		In früheren Tests, wo es die Einschränkung der Länge der Labels noch nicht
 		gab, waren in der Ergebnismenge viele false positives. Zusätzlich wurde in
 		früheren Versionen dieses Matchers einfach nach Vorkommen der Label Wörter in
@@ -347,10 +341,10 @@
 		
 		\subsection{Levenshtein Distance Matcher}
 		Dieser Matcher berechnet die Levenshtein Distanz bzw. den Editierabstand
-		zwischen den Labeln zweier Elemente. Also wie viele Änderungen der Buchstaben
+		zwischen den Labels zweier Elemente. Also wie viele Änderungen der Buchstaben
 		man an einem Label durchführen muss, um das andere Label zu erhalten.\\
 		Zuerst wird geprüft, ob beide Label aus mehr als drei Buchstaben bestehen.
-		Dann wird der Abstand, ob der Abstand zwischen beiden berechnet. Damit ein
+		Dann wird der Abstand zwischen beiden berechnet. Damit ein
 		Elementenpaar als mögliches Matching anerkannt wird, muss der Abstand größer
 		als eins und kleiner als fünf sein. Zusätzlich darf der Abstand nicht größer
 		als ein Drittel der Länge beider Label sein.\\
@@ -359,8 +353,8 @@
 		\begin{lstlisting}
 		if 1 < distance and distance < 5 and (distance < len(item.get_text())/3) and not already_matched:
 		\end{lstlisting}
-		Probleme traten bei kurzen Wörtern, da dann alle Buchstaben geändert werden
-		konnten. Aus diesem Grund wurden die Bedingungen eingeführt, dass mehr als ein Buchstabe
+		Probleme traten bei kurzen Wörtern auf, da dann alle Buchstaben geändert
+		werden konnten. Aus diesem Grund wurden die Bedingungen eingeführt, dass mehr als ein Buchstabe
 		geändert werden muss und die Veränderungen maximal ein Drittel der Buchstaben
 		umfassen dürfen (siehe auch \ref{subsec:Evaluation 1} Evaluation 1).
 		\begin{lstlisting}
@@ -376,10 +370,10 @@
 		Bei diesem Matcher hat sich der Kontext der Ontologie als Schwachstelle
 		herausgestellt, da viele Begriffe verschiedene Bedeutungen haben, insbesondere
 		in bestimmten Wissenschaften. Dann ergeben viele Synonyme keinen Sinn.\\
-		Ein weiteres Problem dieses Matchers ist die Laufzeit, da die Dauer Anfrage
-		zusammen mit der Menge der Anfragen den gesamten Prozess spürbar in die Länge
-		ziehen. Eine mögliche andere Quelle für einen derartigen Matcher ist daher
-		wünschenswert.
+		Ein weiteres Problem dieses Matchers ist die Laufzeit, da die Dauer der
+		Anfrage zusammen mit der Menge der Anfragen den gesamten Prozess spürbar in
+		die Länge ziehen. Eine mögliche andere Quelle für einen derartigen Matcher ist
+		daher wünschenswert.
 		\begin{lstlisting}
 		synonyms = dictionary.synonym(item.get_text().encode('utf8'))
 		[...]
@@ -408,7 +402,7 @@
 		for Biological Data (GFBio)\footnote{\url{http://www.gfbio.org}} Synonyme als
 		Eigenschaft der Elemente eingeführt. Dieser Matcher bedient sich dieser
 		Synonyme, um nach passenden Matchings zu suchen. Dies verringert die Zeit, die
-		das Nachschlagen der Synonyme braucht erheblich.
+		das Nachschlagen der Synonyme braucht, erheblich.
 		\begin{lstlisting}
 		if i.get_attribute("synonyms") is not None:
             synonyms = synonyms + i.get_attribute("synonyms")
@@ -421,10 +415,11 @@
 		\end{lstlisting}
 		
 		\section{Sicherheit}
+		\label{Sicherheit}
 		Sicherheit ist bei der Softwareentwicklung ein wichtiger Aspekt, der
 		betrachtet werden muss. Dies gilt insbesondere bei einer Web Applikation, da
 		dort mit Eingaben von Außen gearbeitet wird. Allerdings ist eine Web
-		Applikation ein zentraler Dienst, d.h. nichttechnische Expoerten müssen sich
+		Applikation ein zentraler Dienst, d. h. nichttechnische Experten müssen sich
 		nicht um Dinge, wie das Einspielen von Updates für eine Runtime oder einen
 		Interpreter kümmern.
 		
@@ -494,10 +489,10 @@
 		XML erlaubt es auch, externe Ressourcen einzubinden, indem eine URL in einer
 		Entität definiert wird. Dabei wird jedes mal, wenn eine entsprechende Entität
 		ersetzt werden soll, die angegebene URL aufgerufen, um das Dokument zu laden.
-		Dieses Verhalten kann ausgenutzt werden, indem z.B. die Wartezeit auf
+		Dieses Verhalten kann ausgenutzt werden, indem z. B. die Wartezeit auf
 		unendlich gesetzt oder die Datenübertragung langsam durchgeführt wird.
-		Alternativ kann man auch sehr große Menge an Daten oder sogar unendlich viel
-		übertragen werden.\cite{Sul09}
+		Alternativ kann man auch ein sehr große Menge an Daten oder sogar unendlich
+		viel übertragen werden.\cite{Sul09}
 		Es ist auch möglich, Dateien auf dem selben System, wie der XML Parser
 		anzugeben, sie dadurch einzulesen und an den Inhalt zu gelangen.\cite{defusedxml}
 		\\

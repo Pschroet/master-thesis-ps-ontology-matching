@@ -38,7 +38,7 @@
 		
 		\subsection{Resultat}
 		Es wurden 203 gleiche Matchings von beiden Algorithmen gefunden, bis auf neun
-		Ergebnisse beschrieben alle das gleiche Konzept, d.h. sie hatten die selbe
+		Ergebnisse beschrieben alle das gleiche Konzept, d. h. sie hatten die selbe
 		URI.
 		Wenn man die Unterschiede in den Ergebnissen betrachtet, also solche, die nur
 		einer der beiden Matching Algorithmen gefunden hat, dann hat der Simple
@@ -59,7 +59,7 @@
 		\begin{itemize}
 		  \item Gleich: Zwei Elemente beschreiben das selbe Konzept.
 		  \item Gegenteil: Zwei Elemente sind das Gegenteil voneinander.
-		  \item Indirekt: Die beiden Elemente können über ein anderes Elemente.
+		  \item Indirekt: Die beiden Elemente können über ein anderes Element
 		  miteinander verbunden werden, unabhängig davon, ob es Teil einer der beiden
 		  Ontologien ist.
 		  \item Ähnlich: Zwei Elemente sind zwar verbunden, es lässt sich aber keine
@@ -67,7 +67,7 @@
 		  oder beide haben den selben Wortstamm.
 		  \item Keine: Es besteht keine Verbindung und das Matching ist ein false
 		  positive.
-		  \item Unsicher: Es ist unklar ob zwei Elemente miteinander verbunden sind,
+		  \item Unsicher: Es ist unklar, ob zwei Elemente miteinander verbunden sind,
 		  da das notwendige Domänenwissen aufgrund von Fachfremdheit fehlt.
 		\end{itemize}
 		
@@ -76,7 +76,7 @@
 		Arten von Verbindungen zu bekommen und die Ergebnisse einordnen zu können.\\
 		Bei der Durchsicht der Ergebnisse fiel schnell auf, dass der Simple Ontology
 		Matcher sehr viele Matchings gefunden hat, die zwar verbunden sind, aber keine
-		Gleichheit ausdrücken (Kategorien Gegeteil und indirekt).
+		Gleichheit ausdrücken (Kategorien Gegenteil und Indirekt).
 		Wohingegen der von Dr. Ing. Algergawy verwendete Algorithmus viele Matchings
 		gefunden hat, die Gleichheit zwischen den Elementen ausdrücken (Kategorien
 		Gleich und Ähnlich).\\
@@ -120,8 +120,8 @@
 		Herangehensweise gibt, der zu derartig unterschiedlichen Ergebnissen führt.
 		Die übliche Suche nach Verbindungen zwischen Ontologien bezieht sich auf
 		Gleichheit oder Ähnlichkeit. Im Rahmen dieser Masterarbeit wurde intuitiv der
-		Ansatz gewählt, dass jede möglich Art der Verbindung zu suchen ist, egal
-		welcher Art. Ob und wo diese Ansätze sinvoll sind, müssen Experten auf dem
+		Ansatz gewählt, dass jede mögliche Art der Verbindung zu suchen ist, egal
+		welcher Art. Ob und wo diese Ansätze sinnvoll sind, müssen Experten auf dem
 		jeweiligen Gebiet entscheiden, auf dem die Matchings erstellt werden.
 		
 		\section{Evaluation 2}
@@ -136,17 +136,15 @@
 		umfangreich, sorgfältig erstellt und beschreiben Konzepte in technischer
 		Sprache. Neben ihrer Größe und einer nur zum Teil in natürlicher Sprache
 		verfassten Konzeptualisierung unterscheiden sie sich von anderen Ontologien in
-		der Verwendung bestimmter Annotationen und Rollen, z.B. häufigen partOf
+		der Verwendung bestimmter Annotationen und Rollen, z. B. häufigen partOf
 		Beziehungen. Ein als Referenz vorgegebenes Matching zeigt, dass es eine hohe
 		Zahl an eher einfachen Matchings gibt, die mit simplen String Vergleichen gefunden werden
 		kann. Gleichzeitig gibt es auch einige Paare, die nicht trivial sind und/oder
 		anatomisches Hintergrundwissen benötigen.\cite{OAEI16}\\
 		Anhand vorher festgelegter Matcher wurde der im Rahmen dieser Masterarbeit
-		entwickelte Simple Ontology Matcher mit dem Referenzergebnis der 2016 Campaign verglichen.
-		
-		\subsection{Resultat}
-		Es wurden Ergebnisse verschiedener Matcher mit der Referenz abgeglichen und
-		Precision und Recall berechnet.\\
+		entwickelte Simple Ontology Matcher mit dem Referenzergebnis der 2016 Campaign
+		verglichen. Für diese Evaluation wurden Ergebnisse verschiedener Matcher mit
+		der Referenz abgeglichen und Precision und Recall berechnet.\\
 		
 		\subsubsection{Simple Ontology Matcher}
 		Da es bei diesem Matcher zwei mögliche Einstellungen gibt, wurden beide
@@ -156,7 +154,7 @@
 		
 		Wenn man die zusätzlich gefundenen Ergebnisse pauschal als false positives
 		einstuft, ergeben sich folgende Werte (alle Prozentangaben in der Tabelle
-		wurden mathematisch gerundet)
+		wurden mathematisch gerundet).
 		\begin{center}
 		\begin{table}[h!]
 		\small

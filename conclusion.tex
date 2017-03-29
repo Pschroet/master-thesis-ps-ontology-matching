@@ -18,7 +18,7 @@ Relevanz gewonnen, da Ontologien es erlauben, Konzepte aus unterschiedlichsten
 Domänen für Computer verarbeit- und verknüpfbar zu machen. Dabei
 finden Technologien, wie OWL und RDF Anwendung, die definieren, wie man Daten
 strukturieren kann. In einer solchen Modellierung lassen sich die Daten
-auszutauschen und untereinander verknüpfen.\\
+austauschen und untereinander verknüpfen.\\
 Der Fokus dieser Masterarbeit lag darauf, ein Tool zu entwickeln, das technisch
 nicht-versierten Nutzern entgegen kommt und es ihnen ohne größeren Aufwand
 ermöglicht, Ontologien zu matchen. Dabei sollen die Ergebnisse, die
@@ -27,7 +27,7 @@ aufweisen, wodurch es wenig nützlich wäre.\\
 Aus Sicht der Softwareentwicklung soll es modular aufgebaut sein, um leicht
 erweiter- und wartbar zu sein. Dadurch wäre es potenziell auch möglich, die
 einzelnen Teile außerhalb der eigentlichen Software zu nutzen.\\
-Da es sich um wissenschaftliche Arbeit handelt, ist auch sinnvoll, die
+Da es sich um wissenschaftliche Arbeit handelt, ist es auch sinnvoll, die
 Ergebnisse frei verfügbar zu veröffentlichen, sowohl die schriftlichen Anteile
 als auch die Software. Dadurch wird dem wissenschaftlichen Gedanken entsprochen,
 mit einer wissenschaftlichen Arbeit Wissen zu mehren und zu teilen.
@@ -37,25 +37,27 @@ Die Software wurde von Anfang an als Webapp entwickelt, damit die Nutzer es
 einfach durch den Aufruf der Seite starten können. Die Arbeit, es aufzusetzen
 und zu konfigurieren, wird dabei vom Nutzer auf einen Admin verschoben. Also von
 einem nichttechnischen zu einem technischen Experten.\\
-Zuerst wurden eine Wrapper-Schicht entwickelt, die das Front- vom Backend
+Zuerst wurde eine Wrapper-Schicht entwickelt, die das Front- vom Backend
 trennt, aber strukturierte Zugriffe anbietet. Die Backend Module, konkret die
 Reader und Matcher, werden dynamisch geladen. Das erlaubt es, diese Module erst
 bei der Verwendung zu laden und es wird vermieden, sie vorher importieren bzw.
 bekannt machen zu müssen. Weiterhin werden Ergebnisse und Daten zwischen den
 verschiedenen Modulen ausgetauscht, ohne dass die Grundmodule Logik über die
 Funktionsweise enthalten müssen. Diese beiden Punkte sorgen für hohe
-Modularität.\\
+Modularität. Durch die geringe Menge an Interaktionen zwischen den Schichten, es
+werden nur einige Variablen weitergereicht, war die Entwicklung des Wrapper
+Teils nicht übermäßig kompliziert.\\
 Das Frontend wird durch ein Django View umgesetzt. Dort werden die
 Nutzeranfragen entgegen genommen, verarbeitet und dann die Antwort
 präsentiert. Das Frontend greift dabei auf die Wrapper zurück, um die Eingaben
 entsprechend weiterzuleiten. Die konkrete Verarbeitung der Optionen wird dabei
 von den Wrappern durchgeführt.\\
-Die erste Art von Wrapper Modulen ist das \textit{Reader Modul}. Reader Module
+Die erste Art von Wrapper Modulen ist das \textit{Reader} Modul. Reader Module
 lesen Ontologien ein und überführen diese Daten in strukturierte Formate.
 Diese Datenformate bilden die Strukturen von Ontologien und deren Elementen ab
 und erlauben es, problemlos Ontologien aus unterschiedlichen Quellen
 gleichwertig bearbeiten zu können.\\
-Die zweite Art von Wrappern ist das \textit{Matcher Modul}. Es nimmt die zu
+Die zweite Art von Wrappern ist das \textit{Matcher} Modul. Es nimmt die zu
 matchenden Ontologien und reicht es an den ausgewählten Matcher weiter. Beides erhält
 dieser Wrapper von einer \textit{Matching Tool Chain}, in einem
 gleichnamigen Modul. Diese Tool Chain sammelt die Matcher, prüft ihre
@@ -70,30 +72,34 @@ einzelnen Elemente und vergleichen diese, um mögliche Verbindungen zwischen
 diesen zu suchen. Zwei Ausnahmen sind der Same Entity und der Count Matcher.
 Beim Same Entity Matcher werden die URIs der zwei Elemente auf Gleichheit
 geprüft, um Elemente, die in beiden Ontologien vorkommen, zu finden. Der Count
-Matcher sammelt und zählt die in unterschiedlichen Matcher gefundenen Paare. 
+Matcher sammelt und zählt die in unterschiedlichen Matchern gefundenen Paare. 
 Der Gedanke dahinter war, dass wenn ähnliche Matcher ein Paar mehrfach finden,
 die Wahrscheinlichkeit steigt, dass dieses korrekt ist. Die Idee dieses
-Matcher entstand relativ früh im Entwicklungsprozess. Da die Matcher aber nun
+Matchers entstand relativ früh im Entwicklungsprozess. Da die Matcher aber nun
 relativ unterschiedliche Algorithmen haben, macht dieses Konzept aktuell nur
 bedingt Sinn. Jetzt zeigt er aber praktisch am Beispiel immer noch, wie eine
 mögliche Analyse der Ergebnisse anhand der bisherigen Matchings funktionieren kann.\\
 Zeitlich hängen die Matcher zwar überwiegend von der Menge
 der Eingabedaten, also der Ontologien, ab, die Verwendung von regulären Ausdrücken
 zeigt sich trotzdem in der Dauer, die ein Durchlauf der Matcher benötigt. Dies
-zu ändern, ist in der Praxis schwierig, sofern es keine von der Laufzeit
+zu ändern ist in der Praxis schwierig, sofern es keine von der Laufzeit
 effizientere Implementierung von regulären Ausdrücken oder eine Implementierung
 von Nebenläufigkeit gibt.
 In der Hinsicht auf die Laufzeit
-schneiden auch die Matcher, die PyDictionary verwenden, leider auch nicht
+schneiden auch die Matcher, die PyDictionary verwenden, leider nicht
 positiv ab.\\
+Allgemein wurden die ersten Versionen der Matcher eher exemplarisch
+entwickelt, um die Funktionsweise des Backends und seiner Module am Beispiel zu
+zeigen. Später wurde mehr Fokus auf die Verbesserung der Ergebnisse gelegt.\\
 Nach der Entwicklung des Backend folgte die Erstellung des Frontend und der
-benötigten Templates für die Start- und Ergebnisseite. Die Startseite sollte
-direkt die Auswahlmöglichkeiten zeigen und dem Nutzer nur das präsentieren, was
-er für die unmittelbare Arbeit, das Matching von Ontologien benötigt. Nämlich
-die Ontologien und die Matcher. Dadurch soll der Nutzer sich ohne Ablenkung
-direkt der Aufgabe widmen kann. Anfangs wurden die Ontologien und Matcher
-einfach nur aufgeführt, ohne konkrete Anweisungen. Das ist aber nicht
-ausreichend, um einen klaren geführten Prozess abzubilden, den die Nutzer
+benötigten Templates für die Start- und Ergebnisseite. Diese beiden wurden nach
+der Erstellung der ersten Version iterativ weiterentwickelt. Die Startseite
+sollte direkt die Auswahlmöglichkeiten zeigen und dem Nutzer nur das
+präsentieren, was er für die unmittelbare Arbeit, das Matching von Ontologien,
+benötigt. Nämlich die Ontologien und die Matcher. Dadurch soll der Nutzer sich
+ohne Ablenkung direkt der Aufgabe widmen können. Anfangs wurden die Ontologien
+und Matcher einfach nur aufgeführt, ohne konkrete Anweisungen. Das ist aber
+nicht ausreichend, um einen klaren geführten Prozess abzubilden, den die Nutzer
 einfach verstehen und anwenden können. Daher wurden Aufforderungen, die
 entsprechenden Optionen anzuwählen, eingefügt.\\
 Die Ontologien, die zur Auswahl stehen, werden beim Start der Django App
@@ -104,16 +110,23 @@ waren in einer früheren Version die einzigen möglichen Quellen. Durch
 Refactoring wurde die Handhabung der Quellen in der Software verallgemeinert,
 was diesen Teil modularisiert hat und es in Zukunft auch erlaubt, vergleichsweise einfach andere
 Quellen zu nutzen.\\
+In der aktuellen Version gibt es außer dem GFBio Terminology Server keine
+anderen externen Ontologien, obwohl es Reader für diese gibt. Anfangs war
+nicht genau klar, welche Quellen nötig sein werden, daher wurden diese Reader
+implementiert. Problematisch dabei ist, dass je nachdem, welcher Server als
+Quelle dient, keine vollständige Kontrolle über die Daten vorhanden ist. Dies
+kann dazu führen, dass die in Kapitel \ref{Sicherheit} aufgeführten Angriffe
+möglich sind.\\
 Die Ergebnisse der Matchings lassen sich von der Ergebnisseite in einem RDF
 im XML Format speichern. Da während der Arbeit bemängelt wurde, dass beim
 Vergleich verschiedener Ergebnisse und in anderen Matching Tools üblichweise nur
 die URIs direkt gezeigt werden, aber nicht die Labels, wurden dem Ausgabeformat
 die Label hinzugefügt. Zusätzlich wurde statt dem normalerweise verwendeten
-\textit{relation} Tag, ein \textit{connectionType} Tag verwendet, in dem das
-konkrete Property steht, z.B. \textit{owl:sameAs}.\\
+\textit{relation} Tag, ein \textit{connectionType} Tag verwendet, in dem die
+konkrete Property steht, z. B. \textit{owl:sameAs}.\\
 Nach der ersten Evaluation hat sich gezeigt, dass intuitiv offensichtlich ein
 anderer Ansatz gewählt wurde, als beim Ontology Matching sonst üblich. Die
-meiste Matching Software versucht, Äquivalente Elemente in zwei Ontologien zu
+meiste Matching Software versucht, äquivalente Elemente in zwei Ontologien zu
 finden. Das ergibt Sinn, da dies eine sehr wichtige Verbindung ist, wenn man
 zwei Ontologien angleichen möchte. Andere Arten von Verbindungen, wie
 Gegenteile, Unterklassen oder Bestandteilbeziehungen sind aber auch wichtige
@@ -127,14 +140,18 @@ getroffen werden. Ein weiterer Unterschied zu den meisten bisher existierenden
 Matching Tools ist der Ansatz, nur Vorschläge zu liefern, anhand derer zwei
 Ontologien gematcht werden sollen. Es soll dem Nutzer kein perfekter Match
 geliefert werden, sondern es muss stets ein sich in der Domäne auskennender
-Experte die Ergebnisse begutachten und sie auf ihre Richtigkeit prüfen.
+Experte die Ergebnisse begutachten und sie auf ihre Richtigkeit prüfen. Durch
+fehlende Kenntnisse der genutzten Domäne wurde die Evaluationsphase erschwert.
+An dieser Stelle wäre Unterstützung durch einen Biologen oder Mediziner
+hilfreich gewesen.
 
 \section{Free Software/Freie Software}
 Die Entscheidung, den Simple Ontology Matcher als freie
 Software\footnote{\url{https://www.gnu.org/philosophy/free-sw}} zu veröffentlichen, beruht auf zwei Punkten. Zum einen dient es dem
 wissenschaftlichen Gedanken, Wissen frei verfügbar zu machen, damit andere davon
-profitieren können. Zum anderen hilft es der Diskussion und Weiterentwicklung,
-da das Projekt für jeden einsehbar und benutzbar ist.\\
+profitieren können. Damit sind nicht nur andere Personen im wissenschaftlichen
+Rahmen gemeint, sondern theoretisch jeder. Zum anderen hilft es der Diskussion
+und Weiterentwicklung, da das Projekt für jeden einsehbar und benutzbar ist.\\
 Wie in Kapitel \ref{subsec:Evaluation 1} Evaluation 1 aufgeführt, wurde bei der
 Zielsetzung bzw. dem Verständnis der Matcher ein anderer Ansatz als der
 verbreitetere gewählt. Weder der eine noch der andere ist generell besser,

@@ -17,7 +17,7 @@
 	Informatik oder verwandten Fachgebieten. Aufgrund dessen haben sie begrenztes
 	Wissen über die Vorgänge in Software und eine andere Sicht auf Software, als
 	Personen mit technischem Hintergrund. In ihrer Arbeitsumgebung haben sie oft
-	keine erweiterten Recht, um z.B. Software eigenständig zu installieren.
+	keine erweiterten Rechte, um z. B. Software eigenständig zu installieren.
 
 	\section{Mapping Methoden}
 	Der grundlegende Prozess für die Bestimmung möglicher Matches von Eigenschaften
@@ -33,41 +33,47 @@
 	
 	Im ersten Schritt wird ein Element (\textit{feature}), wie ein Label für
 	Entitäten oder Instanzen von Attributen, aus einer der zu matchenden Ontologien ausgewählt,
-	anschließend werden in der anderen Ontologie nach möglichen, passenden
+	anschließend wird in der anderen Ontologie nach möglichen, passenden
 	Elementen (sogenannte \textit{candidates}) gesucht. Mithilfe der Matcher werden
-	die beiden Eigenschaften dann verbunden, sofern der oder die Matcher Übereinstimmungen vermuten. Die Ergebnisse werden dann zusammengefasst und zum Schluss entweder in einer neuen Iteration berücksichtigt oder ausgegeben. \cite{Hoo14}\\
+	die beiden Eigenschaften dann verbunden, sofern der oder die Matcher
+	Übereinstimmungen vermuten. Die Ergebnisse werden dann zusammengefasst und zum
+	Schluss entweder in einer neuen Iteration berücksichtigt oder ausgegeben. \cite{Hoo14}\\
 	Neben der direkten Verbindung kann man die Eigenschaften aus den Ontologien, die
 	gematched werden sollen, über sogenannte \textit{Anker} (Anchors) mit einer
-	weiteren Ontologie verbunden, deren Zweck es ist, als „Meta-Ontologie“ eine gemeinsame Schnittstelle zu bilden. Anker sind Entitäten, die als gleichartig zu Entitäten der anderen Ontologien definiert werden. \cite{Hoo14}
+	weiteren Ontologie verbinden, deren Zweck es ist, als „Meta-Ontologie“ eine
+	gemeinsame Schnittstelle zu bilden. Anker sind Entitäten, die als gleichartig
+	zu Entitäten der anderen Ontologien definiert werden.\cite{Hoo14}
 	
 	\section{Kategorien von Matchern}
 	\label{MatcherKategorien}
 	Um Ontologien zu matchen gibt es verschiedene Möglichkeiten. Diese können einzeln, aber auch kombiniert auf verschiedene Weise angewendet werden. Eine Möglichkeit ist es, mehrere Matcher sequentiell anzuwenden, um die Ergebnisse immer mehr zu verfeinern und zu verbessern. Eine andere Variante ist es, mehr als eine Matching Methode parallel anzuwenden und dann die Ergebnisse zusammenzufügen. Diese beiden Aggregationsverfahren kann man auch kombinieren. \cite{Hoo14}
 	
 	\section{Terminologisches Mapping}
-	Um Elemente von Ontologien zu matchen, kann man deren Benennung durch Tokenisierung in ein gemeinsames Format überführen und dann mithilfe von Gewichtung und Gleichheit in Relation setzen.
+	Um Elemente von Ontologien zu matchen, kann man deren Benennung durch
+	Tokenisierung in ein gemeinsames Format überführen und dann mithilfe von
+	Gewichtung und Gleichheit in Relation setzen.
 	\begin{itemize}
 		\item Stringbasiert (String-based): Bei dieser Methode wird die Struktur von
-		Strings als Zeichenketten betrachtet. Konkret werden Techniken angewendet, die Ähnlichkeit
+		Strings als Zeichenkette betrachtet. Konkret werden Techniken angewendet, die Ähnlichkeit
 		von Strings und deren Teilen bestimmen. Bekannte Methoden aus diesem Bereich
-		sind z.B. Normalisierung und Editierdistanz. \cite{EuzShv07}\\
+		sind z. B. Normalisierung und Editierdistanz. \cite{EuzShv07}\\
 		Beispielsweise beträgt der Abstand der Elemente „author“ und „hasauthor“ 3,
 		nämlich den Zusatz „has“, sofern der Algorithmus erkennt, dass der hintere Teil gleich ist.
 		\item  Sprache basiert (Language-based): Hierbei werden Wörter als Texte
-		betrachtet, d.h.
+		betrachtet, d. h.
 		die Reihenfolge der Wörter in einer Sequenz wird einbezogen, ebenso die
 		Bedeutung dieser Wörter. Zur Analyse werden verschiedene Techniken angewandt,
 		um das Grundwort zu ermitteln. Dieses dient dann dazu, Ähnlichkeiten zwischen
 		den Wörtern zu finden. \cite{EuzShv07}\\
 		Zum Beispiel, wenn man in einer Ontologie das Element „walk“ und in einer
-		anderen „walking“ hat, kann man „walking“ auf „walk“ reduzieren (z.B. durch
+		anderen „walking“ hat, kann man „walking“ auf „walk“ reduzieren (z. B. durch
 		Stemming) und dadurch Matches finden.
 		\item Linguistische Analyse (Linguistic): Durch das Einbeziehen von externen
-		linguistischen Quellen, wie z.B. Wiktionary , werden Strings interpretiert.
-		Beim bedeutungsbasierten Ansatz werden über \textit{Hyponyme} (begriffliche
+		linguistischen Quellen, wie z. B. Wiktionary, werden Strings interpretiert.
+		Beim bedeutungsbasierten Ansatz wird über \textit{Hyponyme} (begriffliche
 		Unterordnung), \textit{Hyperonyme} (Ober-/Überbegriff), \textit{Synonyme}
 		(gleiche Bedeutung) und \textit{Antonyme} (gegensätzliche Bedeutung) die
-		Bedeutung der Wörter festgestellt. Beim sprachbasierten Ansatz hingegen, wird
+		Bedeutung der Wörter festgestellt. Beim sprachbasierten Ansatz hingegen wird
 		der Abstand zu anderen Wörtern in Sätzen analysiert. \cite{EuzShv07}\\
 		Zum Beispiel kann man „creator“ als Oberbegriff von „author“ und
 		„illustrator“ auffassen.
@@ -86,7 +92,7 @@
 		teilen. \cite{EuzShv07}\\
 		Beispielsweise kann man annehmen, dass wenn zwei
 		Ontologien ein gleiches oder ähnliches Konzept haben, um Bücher zu
-		beschreiben, dass die darunterliegenden Konzepte für die Beschreibung für
+		beschreiben, die darunterliegenden Konzepte für die Beschreibung für
 		„creator“ und „author“ ebenfalls ähnlich bzw. gleich sind. Bei bounded-paths
 		werden Pfade verglichen, um ähnliche Konzepte zu identifizieren. Bei diesen
 		Pfaden handelt es sich um Verbindungen zwischen Klassen. Die Art und Weise der
@@ -98,11 +104,11 @@
 		für eine Betrachtung bezüglich eines Matches an.
 		\item Baumbasiertes Mapping (Relations): Hierbei spielt Ähnlichkeit eine
 		Rolle.
-		Es wird angenommen, dass sich Knoten ähneln, die benachbart sind, und dass dies auch
-		für verschiedene Ontologien gilt. Also wenn ein Knoten mit einem anderen
+		Es wird angenommen, dass sich Knoten, die benachbart sind, ähneln und dass
+		dies auch für verschiedene Ontologien gilt. Also wenn ein Knoten mit einem anderen
 		benachbart ist und mit einem Knoten aus einer anderen Ontologie verbunden ist,
-		dann ähneln sich die benachbarten Knoten mit den beiden verbundenen. Wenn
-		beispielsweise in einer Ontologie das Element „book“ über „author“ mit „human“
+		dann ähneln sich die benachbarten Knoten mit den beiden verbundenen Knoten.
+		Wenn beispielsweise in einer Ontologie das Element „book“ über „author“ mit „human“
 		verbunden ist und in einer zweiten Ontologie „volume“ über „author“ mit
 		„writer“, wobei festgelegt wurde, dass sowohl „book“ und „volume“, als auch
 		die beiden „author“ Elemente äquivalent sind, besteht Grund zur Annahme, dass
@@ -114,20 +120,20 @@
 	dienen, ihren Anwendern sinnvolle Vorschläge bezüglich Entscheidungen zu
 	machen. Meist sind diese Systeme darauf hin ausgerichtet, unerfahrene oder
 	nicht sachkundige Nutzer zu unterstützen. \cite{Fra10}\\
-	Bekannt sind den meisten Menschen solche System überwiegend aus den Bereichen
+	Bekannt sind den meisten Menschen solche Systeme überwiegend aus den Bereichen
 	des eCommerce, wo sie genutzt werden, um Kunden oder Besuchern Produkte
 	vorzuschlagen, die diese interessieren könnten.\\
-	In ihrer einfachsten Form, werden möglich Vorschläge in einerListe gesammelt
-	und dann entsprechend der Präferenzen des Nutzers und (Rand-)Bedingungen
-	geordnet. Beide ergeben sich direkt, z.B. beim Ansehen eines Produkts in einem
-	Webshop, oder indirekt, z.B. über die Empfehlung eines Films des gleichen
-	Regisseurs.\cite{Fra10}
+	In ihrer einfachsten Form, werden mögliche Vorschläge in einer Liste gesammelt
+	und dann entsprechend der Präferenzen des Nutzers und (Rand-) Bedingungen
+	geordnet. Es kann sich direkt ergeben, z. B. beim Ansehen eines Produkts in
+	einem Webshop. Alternativ kann es sich indirekt ergeben, z. B. über die
+	Empfehlung eines Films des gleichen Regisseurs.\cite{Fra10}
 	
 	\section{Information Visualization}
 	Bei Information Visualization geht es im Kern darum, Daten grafisch
 	darzustellen. Dadurch ist es möglich, Daten anzuzeigen, um den
 	Nutzer bzw. Betrachter nicht das Interesse verlieren zu lassen. Weiterhin
-	ermöglichen eine gute Aufbereitung der Daten und ein gutes User Iterface (UI)
+	ermöglichen eine gute Aufbereitung der Daten und ein gutes User Interface (UI)
 	ein leichteres Navigieren innerhalb dieser Daten und deren Verknüpfung.\\
 	Dafür gibt es eine Reihe an Techniken, um dies zu bewerkstelligen. Die
 	Visualisierung von Informationen ist eng verknüpft mit der \textit{visuellen

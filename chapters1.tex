@@ -14,47 +14,58 @@
 		erweitern und/oder andere Aspekte zu behandeln. Und zum anderen soll von
 		bestehenden Tools gelernt werden. Da die Auswahl an möglichen Tools groß ist
 		\cite{Ber14}\cite{Shv13}\cite{Eng08}, können nicht alle in diesem Rahmen
-		ausführlich vorgestellt werden. Daher erfolgt hier nur eine Auswahl. Reine Frameworks wurden bei der Bewertung nicht beachtet, da diese für die Zielgruppe nicht technischer Experten nicht geeignet sind, sondern für Entwickler von entsprechenden Tools.
+		ausführlich vorgestellt werden. Daher erfolgt hier nur eine Auswahl. Reine
+		Frameworks wurden bei der Bewertung nicht beachtet, da diese für die
+		Zielgruppe nicht technischer Experten nicht geeignet sind, sondern für
+		Entwickler von entsprechenden Tools.
 		
-		\subsection{AgreementMakerLight}
+		\section{AgreementMakerLight}
 		\textit{AgreementMakerLight} ist ein automatisiertes Ontologie Matching System,
-		das eine Weiterentwicklung der Software AgreementMaker ist und seit Anfang 2013 entwickelt wird. Der AgreementMakerLight ist Open Source, wird unter der Apache Lizenz Version 2.0 veröffentlicht und kann daher frei weiterentwickelt und verwendet werden. Es ist ein erweiterbares Framework und will Probleme bei umfangreichen Ontologie Matchings durch Effizienz angehen. Hauptsächlich finden Techniken Anwendung, die auf Elementebene arbeiten und durch domänspezifisches Wissen ergänzt werden.
+		das eine Weiterentwicklung der Software AgreementMaker ist und seit Anfang
+		2013 entwickelt wird. Der AgreementMakerLight ist Open Source, wird unter der
+		Apache Lizenz Version 2.0 veröffentlicht und kann daher frei weiterentwickelt
+		und verwendet werden. Es ist ein erweiterbares Framework und will Probleme bei
+		umfangreichen Ontologie Matchings durch Effizienz angehen. Hauptsächlich
+		finden Techniken Anwendung, die auf Elementebene arbeiten und durch
+		domänspezifisches Wissen ergänzt werden.
 		Der AgreementMakerLight wird als vorbereitetes Projekt für die Integrated
 		Development Environment (IDE)
 		Eclipse\footnote{\url{https://github.com/AgreementMakerLight/AML-Project}} und
 		als ausführbares Java-Archiv
-		(jar)\footnote{\url{https://github.com/AgreementMakerLight/AML-Jar}} angeboten. Beides trifft die gewählte Zielgruppe aber nicht.
-		Als Projekt ist es eher für Entwickler oder zumindest mit Softwareentwicklung vertrauten
-		Personen gerichtet. Um eine jar-Datei auszuführen, ist eine Installation von
-		Java nötig, was dem Gedanken des im Rahmen dieser Arbeit zu erstellenden Tools
-		widerspricht, unkompliziert und sofort benutzbar zu sein. Auch besitzen nicht
-		alle Benutzer, die als Zielgruppe für diese Arbeit ausgewählt wurden,
-		entsprechende Rechte auf ihren Arbeitssystemen, um zusätzliche Software zu
-		installieren.
+		(jar)\footnote{\url{https://github.com/AgreementMakerLight/AML-Jar}}
+		angeboten. Beides trifft die gewählte Zielgruppe aber nicht.
+		Als Projekt ist es eher für Entwickler oder zumindest mit Softwareentwicklung
+		vertrauten Personen gerichtet. Um eine jar-Datei auszuführen, ist eine
+		Installation von Java nötig, was dem Gedanken des im Rahmen dieser Arbeit zu
+		erstellenden Tools widerspricht, unkompliziert und sofort benutzbar zu sein.
+		Auch besitzen nicht alle Benutzer, die als Zielgruppe für diese Arbeit
+		ausgewählt wurden, entsprechende Rechte auf ihren Arbeitssystemen, um
+		zusätzliche Software zu installieren.
 		
-		\subsection{PARIS}
+		\section{PARIS}
 		\textit{PARIS}\footnote{\url{http://webdam.inria.fr/paris/}}, kurz für
 		\textit{Probabilistic Alignment of Relations, Instances, and Schema}, ist ein
 		System, um Ontologien im RDF Format zu matchen. Dabei werden Verbindungen auf
 		Instanz- und Klassenebene gesucht und wirken sich aufeinander aus. Matchings
 		wird eine Wahrscheinlichkeit zugerechnet, um ohne das Festlegen von Parametern
-		zu arbeiten. In Tests mit großen Ontologien erzielt PARIS eine Trefferquote von etwa 90\%. PARIS steht
-		unter einer Creative Commons Lizenz , die eine kommerzielle Nutzung untersagt
-		und eine Namensnennung der Ersteller vorschreibt. Ansonsten ist die
-		Erweiterung und Nutzung aber frei\\
+		zu arbeiten. In Tests mit großen Ontologien erzielt PARIS eine Trefferquote
+		von etwa 90\%. PARIS steht unter einer Creative Commons Lizenz, die eine
+		kommerzielle Nutzung untersagt und eine Namensnennung der Ersteller
+		vorschreibt. Ansonsten ist die Erweiterung und Nutzung aber frei.\\
 		PARIS wird neben dem reinen Quellcode als jar-Datei ausgeliefert. Wie beim
 		AgreementMakerLight ist dies für die Zielgruppe kein idealer Anwendungsfall.
-		Weiterhin wird PARIS über die Kommandozeile gestartet, im Gegensatz zu z.B.
+		Weiterhin wird PARIS über die Kommandozeile gestartet, im Gegensatz zu z. B.
 		AgreementMakerLight, was eine zusätzliche Hürde darstellt.
 		
-		\subsection{COMA 3.0}
+		\section{COMA 3.0}
 		\textit{COMA 3.0}\footnote{\url{http://dbs.uni-leipzig.de/Research/coma.html}}
-		ist Matching Tool für Schemata und Ontologien und wurde am Institut für Informatik an der Universität Leipzig entwickelt. Es gibt sowohl
-		eine klassische Software- als auch eine Webversion. Beide wurden in Java
+		ist Matching Tool für Schemata und Ontologien und wurde am Institut für
+		Informatik an der Universität Leipzig entwickelt. Es gibt sowohl eine
+		klassische Software- als auch eine Webversion. Beide wurden in Java
 		entwickelt. Die Webversion wird als Java Applet angeboten. Die Vorgänger von
 		COMA 3.0 hießen COMA und COMA++ und es ist eine Weiterentwickelung von diesen.
-		Dafür wurden das Management des Workflows verbessert und Features hinzugefügt,
-		darunter Ontologie Matching. Da die im Rahmen dieser Mastarbeit entwickelte
+		Dafür wurde das Management des Workflows verbessert und Features hinzugefügt,
+		darunter Ontologie Matching. Da die im Rahmen dieser Masterarbeit entwickelte
 		Software als Webapplikation entwickelt werden soll, wird wegen der Ähnlichkeit
 		nur das Java Applet betrachtet. Als Java Applets wird Java Software in Java
 		Bytecode bezeichnet, die über einen Webbrowser ausgeführt werden kann. Dafür
@@ -67,16 +78,16 @@
 		Technologie nicht mehr weiterentwickelt wird.  Weiterhin ist die Portabilität
 		über Betriebssysteme nicht unproblematisch, da Browser auf mobilen Geräten,
 		die Plug-Ins fast ausnahmslos nicht unterstützen.  Das sind alles Gründe, die
-		gegen einen Einsatz im Benutzerkreis sprechen, der im Rahmen dieser Mastarbeit
-		angesprochen werden soll.
+		gegen einen Einsatz im Benutzerkreis sprechen, der im Rahmen dieser
+		Masterarbeit angesprochen werden soll.
 		
-		\subsection{LODE}
+		\section{LODE}
 		\textit{LODE}\footnote{\url{http://lode.informatik.uni-mannheim.de/}} (Linked
 		Open Data Enhancer) ist ein webbasiertes Tool, um Ontologien zu erkunden, zu matchen und zu erweitern. Es ist Open Source und
 		wird innerhalb des Play Frameworks   verwendet. Entwickelt wurde es in der
 		Kooperation der Universitäten Mannheim, Washington und Indiana.
 		
-		\subsection{HerTUDA}
+		\section{HerTUDA}
 		\textit{HerTUDA}\footnote{\url{http://www.ke.tu-darmstadt.de/resources/ontology-matching/hertuda}}
 		ist ein Ontologie Matching Tool der Knowledge Engineering Arbeitsgruppe des Fachbereichs Informatik an der Technischen Universität
 		Darmstadt. Es ist auf schnelles und einfaches Arbeiten ausgelegt und arbeitet
