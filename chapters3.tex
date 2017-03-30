@@ -85,7 +85,6 @@
 		\begin{table}[h!]
 		\small
 		\setlength\tabcolsep{2pt}
-		\caption{Kategorisierte Ergebnisse}
 		\noindent\makebox[\textwidth]{
 			\begin{tabular}{|c|c|c|c|c|c|c|}\hline
 			Matching Algorithmus von & Gleich & Gegenteil & Indirekt & Ähnlich & Keine &
@@ -96,6 +95,7 @@
 			(23,86\%) & 10 (11,36\%) \\\hline
 			\end{tabular}
 		}
+		\caption{Kategorisierte Ergebnisse}
 		\end{table}
 		\end{center}
 		Alle Prozentangaben in der Tabelle wurden abgerundet.\\
@@ -107,7 +107,7 @@
 		\label{fig16}
 		\end{figure}
 		
-		\subsection{Fazit und Verbesserungen des Simple Ontology Matchers}
+		\subsection{Fazit und Verbesserungen}
 		Als erstes wurde für die gleichen Elemente, also solche mit gleicher URI, ein
 		eigener Matcher geschrieben und als Bedingung in die anderen Matcher
 		aufgenommen, dass die URI nicht mehr gleich sein darf. Dadurch können diese
@@ -146,7 +146,7 @@
 		verglichen. Für diese Evaluation wurden Ergebnisse verschiedener Matcher mit
 		der Referenz abgeglichen und Precision und Recall berechnet.\\
 		
-		\subsubsection{Simple Ontology Matcher}
+		\subsection{Simple Ontology Matcher}
 		Da es bei diesem Matcher zwei mögliche Einstellungen gibt, wurden beide
 		getrennt getestet. Wenn nur exakt gleiche Labels als Matching ausgewählt
 		wurden, fand dieser Matcher 933 Paare. Von diesen waren lediglich 3 nicht in
@@ -158,14 +158,14 @@
 		\begin{center}
 		\begin{table}[h!]
 		\small
-		\caption{Vergleich 1 Simple Ontology Matcher OAEI16 Referenz}
 		\noindent\makebox[\textwidth]{
 			\begin{tabular}{|c|c|c|c|c|}\hline
-			Gefunden insgesamt & davon nicht in Referenz & Aus Referenz nicht gefunden &
-			Precision & Recall \\\hline
+			Gefunden & davon nicht & Aus Referenz &
+			Precision & Recall\\ insgesamt & in Referenz & nicht gefunden & & \\\hline
 			933 & 3 & 586 & 99,68\% & 62,35\% \\\hline
 			\end{tabular}
 		}
+		\caption{Vergleich 1 Simple Ontology Matcher OAEI16 Referenz}
 		\end{table}
 		\end{center}
 		Wenn man die Ergebnisse nicht nur auf exakte Matchings beschränkt (siehe
@@ -175,14 +175,14 @@
 		\begin{center}
 		\begin{table}[h!]
 		\small
-		\caption{Vergleich 2 Simple Ontology Matcher OAEI16 Referenz}
 		\noindent\makebox[\textwidth]{
 			\begin{tabular}{|c|c|c|c|c|}\hline
-			Gefunden insgesamt & davon nicht in Referenz & Aus Referenz nicht gefunden &
-			Precision & Recall \\\hline
-			5306 & 4274 & 484 & 19,46\% & 68,07\% \\\hline
+			Gefunden & davon nicht & Aus Referenz &
+			Precision & Recall\\ insgesamt & in Referenz & nicht gefunden & & \\\hline
+			5306 & 4274 & 1436 & 10,09\% & 5,28\% \\\hline
 			\end{tabular}
 		}
+		\caption{Vergleich 2 Simple Ontology Matcher OAEI16 Referenz}
 		\end{table}
 		\end{center}
 		
@@ -221,25 +221,74 @@
 		\begin{center}
 		\begin{table}[h!]
 		\small
-		\caption{Vergleich 3 Simple Ontology Matcher OAEI16 Referenz}
 		\noindent\makebox[\textwidth]{
 			\begin{tabular}{|c|c|c|c|c|}\hline
-			Gefunden insgesamt & true positives & false positives & nicht verifizierbar & Precision \\\hline
-			4274 & 3943 & 222 & 109 & 92,3\% \\\hline
+			Gefunden & true & false & nicht verifizierbar &
+			Precision (nur true\\ insgesamt & positives & positives & & und false
+			positives) \\\hline 4274 & 3943 & 222 & 109 & 94,67\% \\\hline
 			\end{tabular}
 		}
+		\caption{Vergleich 3 Simple Ontology Matcher OAEI16 Referenz}
 		\end{table}
 		\end{center}
 		Der Recall ist in diesem Fall nicht ohne weiteres bestimmbar, da hier die
 		Richtschnur ein "`perfekter Match"' zwischen den zwei Ontologien wäre.
 		Der Transparenz wegen sind die vollständigen Ergebnisse und ihre Zuteilung auf
 		\url{insert.link} aufgeführt, aus Platzgründen ist diese Auflistung nicht in
-		dieser Arbeit enthalten.\\
-		Andere Matcher wurden nicht in diesem Rahmen betrachtet, da erste Tests mit
+		dieser Arbeit enthalten.
+		
+		\subsection{Levenshtein Distance Matcher}
+		Der zweite Matcher, der in der Evaluation benutzt wurde, ist der Levenshtein
+		Distance Matcher. In vorherigen Tests hat er akzeptable Ergebnisse geliefert.
+		Wenn man auch hier die zusätzlich gefundenen Ergebnisse pauschal als false
+		positives einstuft, ergeben sich folgende Werte (alle Prozentangaben in der
+		Tabelle wurden wieder mathematisch gerundet).
+		\begin{center}
+		\begin{table}[h!]
+		\small
+		\noindent\makebox[\textwidth]{
+			\begin{tabular}{|c|c|c|c|c|}\hline
+			Gefunden & davon nicht & Aus Referenz &
+			Precision & Recall\\ insgesamt & in Referenz & nicht gefunden & & \\\hline
+			793 & 713 & 1436 & 10,09\% & 5,28\% \\\hline
+			\end{tabular}
+		}
+		\caption{Vergleich 1 Levenshtein Distance Matcher OAEI16 Referenz}
+		\end{table}
+		\end{center}
+		Die Werte zeichnen ein miserables Bild und es zeigt sich, dass der Levenshtein
+		Distance Matcher für diese Domäne absolut ungeeignet ist. Bei Betrachtung der
+		713 zusätzlich gefundenen Matchings bestätigt sich diese Annahme. Aus diesen
+		Daten ergeben sich folgende Werte
+		\begin{center}
+		\begin{table}[h!]
+		\small
+		\noindent\makebox[\textwidth]{
+			\begin{tabular}{|c|c|c|c|c|}\hline
+			Gefunden & true & false & nicht verifizierbar &
+			Precision (nur true\\ insgesamt & positives & positives & &und false
+			positives) \\\hline 793 & 51 & 658 & 4 & 7,13\% \\\hline
+			\end{tabular}
+		}
+		\caption{Vergleich 2 Levenshtein Distance Matcher OAEI16 Referenz}
+		\end{table}
+		\end{center}
+		Typische korrekte Matchings sind \url{http://human.owl#NCI_C52834}
+		(Hand\textunderscore Digit\textunderscore 1) und
+		\url{http://mouse.owl#MA_0000041} (hand digit). Derartige Ergebnisse werden
+		aber schon vom Simple Label Matcher gefunden. Häufige false positives sind
+		z. B. \url{http://human.owl#NCI_C12456} (Diencephalon) und
+		\url{http://mouse.owl#MA_0000183} (telencephalon) oder
+		\url{http://human.owl#NCI_C32391} (Costal\textunderscore Cartilage) und
+		\url{http://mouse.owl#MA_0001883} (nasal cartilage). Die nötigen Änderungen,
+		um ein Label in das andere zu überführen, sind gering, aber die Elemente haben
+		nichts miteinander zu tun. Dies zeigt, dass das verwendete Vokabular der
+		Ontologien bei diesem Matcher sehr wichtig ist.\\
+		Andere Matcher wurden in diesem Rahmen nicht betrachtet, da erste Tests mit
 		ihnen schon vorher keine zufriedenstellenden Ergebnisse mit dem gewählten
 		Wörterbuch lieferten.
-		Dies ist darauf zurückzuführen, dass das Wörterbuch für die Domäne zu
-		allgemein ist und das in diesem Kontext benötigte Vokabular nicht in
-		ausreichendem Maße enthalten ist.
+		Dies ist darauf zurückzuführen, dass das Wörterbuch für die meisten
+		wissenschaftlichen Domänen zu allgemein ist und das in diesem Kontext
+		benötigte Vokabular nicht in ausreichendem Maße enthalten ist.
 		
 		\pagebreak[4]

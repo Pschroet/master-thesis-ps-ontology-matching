@@ -44,14 +44,15 @@ bei der Verwendung zu laden und es wird vermieden, sie vorher importieren bzw.
 bekannt machen zu müssen. Weiterhin werden Ergebnisse und Daten zwischen den
 verschiedenen Modulen ausgetauscht, ohne dass die Grundmodule Logik über die
 Funktionsweise enthalten müssen. Diese beiden Punkte sorgen für hohe
-Modularität. Durch die geringe Menge an Interaktionen zwischen den Schichten, es
-werden nur einige Variablen weitergereicht, war die Entwicklung des Wrapper
-Teils nicht übermäßig kompliziert.\\
+Modularität.\\
 Das Frontend wird durch ein Django View umgesetzt. Dort werden die
 Nutzeranfragen entgegen genommen, verarbeitet und dann die Antwort
 präsentiert. Das Frontend greift dabei auf die Wrapper zurück, um die Eingaben
 entsprechend weiterzuleiten. Die konkrete Verarbeitung der Optionen wird dabei
-von den Wrappern durchgeführt.\\
+von den Wrappern durchgeführt. Das Design wurde auf das Minimum reduziert, damit
+der Nutzer sich auf die an ihn gestellte Aufgabe konzentrieren kann und sich nicht
+mit Optionen und Einstellungsmöglichkeiten beschäftigen muss. Dies verbirgt
+auch die Komplexität der Anwendung und der Matching Algorithmen.\\
 Die erste Art von Wrapper Modulen ist das \textit{Reader} Modul. Reader Module
 lesen Ontologien ein und überführen diese Daten in strukturierte Formate.
 Diese Datenformate bilden die Strukturen von Ontologien und deren Elementen ab

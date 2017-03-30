@@ -53,28 +53,28 @@
 	Tokenisierung in ein gemeinsames Format überführen und dann mithilfe von
 	Gewichtung und Gleichheit in Relation setzen.
 	\begin{itemize}
-		\item Stringbasiert (String-based): Bei dieser Methode wird die Struktur von
+		\item Stringbasiert: Bei dieser Methode wird die Struktur von
 		Strings als Zeichenkette betrachtet. Konkret werden Techniken angewendet, die Ähnlichkeit
 		von Strings und deren Teilen bestimmen. Bekannte Methoden aus diesem Bereich
 		sind z. B. Normalisierung und Editierdistanz. \cite{EuzShv07}\\
 		Beispielsweise beträgt der Abstand der Elemente „author“ und „hasauthor“ 3,
 		nämlich den Zusatz „has“, sofern der Algorithmus erkennt, dass der hintere Teil gleich ist.
-		\item  Sprache basiert (Language-based): Hierbei werden Wörter als Texte
+		\item  Sprache basiert: Hierbei werden Wörter als Texte
 		betrachtet, d. h.
 		die Reihenfolge der Wörter in einer Sequenz wird einbezogen, ebenso die
 		Bedeutung dieser Wörter. Zur Analyse werden verschiedene Techniken angewandt,
 		um das Grundwort zu ermitteln. Dieses dient dann dazu, Ähnlichkeiten zwischen
-		den Wörtern zu finden. \cite{EuzShv07}\\
+		den Wörtern zu finden.\cite{EuzShv07}\\
 		Zum Beispiel, wenn man in einer Ontologie das Element „walk“ und in einer
 		anderen „walking“ hat, kann man „walking“ auf „walk“ reduzieren (z. B. durch
 		Stemming) und dadurch Matches finden.
-		\item Linguistische Analyse (Linguistic): Durch das Einbeziehen von externen
+		\item Linguistische Analyse: Durch das Einbeziehen von externen
 		linguistischen Quellen, wie z. B. Wiktionary, werden Strings interpretiert.
 		Beim bedeutungsbasierten Ansatz wird über \textit{Hyponyme} (begriffliche
 		Unterordnung), \textit{Hyperonyme} (Ober-/Überbegriff), \textit{Synonyme}
 		(gleiche Bedeutung) und \textit{Antonyme} (gegensätzliche Bedeutung) die
 		Bedeutung der Wörter festgestellt. Beim sprachbasierten Ansatz hingegen wird
-		der Abstand zu anderen Wörtern in Sätzen analysiert. \cite{EuzShv07}\\
+		der Abstand zu anderen Wörtern in Sätzen analysiert.\cite{EuzShv07}\\
 		Zum Beispiel kann man „creator“ als Oberbegriff von „author“ und
 		„illustrator“ auffassen.
 	\end{itemize}
@@ -85,7 +85,7 @@
 	Strukturen innerhalb der Ontologien. Dabei werden die Eigenschaften und die
 	Beziehung der Entitäten untereinander untersucht.
 	\begin{itemize}
-		\item Taxonomisches Mapping (Taxonomic structure): Dabei werden zwei Techniken
+		\item Taxonomisches Mapping: Dabei werden zwei Techniken
 		verwendet, \textit{super-} oder  \textit{subclass rule} und
 		\textit{bounded-paths}. Die \textit{super class rule} unterstellt, dass eine
 		Ähnlichkeit zwischen zwei Konzepten besteht, wenn diese ein Elternkonzept
@@ -96,13 +96,12 @@
 		„creator“ und „author“ ebenfalls ähnlich bzw. gleich sind. Bei bounded-paths
 		werden Pfade verglichen, um ähnliche Konzepte zu identifizieren. Bei diesen
 		Pfaden handelt es sich um Verbindungen zwischen Klassen. Die Art und Weise der
-		Verbindungen wird durch eine hierarchische Struktur definiert.
-		\cite{EuzShv07}\\
+		Verbindungen wird durch eine hierarchische Struktur definiert.\cite{EuzShv07}\\
 		Wenn das Attribut „book“ in zwei verschiedenen Ontologien
 		einmal mit „hasAuthor“ und einmal mit „hasWritten“ zu den beiden äquivalenten
 		Elementen „creator“ bzw. „author“ verbunden ist, dann bieten sich diese beiden
 		für eine Betrachtung bezüglich eines Matches an.
-		\item Baumbasiertes Mapping (Relations): Hierbei spielt Ähnlichkeit eine
+		\item Baumbasiertes Mapping: Hierbei spielt Ähnlichkeit eine
 		Rolle.
 		Es wird angenommen, dass sich Knoten, die benachbart sind, ähneln und dass
 		dies auch für verschiedene Ontologien gilt. Also wenn ein Knoten mit einem anderen
