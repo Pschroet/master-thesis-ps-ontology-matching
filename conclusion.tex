@@ -19,10 +19,11 @@ Der Fokus dieser Masterarbeit lag darauf, ein Tool zu entwickeln, das technisch
 nicht-versierten Nutzern entgegen kommt und es ihnen ohne größeren Aufwand
 ermöglicht, Ontologien zu matchen. Dabei sollen die Ergebnisse, die
 vorgeschlagen werden, keine außergewöhnlich hohe Rate an false positives
-aufweisen, wodurch es wenig nützlich wäre.\\
+aufweisen, die umfangreiche Nachbearbeitung durch den Nutzer nötig machen
+würden.\\
 Aus Sicht der Softwareentwicklung soll es modular aufgebaut sein, um leicht
-erweiter- und wartbar zu sein. Dadurch wäre es potenziell auch möglich, die
-einzelnen Teile außerhalb der eigentlichen Software zu nutzen.\\
+erweiter- und wartbar zu sein. Dadurch wäre es potenziell auch möglich, einzelne
+Teile außerhalb der eigentlichen Software zu nutzen.\\
 Da es sich um wissenschaftliche Arbeit handelt, ist es auch sinnvoll, die
 Ergebnisse frei verfügbar zu veröffentlichen, sowohl die schriftlichen Anteile
 als auch die Software. Dadurch wird dem wissenschaftlichen Gedanken entsprochen,
@@ -31,10 +32,9 @@ mit einer wissenschaftlichen Arbeit Wissen zu mehren und zu teilen.
 \section{Umsetzung}
 Die Software wurde von Anfang an als Webapp entwickelt, damit die Nutzer es
 einfach durch den Aufruf der Seite starten können. Die Arbeit, es aufzusetzen
-und zu konfigurieren, wird dabei vom Nutzer auf einen Admin verschoben. Also von
-einem nichttechnischen zu einem technischen Experten.\\
+und zu konfigurieren, wird dabei vom Nutzer auf einen Admin verschoben.\\
 Zuerst wurde eine Wrapper-Schicht entwickelt, die das Front- vom Backend
-trennt, aber strukturierte Zugriffe anbietet. Die Backend Module, konkret die
+trennt, aber strukturierte Zugriffe erlaubt. Die Backend Module, konkret die
 Reader und Matcher, werden dynamisch geladen. Das erlaubt es, diese Module erst
 bei der Verwendung zu laden und es wird vermieden, sie vorher importieren bzw.
 bekannt machen zu müssen. Weiterhin werden Ergebnisse und Daten zwischen den
@@ -61,8 +61,8 @@ gleichnamigen Modul. Diese Tool Chain sammelt die Matcher, prüft ihre
 Existenz und führt sie der Reihe nach aus.\\
 Die implementierten Matcher decken verschiedene Methoden des Ontology Matchings
 ab, die in dieser Arbeit vorgestellt wurden. Alle Matcher haben verschiedene
-Iterationen bis zu ihrem jetzigen durchlaufen. Die Matcher sollen sowohl als
-exemplarisches Beispiel für die Nutzung der Software als auch als konkrete
+Iterationen bis zu ihrem jetzigen Stand durchlaufen. Die Matcher sollen sowohl
+als exemplarisches Beispiel für die Nutzung der Software als auch als konkrete
 Werkzeuge für das Ontologie Matching dienen.\\
 Die Matcher, die implementiert wurden, beschränken sich auf die Label der
 einzelnen Elemente und vergleichen diese, um mögliche Verbindungen zwischen
@@ -74,15 +74,15 @@ Der Gedanke dahinter war, dass wenn ähnliche Matcher ein Paar mehrfach finden,
 die Wahrscheinlichkeit steigt, dass dieses korrekt ist. Die Idee dieses
 Matchers entstand relativ früh im Entwicklungsprozess. Da die Matcher aber nun
 relativ unterschiedliche Algorithmen haben, macht dieses Konzept aktuell nur
-bedingt Sinn. Jetzt zeigt er aber praktisch am Beispiel immer noch, wie eine
-mögliche Analyse der Ergebnisse anhand der bisherigen Matchings funktionieren kann.\\
+bedingt Sinn. Jetzt zeigt der Count Matcher aber praktisch am Beispiel immer
+noch, wie eine mögliche Analyse der Ergebnisse anhand der bisherigen Matchings funktionieren kann.\\
 Zeitlich hängen die Matcher zwar überwiegend von der Menge
 der Eingabedaten, also der Ontologien, ab, die Verwendung von regulären Ausdrücken
 zeigt sich trotzdem in der Dauer, die ein Durchlauf der Matcher benötigt. Dies
 zu ändern ist in der Praxis schwierig, sofern es keine von der Laufzeit
 effizientere Implementierung von regulären Ausdrücken oder eine Implementierung
 von Nebenläufigkeit gibt.
-In der Hinsicht auf die Laufzeit
+Hinsichtlich der Laufzeit
 schneiden auch die Matcher, die PyDictionary verwenden, leider nicht
 positiv ab.\\
 Allgemein wurden die ersten Versionen der Matcher eher exemplarisch
@@ -126,15 +126,14 @@ anderer Ansatz gewählt wurde, als beim Ontology Matching sonst üblich. Die
 meiste Matching Software versucht, äquivalente Elemente in zwei Ontologien zu
 finden. Das ergibt Sinn, da dies eine sehr wichtige Verbindung ist, wenn man
 zwei Ontologien angleichen möchte. Andere Arten von Verbindungen, wie
-Gegenteile, Unterklassen oder Bestandteilbeziehungen sind aber auch wichtige
-Angaben über Ontologien. Alle denkbaren Arten von Verknüpfungen zu suchen,
-anstatt sich eher auf Gleichheit zu fokussieren, verhilft zwar zu einer
+Gegenteile, Unterklassen oder Bestandteilbeziehungen liefern aber auch wichtige
+Informationen über Ontologien. Alle denkbaren Arten von Verknüpfungen zu suchen,
+anstatt auf Gleichheit zu fokussieren, verhilft zwar zu einer
 breiteren Möglichkeit an Ergebnissen und damit zur Abdeckung des Wissens
 zwischen den Ontologien. Gleichzeitig erschwert es aber auch die Entwicklung von
 Algorithmen, aufgrund der gestiegenen Komplexität. Welcher Ansatz sinnvoller
-ist, entscheidet sich aber von Fall zu Fall und muss von den möglichen Anwendern
-getroffen werden. Ein weiterer Unterschied zu den meisten bisher existierenden
-Matching Tools ist der Ansatz, nur Vorschläge zu liefern, anhand derer zwei
+ist, muss von Fall zu Fall entschieden und von den Anwendern getroffen
+werden. Ein weiterer Unterschied zu den meisten bisher existierenden Matching Tools ist der Ansatz, nur Vorschläge zu liefern, anhand derer zwei
 Ontologien gematcht werden sollen. Es soll dem Nutzer kein perfekter Match
 geliefert werden, sondern es muss stets ein sich in der Domäne auskennender
 Experte die Ergebnisse begutachten und sie auf ihre Richtigkeit prüfen. Durch
@@ -153,8 +152,7 @@ Wie in Kapitel \ref{subsec:Evaluation 1} Evaluation 1 aufgeführt, wurde bei der
 Zielsetzung bzw. dem Verständnis der Matcher ein anderer Ansatz als der
 verbreitetere gewählt. Weder der eine noch der andere ist generell besser,
 sondern es hängt vom Einsatzgebiet und der Zielstellung ab. Mit freier Software
-kann frei darüber diskutiert werden und ein anderer Ansatz für die Matcher bzw.
-die gesamte Software gewählt werden.
+kann darüber diskutiert werden.
 
 \cleardoublepage
 \pagebreak[4]

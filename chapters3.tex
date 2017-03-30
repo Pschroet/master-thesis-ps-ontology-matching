@@ -37,9 +37,10 @@
 		Organismen.\footnote{\url{http://obofoundry.org/ontology/pato.html}}
 		
 		\subsection{Resultat}
-		Es wurden 203 gleiche Matchings von beiden Algorithmen gefunden, bis auf neun
-		Ergebnisse beschrieben alle das gleiche Konzept, d. h. sie hatten die selbe
-		URI.
+		Der Algorithmus von Dr. Ing Algergawy fand insgesamt 246 Matchings, der Simple
+		Ontology Matcher 292. Es gab bei 203 Matchings eine
+		Überschneidung, bis auf neun dieser Matchings beschrieben alle das
+		gleiche Konzept, d. h. sie hatten die selbe URI.
 		Wenn man die Unterschiede in den Ergebnissen betrachtet, also solche, die nur
 		einer der beiden Matching Algorithmen gefunden hat, dann hat der Simple
 		Ontology Matcher 89 potenzielle Matchings gefunden, während der Algorithmus
@@ -79,7 +80,10 @@
 		Gleichheit ausdrücken (Kategorien Gegenteil und Indirekt).
 		Wohingegen der von Dr. Ing. Algergawy verwendete Algorithmus viele Matchings
 		gefunden hat, die Gleichheit zwischen den Elementen ausdrücken (Kategorien
-		Gleich und Ähnlich).\\
+		Gleich und Ähnlich). Die Menge der Zuordnungen in die verschiedenen
+		Kategorien sind in Tabelle \ref{tab1} und in Abbildung
+		\ref{fig16} dargestellt. Alle Prozentangaben in der Tabelle wurden
+		abgerundet.\\
 		
 		\begin{center}
 		\begin{table}[h!]
@@ -96,9 +100,10 @@
 			\end{tabular}
 		}
 		\caption{Kategorisierte Ergebnisse}
+		\label{tab1}
 		\end{table}
 		\end{center}
-		Alle Prozentangaben in der Tabelle wurden abgerundet.\\
+		\\
 				
 		\begin{figure}[h!]
 		\centering
@@ -153,8 +158,8 @@
 		der Menge der Referenzergebnisse.\\
 		
 		Wenn man die zusätzlich gefundenen Ergebnisse pauschal als false positives
-		einstuft, ergeben sich folgende Werte (alle Prozentangaben in der Tabelle
-		wurden mathematisch gerundet).
+		einstuft, ergeben sich die in Tabelle \ref{tab2} aufgeführten Werte. Alle
+		Prozentangaben in der Tabelle wurden mathematisch gerundet.
 		\begin{center}
 		\begin{table}[h!]
 		\small
@@ -166,12 +171,13 @@
 			\end{tabular}
 		}
 		\caption{Vergleich 1 Simple Ontology Matcher OAEI16 Referenz}
+		\label{tab2}
 		\end{table}
 		\end{center}
 		Wenn man die Ergebnisse nicht nur auf exakte Matchings beschränkt (siehe
 		Kapitel \ref{simpleOntologyMatcher}), werden 4373 zusätzliche potenzielle
 		Matchings gefunden, also insgesamt 5306. Davon waren 102 zusätzlich auch in der Referenzmenge. Aus diesen Daten ergeben sich
-		folgende Werte
+		die Werte, wie in Tabelle \ref{tab3} dargestellt.
 		\begin{center}
 		\begin{table}[h!]
 		\small
@@ -183,6 +189,7 @@
 			\end{tabular}
 		}
 		\caption{Vergleich 2 Simple Ontology Matcher OAEI16 Referenz}
+		\label{tab3}
 		\end{table}
 		\end{center}
 		
@@ -216,8 +223,8 @@
 		restlichen 109 Matchings sind ohne entsprechendes Domänenwissen nicht
 		eindeutig auf Richtigkeit prüfbar.\\
 		Bei Betrachtung der zusätzlichen Matchings und Berechnung nach der Precision
-		obiger Formel würden sich folgende Werte für die zusätzlichen Matchings
-		ergeben
+		obiger Formel würden sich für die zusätzlichen Matchings Werte, wie in Tabelle
+		\ref{tab4} gezeigt, ergeben
 		\begin{center}
 		\begin{table}[h!]
 		\small
@@ -229,6 +236,7 @@
 			\end{tabular}
 		}
 		\caption{Vergleich 3 Simple Ontology Matcher OAEI16 Referenz}
+		\label{tab4}
 		\end{table}
 		\end{center}
 		Der Recall ist in diesem Fall nicht ohne weiteres bestimmbar, da hier die
@@ -241,8 +249,8 @@
 		Der zweite Matcher, der in der Evaluation benutzt wurde, ist der Levenshtein
 		Distance Matcher. In vorherigen Tests hat er akzeptable Ergebnisse geliefert.
 		Wenn man auch hier die zusätzlich gefundenen Ergebnisse pauschal als false
-		positives einstuft, ergeben sich folgende Werte (alle Prozentangaben in der
-		Tabelle wurden wieder mathematisch gerundet).
+		positives einstuft, ergeben sich die in Tabelle \ref{tab5} aufgeführten Werte.
+		Alle Prozentangaben in der Tabelle wurden wieder mathematisch gerundet.
 		\begin{center}
 		\begin{table}[h!]
 		\small
@@ -254,12 +262,13 @@
 			\end{tabular}
 		}
 		\caption{Vergleich 1 Levenshtein Distance Matcher OAEI16 Referenz}
+		\label{tab5}
 		\end{table}
 		\end{center}
 		Die Werte zeichnen ein miserables Bild und es zeigt sich, dass der Levenshtein
 		Distance Matcher für diese Domäne absolut ungeeignet ist. Bei Betrachtung der
 		713 zusätzlich gefundenen Matchings bestätigt sich diese Annahme. Aus diesen
-		Daten ergeben sich folgende Werte
+		Daten ergeben sich folgende Werte, wie in Tabelle \ref{tab6} aufgeführt.
 		\begin{center}
 		\begin{table}[h!]
 		\small
@@ -271,6 +280,7 @@
 			\end{tabular}
 		}
 		\caption{Vergleich 2 Levenshtein Distance Matcher OAEI16 Referenz}
+		\label{tab6}
 		\end{table}
 		\end{center}
 		Typische korrekte Matchings sind \url{http://human.owl#NCI_C52834}
@@ -284,9 +294,9 @@
 		um ein Label in das andere zu überführen, sind gering, aber die Elemente haben
 		nichts miteinander zu tun. Dies zeigt, dass das verwendete Vokabular der
 		Ontologien bei diesem Matcher sehr wichtig ist.\\
-		Andere Matcher wurden in diesem Rahmen nicht betrachtet, da erste Tests mit
-		ihnen schon vorher keine zufriedenstellenden Ergebnisse mit dem gewählten
-		Wörterbuch lieferten.
+		Andere Matcher wurden in diesem Rahmen nicht berücksichtigt, da erste Tests
+		mit den lexikalischen Matchern schon vorher keine zufriedenstellenden
+		Ergebnisse mit dem gewählten Wörterbuch lieferten.
 		Dies ist darauf zurückzuführen, dass das Wörterbuch für die meisten
 		wissenschaftlichen Domänen zu allgemein ist und das in diesem Kontext
 		benötigte Vokabular nicht in ausreichendem Maße enthalten ist.\\

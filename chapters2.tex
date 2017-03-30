@@ -13,8 +13,8 @@
 		und ist über verschiedene Technologien ansprechbar. Aktuell sind die Module
 		der Software als App für Django\footnote{\url{https://www.djangoproject.com/}} verfügbar, können
 		aber auch direkt in Python Skripten benutzt werden.\\
-		Der Kernteil besteht aus mehreren Modulen, um verschiedene Arten von
-		Daten einlesen zu können, z. B.
+		Der Kernteil besteht aus mehreren Modulen, mit denen verschiedene Arten von
+		Daten eingelesen werden können, z. B.
 		Formate wie OWL/XML, Query Languages wie SPARQL oder REST-Schnittstellen.
 		Zusätzlich können unterschiedliche Arten und Implementierungen von Matchern
 		verwendet werden. Um dies zu realisieren, gibt es eine Klasse, um Ontologien,
@@ -47,7 +47,7 @@
 		Möglichkeiten abdecken. Durch die Modularität können aber problemlos weitere
 		hinzugefügt werden.\\
 		Dann werden die Ontologien an verschiedene Matcher übergeben. Dabei werden
-		die Ergebnisse von einem Matcher zum nächsten weitergegeben, so ist es zum
+		die Ergebnisse von einem Matcher zum nächsten weitergegeben. So ist es zum
 		einen möglich, diese Ergebnisse zu akkumulieren und zum
 		anderen, weitergehende Analysen z. B. der Struktur oder Hierarchie vorzunehmen. Je nachdem, auf welche Eigenschaften
 		eines Elements ein Matcher achtet, können sinnvolle Arten von Verbindungen
@@ -237,21 +237,21 @@
 		\textit{Readern} geparst. Die Reader werden ermittelt, indem überprüft wird,
 		ob es sich bei der gespeicherten Quelle um eine URL oder eine
 		existierende und lesbare Datei handelt. Dies wird über das \textit{View} von
-		Django durchgeführt und dann an das \textit{Reader} Modul weitergeleitet. Dieses
-		bindet die passenden Module ein, startet das Parsen und liefert die Ergebnisse
-		in Form einer Instanz der Klasse \textit{ontology} zurück. Die Ergebnisse
+		Django durchgeführt und dann an das \textit{Reader} Modul weitergeleitet. Das
+		Reader Modul bindet die passenden Module ein, startet das Parsen und liefert
+		die Ergebnisse in Form einer Instanz der Klasse \textit{ontology} zurück. Die Ergebnisse
 		aller Reader werden in einer Liste gesammelt.\\
 		Mit den übergebenen Matchern wird eine \textit{Matching Tool Chain} im
 		gleichnamigen Modul erstellt, welche die Matcher in der vom
 		Benutzer ausgewählten Reihenfolge ausführt. Die Ergebnisse jedes Matching
 		Vorgangs werden von einem Matcher an den nächsten in Form des Python Datentyps \textit{Dictionary}
-		weitergegeben. Durch das weiterleiten der Ergebnisse zwischen den Matchern
+		weitergegeben. Durch das Weiterleiten der Ergebnisse zwischen den Matchern
 		ist es möglich, auf vorherige Ergebnisse zuzugreifen, um z. B. die Struktur von
-		Elementen innerhalb der Ontologien zu analysieren,
-		siehe auch Kapitel \ref{StrukturellesMapping} Strukturelles Mapping.
+		Elementen innerhalb der Ontologien zu analysieren ( siehe auch Kapitel
+		\ref{StrukturellesMapping} Strukturelles Mapping).
 		Die Ergebnisse eines Matchers werden dann zum Ergebnis Dictionary
 		hinzugefügt.\\
-		Wenn alle Matcher durchlaufen wurden, wird das letztendliche Ergebnis in einem
+		Wenn alle Matcher durchlaufen wurden, wird das finale Ergebnis in einem
 		anderen Template der Django Template Engine verarbeitet und angezeigt,
 		wie in Abbildung \ref{fig7} exemplarisch dargestellt.
 		
@@ -300,9 +300,9 @@
 		\section{Implementierte Matcher}
 		\label{ImplementierteMatcher}
 		Im Rahmen dieser Masterarbeit wurden verschiedene Matching Algorithmen
-		implementiert. Das Ziel der verschiedenen Matcher ist nicht nur Beziehungen,
-		die Gleichheit oder Ähnlichkeit ausdrücken, zu finden, sondern möglichst
-		verschiedene Arten von Verknüpfungen.
+		implementiert, die im nachfolgenden erläutert werden. Das Ziel der
+		verschiedenen Matcher ist nicht nur Beziehungen, die Gleichheit oder
+		Ähnlichkeit ausdrücken, zu finden, sondern möglichst verschiedene Arten von Verknüpfungen.
 		
 		\subsection{Same Entity Matcher}
 		Der einfachste Matcher überprüft die URI der Elemente, um festzustellen, ob es
@@ -438,7 +438,7 @@
 		
 		\subsection{XML}
 		Daten, die in XML vorliegen, lassen sich grundsätzlich so gestalten, dass sie
-		schädliches Verhalten hervorrufen. Denkbar sind
+		schädliches Verhalten hervorrufen können. Denkbar sind
 		\textit{Denial of Service} (DoS) Attacken, Zugriff auf lokale Dateien,
 		Erstellen von Netzwerkverbindungen oder Umgehung von
 		Schutzmaßnahmen.\cite{defusedxml}
